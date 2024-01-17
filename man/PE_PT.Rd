@@ -15,7 +15,7 @@ PE_PT(Tavg, Rn, G = NULL)
 May be provided by \code{\link{Soil_Heat_Flux}}}
 }
 \value{
-Daily potential evapotranspiration values (Penman & Monteith \acronym{FAO-1998}).
+Daily potential evapotranspiration values (Priestley and Taylor).
 }
 \description{
 PE_PT

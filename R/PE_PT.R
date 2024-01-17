@@ -8,7 +8,7 @@
 #' Optional. A vector, 1-column matrix or data frame with daily soil Heat flux in \acronym{MJ m-2 day-1}.
 #' May be provided by \code{\link{Soil_Heat_Flux}}
 #' @return
-#' Daily potential evapotranspiration values (Penman & Monteith \acronym{FAO-1998}).
+#' Daily potential evapotranspiration values (Priestley and Taylor).
 #' @export
 #' @examples
 #' data(DataForCWB)

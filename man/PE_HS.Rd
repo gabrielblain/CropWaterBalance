@@ -16,7 +16,7 @@ PE_HS(Ra, Tavg, Tmax, Tmin)
 \item{Tmin}{A vector, 1-column matrix or data frame with daily Minimum air temperature in Celsius degrees.}
 }
 \value{
-Daily potential evapotranspiration values.
+Daily potential evapotranspiration values (Hargreaves and Samani).
 }
 \description{
 PE_HS

@@ -13,11 +13,13 @@
 #' A single number defining the crop coefficient. Default is 1.
 #' @param Ks
 #' A single number defining the water stress coefficient. Default is 1.
+#' @param MAD
+#' A single number between 0.1 and 1 defining the management allowed depletion. Default is 0.8.
 #' @param Irrig
 #' A vector, 1-column matrix or data frame with net irrigation amount infiltrated into the soil
 #' for the current day in millimeters. Default is 0.
 #' @return
-#' Daily potential evapotranspiration values (Penman & Monteith \acronym{FAO-1998}).
+#' Water Balance Accounting, including the amount of required irrigation in millimeters.
 #' @export
 #' @examples
 #' data(DataForCWB)
@@ -32,7 +34,7 @@
 #' Rain <- DataForCWB[,10]
 #' CWB(Rain, PE, AWC=50)
 
-CWB <- function(Rain, PE, AWC, STinit = AWC, Kc = NULL, Ks = NULL,Irrig = NULL){
+CWB <- function(Rain, PE, AWC, STinit = AWC, Kc = NULL, Ks = NULL,Irrig = NULL, MAD = 0.8){
   Rain <- as.matrix(Rain)
   n <- length(Rain)
   if (is.numeric(Rain) == FALSE || n < 5) {
@@ -45,7 +47,11 @@ CWB <- function(Rain, PE, AWC, STinit = AWC, Kc = NULL, Ks = NULL,Irrig = NULL){
   Def <- matrix(NA,n,1)
   NegAc <- matrix(NA,n,1)
   PPE <- matrix(NA,n,1)
+  Req.Irrig <- matrix(NA,n,1)
+  Easy.AWC <- MAD*AWC
   if (is.numeric(AWC) == FALSE || length(AWC) != 1) {stop ("AWC must be a single number")}
+  if (is.numeric(MAD) == FALSE || length(MAD) != 1 || MAD > 1 || MAD < 0.1)
+    {stop ("MAD must be a single number between 0.1 and 1")}
   if (is.numeric(STinit) == TRUE &&
       length(STinit) == 1 &&
       STinit <= AWC) {Arm[1,1] <- STinit} else {
@@ -72,6 +78,8 @@ CWB <- function(Rain, PE, AWC, STinit = AWC, Kc = NULL, Ks = NULL,Irrig = NULL){
     ETR[1,1]=ETc[1,1]
   }
   if (Arm[1,1]<AWC){Exd[1,1] <- 0}else{Exd[1,1] <- PPE[1,1]-Alt[1,1]}
+  if (Exd[1,1] < 0) {Exd[1,1] <- 0}
+  if (Arm[1,1]>=Easy.AWC){Req.Irrig[1,1] <- 0}else{Req.Irrig[1,1] <- Easy.AWC-Arm[1,1]}
   for (i in 2:n){
     if (PPE[i,1]<0){
       NegAc[i,1] <- NegAc[(i-1),1]+PPE[i,1]
@@ -86,10 +94,11 @@ CWB <- function(Rain, PE, AWC, STinit = AWC, Kc = NULL, Ks = NULL,Irrig = NULL){
       ETR[i,1]=ETc[i,1]
     }
     if (Arm[i,1]<AWC){Exd[i,1] <- 0}else{Exd[i,1] <- PPE[i,1]-Alt[i,1]}
-
+    if (Arm[i,1]>=Easy.AWC){Req.Irrig[i,1] <- 0}else{Req.Irrig[i,1] <- Easy.AWC-Arm[i,1]}
   }
   Def[,1]=ETc[,1] - ETR[,1]
-  WB=as.matrix(cbind(DaysSeason,Rain,Irrig,PE,Kc,Ks,ETc,PPE,ETR,Arm,Alt,Exd,Def))
-  colnames(WB) <- c("DaysSeason","Rain","Irrig","PE","Kc","Ks","ETc", "P-ETc","ActualPE","Water_Root","DeltaWater_Root","Perc","WaterDefict")
+  WB=as.matrix(cbind(DaysSeason,Rain,Irrig,PE,Kc,Ks,ETc,PPE,ETR,Arm,Alt,Exd,Def,Req.Irrig))
+  colnames(WB) <- c("DaysSeason","Rain","Irrig","PE","Kc","Ks","ETc", "P-ETc","ActualCropEvap",
+                    "StoredWaterRoot","DeltaWaterRoot","Perc","WaterDefict","Req.Irrig (mm)")
   return(WB)
 }

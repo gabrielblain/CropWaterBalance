@@ -9,7 +9,7 @@
 #' @param Tavg
 #' A vector, 1-column matrix or data frame with daily average air temperature.
 #' @return
-#' Daily potential evapotranspiration values.
+#' Daily potential evapotranspiration values (Hargreaves and Samani).
 #' @export
 #' @examples
 #' data(DataForCWB)

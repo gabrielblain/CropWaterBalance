@@ -4,7 +4,7 @@
 \alias{CWB}
 \title{CWB}
 \usage{
-CWB(Rain, PE, AWC, STinit = AWC, Kc = NULL, Ks = NULL, Irrig = NULL)
+CWB(Rain, PE, AWC, STinit = AWC, Kc = NULL, Ks = NULL, Irrig = NULL, MAD = 0.8)
 }
 \arguments{
 \item{Rain}{A vector, 1-column matrix or data frame with daily rainfall totals in millimeters.}
@@ -22,9 +22,11 @@ of the water balance accounting. Default is \dQuote{STinit=AWC}}
 
 \item{Irrig}{A vector, 1-column matrix or data frame with net irrigation amount infiltrated into the soil
 for the current day in millimeters. Default is 0.}
+
+\item{MAD}{A single number between 0.1 and 1 defining the management allowed depletion. Default is 0.8.}
 }
 \value{
-Daily potential evapotranspiration values (Penman & Monteith \acronym{FAO-1998}).
+Water Balance Accounting, including the amount of required irrigation in millimeters.
 }
 \description{
 CWB
