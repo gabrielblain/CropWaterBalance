@@ -34,7 +34,7 @@
 #' Rain <- DataForCWB[,10]
 #' CWB(Rain, PE, AWC=50)
 
-CWB <- function(Rain, PE, AWC, STinit = AWC, Kc = NULL, Ks = NULL,Irrig = NULL, MAD = 0.8){
+CWB <- function(Rain, PE, AWC, STinit = NULL, Kc = NULL, Ks = NULL,Irrig = NULL, MAD = 0.8){
   Rain <- as.matrix(Rain)
   n <- length(Rain)
   if (is.numeric(Rain) == FALSE || n < 5) {
@@ -48,14 +48,18 @@ CWB <- function(Rain, PE, AWC, STinit = AWC, Kc = NULL, Ks = NULL,Irrig = NULL, 
   NegAc <- matrix(NA,n,1)
   PPE <- matrix(NA,n,1)
   Req.Irrig <- matrix(NA,n,1)
+  if (is.numeric(AWC) == FALSE || length(AWC) != 1 || AWC <=0)
+    {stop ("AWC must be a single positive number")}
   Easy.AWC <- MAD*AWC
-  if (is.numeric(AWC) == FALSE || length(AWC) != 1) {stop ("AWC must be a single number")}
   if (is.numeric(MAD) == FALSE || length(MAD) != 1 || MAD > 1 || MAD < 0.1)
     {stop ("MAD must be a single number between 0.1 and 1")}
-  if (is.numeric(STinit) == TRUE &&
-      length(STinit) == 1 &&
-      STinit <= AWC) {Arm[1,1] <- STinit} else {
-        stop("STinit must be a single number and cannot be larger than AWC")}
+  if (is.null(STinit) == TRUE) {
+    Arm[1, 1] <- AWC
+  } else if (is.numeric(STinit) == TRUE &&
+             length(STinit) == 1 &&
+             STinit > 0 &&
+             STinit <= AWC) {Arm[1, 1] <- STinit} else {
+               stop("STinit must be a single positive number and cannot be larger than AWC")}
   if (is.null(Kc) == TRUE) {Kc <- matrix(1,n,1)}
   if (is.null(Ks) == TRUE) {Ks <- matrix(1,n,1)}
   if (is.null(Irrig) == TRUE) {Irrig <- matrix(0,n,1)}

@@ -4,7 +4,16 @@
 \alias{CWB}
 \title{CWB}
 \usage{
-CWB(Rain, PE, AWC, STinit = AWC, Kc = NULL, Ks = NULL, Irrig = NULL, MAD = 0.8)
+CWB(
+  Rain,
+  PE,
+  AWC,
+  STinit = NULL,
+  Kc = NULL,
+  Ks = NULL,
+  Irrig = NULL,
+  MAD = 0.8
+)
 }
 \arguments{
 \item{Rain}{A vector, 1-column matrix or data frame with daily rainfall totals in millimeters.}
