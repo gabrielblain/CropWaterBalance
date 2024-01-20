@@ -49,5 +49,5 @@ Compare <- function(Method1, Method2){
     ObsEst <- as.data.frame(cbind(Method1,Method2))
     Comp <- Accuracy(obs_est = ObsEst, conf.int = "No")
   }
-
+  return(PE)
 }
