@@ -3,9 +3,9 @@
 \docType{data}
 \name{DataForCWB}
 \alias{DataForCWB}
-\title{Meteorological data for calculating Water Balance}
+\title{Data for Water Balance Accounting}
 \format{
-An object of class \code{data.frame} with 31 rows and 10 columns.
+An object of class \code{data.frame} with 129 rows and 13 columns.
 }
 \usage{
 DataForCWB
@@ -16,7 +16,7 @@ Belongs to the Agronomic Institute \acronym{IAC}
 }
 \details{
 @format ## \code{DataForCWB}
-A data frame with 10 columns and 31 rows:
+A data frame with 13 columns and 129 rows:
 \describe{
 \item{date}{date}
 \item{tmed}{Average air temperature in Celsius degrees}
@@ -28,6 +28,10 @@ A data frame with 10 columns and 31 rows:
 \item{RH}{Relative Humidity  in \%}
 \item{G}{Soil Heat Flux  in \acronym{MJ m-2 day-1}}
 \item{Rain}{Rain in millimeters}
+\item{Drz}{Depth of the root zone in centimeters}
+\item{AWC}{available water capacity (amount of water between field capacity and permanent wilting point)
+in millimeter of water per centimeter of soil}
+\item{MAD}{management allowed depletion (between 0 and 1)}
 }
 @source \url{https://clima.iac.sp.gov.br/}
 }

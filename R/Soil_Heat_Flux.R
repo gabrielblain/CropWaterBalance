@@ -1,9 +1,11 @@
 #' Soil_Heat_Flux
 #'
+#' Calculates the Soil Heat Flux
+#'
 #' @param Tavg
 #' A vector, 1-column matrix or data frame with daily average air temperature.
 #' @return
-#' Daily values for soil Heat flux.
+#' Daily values for soil Heat flux in \acronym{MJ/m^2/day}.
 #' @export
 #' @examples
 #' data(DataForCWB)

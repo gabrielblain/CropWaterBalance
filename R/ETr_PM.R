@@ -1,4 +1,6 @@
-#' PE_PM
+#' Reference 'evapotranspiration'
+#'
+#' Daily reference 'evapotranspiration' using 'Penman' and 'Monteith' method.
 #'
 #' @param Tavg
 #' A vector, 1-column matrix or data frame with daily average air temperature.
@@ -25,20 +27,20 @@
 #' Tmin <- DataForCWB[,4]
 #' Rn <- DataForCWB[,6]
 #' WS <- DataForCWB[,7]
-#' RH <- DataForCWB[,7]
+#' RH <- DataForCWB[,8]
 #' G <- DataForCWB[,9]
-#' PE_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+#' ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
 
-PE_PM <- function(Tavg, Tmax, Tmin, Rn, RH, WS,G = NULL){
+ETr_PM <- function(Tavg, Tmax, Tmin, Rn, RH, WS,G = NULL){
   if (is.null(G) == TRUE) {
     G <- Soil_Heat_Flux(Tavg)}
 
   es=0.6108*exp((17.27*Tavg)/(Tavg+273.3))
   ea=(RH*es)/100
   slope.pressure=(4098*es)/((Tavg+237.3)^2)
-  PE <- as.matrix((0.408*slope.pressure*
+  ETr <- as.matrix((0.408*slope.pressure*
                      (Rn-G)+0.063*(900/(Tavg+273))*WS*(es-ea))/
                     (slope.pressure+0.063*(1+0.34*WS)))
-  colnames(PE) <- c("PE_PM")
-  return(PE)
+  colnames(ETr) <- c("ETr_PM")
+  return(ETr)
 }

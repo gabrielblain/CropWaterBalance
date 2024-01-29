@@ -10,10 +10,10 @@ Soil_Heat_Flux(Tavg)
 \item{Tavg}{A vector, 1-column matrix or data frame with daily average air temperature.}
 }
 \value{
-Daily values for soil Heat flux.
+Daily values for soil Heat flux in \acronym{MJ/m^2/day}.
 }
 \description{
-Soil_Heat_Flux
+Calculates the Soil Heat Flux
 }
 \examples{
 data(DataForCWB)

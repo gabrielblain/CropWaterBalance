@@ -2,43 +2,36 @@
 % Please edit documentation in R/CWB.R
 \name{CWB}
 \alias{CWB}
-\title{CWB}
+\title{Crop Water Balance Accounting}
 \usage{
-CWB(
-  Rain,
-  PE,
-  AWC,
-  STinit = NULL,
-  Kc = NULL,
-  Ks = NULL,
-  Irrig = NULL,
-  MAD = 0.8
-)
+CWB(Rain, ETr, AWC, Drz, Kc = NULL, Ks = NULL, Irrig = NULL, MAD = NULL)
 }
 \arguments{
-\item{Rain}{A vector, 1-column matrix or data frame with daily rainfall totals in millimeters.}
+\item{Rain}{Vector, 1-column matrix or data frame with daily rainfall totals in millimeters.}
 
-\item{PE}{A vector, 1-column matrix or data frame with daily potential evapotranspiration in millimeters.}
+\item{ETr}{Vector, 1-column matrix or data frame with daily reference evapotranspiration in millimeters.}
 
-\item{AWC}{A single number defining the available water capacity in the root zone.}
+\item{AWC}{Vector, 1-column matrix or data frame defining the available water capacity of the soil, that is:
+the amount of water between field capacity and permanent wilting point in millimeter of water per centimeter of soil.}
 
-\item{STinit}{A single number defining the water capacity in the root zone at the beginning
-of the water balance accounting. Default is \dQuote{STinit=AWC}}
+\item{Drz}{Vector, 1-column matrix or data frame defining the root zone depth in centimeters.}
 
-\item{Kc}{A single number defining the crop coefficient. Default is 1.}
+\item{Kc}{Single number defining the crop coefficient. Default is 1.}
 
-\item{Ks}{A single number defining the water stress coefficient. Default is 1.}
+\item{Ks}{Single number defining the water stress coefficient. Default is 1.}
 
-\item{Irrig}{A vector, 1-column matrix or data frame with net irrigation amount infiltrated into the soil
+\item{Irrig}{Vector, 1-column matrix or data frame with net irrigation amount infiltrated into the soil
 for the current day in millimeters. Default is 0.}
 
-\item{MAD}{A single number between 0.1 and 1 defining the management allowed depletion. Default is 0.8.}
+\item{MAD}{Vector, 1-column matrix or data frame defining the management allowed depletion.
+Varies between 0 and 1, default = 0.3.}
 }
 \value{
-Water Balance Accounting, including the amount of required irrigation in millimeters.
+Water Balance Accounting, including the soil water defict.
 }
 \description{
-CWB
+Calculates several parameters of the crop water balance.
+It also suggests when irrigate.
 }
 \examples{
 data(DataForCWB)
@@ -47,9 +40,12 @@ Tmax <- DataForCWB[,3]
 Tmin <- DataForCWB[,4]
 Rn <- DataForCWB[,6]
 WS <- DataForCWB[,7]
-RH <- DataForCWB[,7]
+RH <- DataForCWB[,8]
 G <- DataForCWB[,9]
-PE <- PE_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+ETr <- ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
 Rain <- DataForCWB[,10]
-CWB(Rain, PE, AWC=50)
+Drz <- DataForCWB[,11]
+AWC <- DataForCWB[,12]
+MAD <- DataForCWB[,13]
+CWB(Rain, ETr, AWC,Drz,MAD)
 }

@@ -1,10 +1,10 @@
-#' Meteorological data for calculating Water Balance
+#' Data for Water Balance Accounting
 #'
 #' Daily meteorological data from a weather station in Campinas, Brazil.
 #' Belongs to the Agronomic Institute \acronym{IAC}
 #'
 #'  @format ## `DataForCWB`
-#'  A data frame with 10 columns and 31 rows:
+#'  A data frame with 13 columns and 129 rows:
 #'  \describe{
 #'    \item{date}{date}
 #'    \item{tmed}{Average air temperature in Celsius degrees}
@@ -16,6 +16,10 @@
 #'    \item{RH}{Relative Humidity  in %}
 #'    \item{G}{Soil Heat Flux  in \acronym{MJ m-2 day-1}}
 #'    \item{Rain}{Rain in millimeters}
+#'    \item{Drz}{Depth of the root zone in centimeters}
+#'    \item{AWC}{available water capacity (amount of water between field capacity and permanent wilting point)
+#'               in millimeter of water per centimeter of soil}
+#'    \item{MAD}{management allowed depletion (between 0 and 1)}
 #'    }
 #'    @source <https://clima.iac.sp.gov.br/>
 "DataForCWB"
