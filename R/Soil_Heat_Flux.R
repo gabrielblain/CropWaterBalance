@@ -14,7 +14,8 @@
 
 Soil_Heat_Flux <- function(Tavg){
   Tavg <-as.matrix(Tavg)
-  if(ncol(Tavg)!= 1){stop("Tavg must be a single column variable")}
+  if(ncol(Tavg)!= 1 || any(is.na(Tavg)) == TRUE)
+    {stop("Tavg must be a single column variable with no missing value")}
   n <- length(Tavg)
   G <- matrix(NA,n,1)
   if (n<4){stop("At least four days of Tavg are required.")}

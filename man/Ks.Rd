@@ -38,7 +38,7 @@ Rain <- DataForCWB[,10]
 Drz <- DataForCWB[,11]
 AWC <- DataForCWB[,12]
 MAD <- DataForCWB[,13]
-CWB.been <- CWB(Rain, ETr, AWC,Drz)
+CWB.been <- CWB(Rain, ETr, AWC,Drz, start.date = "2023-11-23")
 D <- CWB.been$SoilWaterDeficit
 Ks(AWC = AWC,MAD = MAD, Drz = Drz, SoilWaterDeficit = D)
 }

@@ -17,3 +17,25 @@ test_that("Soil_Heat_Flux() works as expected in example", {
     ),
     tolerance = 0.01
   )})
+
+test_that("Tavg. Wrong format", {
+  Tavg <- cbind(DataForCWB[,2],DataForCWB[,2])
+  expect_error(
+    G <- Soil_Heat_Flux(Tavg=Tavg),
+    "Tavg must be a single column variable with no missing value")
+})
+
+test_that("Tavg. Wrong format", {
+  Tavg <- DataForCWB[,2]
+  Tavg[1] <- NA
+  expect_error(
+    G <- Soil_Heat_Flux(Tavg=Tavg),
+    "Tavg must be a single column variable with no missing value")
+})
+
+test_that("Tavg. Wrong format", {
+  Tavg <- DataForCWB[1:3,2]
+  expect_error(
+    G <- Soil_Heat_Flux(Tavg=Tavg),
+    "At least four days of Tavg are required.")
+})

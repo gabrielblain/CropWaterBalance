@@ -11,7 +11,7 @@ test_that("CWB() works as expected in example", {
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
   MAD <- DataForCWB[,13]
-  tes <- CWB(Rain, ETr, AWC,Drz,MAD)
+  tes <- CWB(Rain, ETr, AWC,Drz,MAD, start.date = "2023-11-23")
   expect_s3_class(tes, "data.frame")
   expect_length(tes, 17)
   expect_equal(nrow(tes), 129)
@@ -45,7 +45,7 @@ test_that("Physically impossible rain values", {
   AWC <- DataForCWB[,12]
   MAD <- DataForCWB[,13]
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz),
+    tes <- CWB(Rain, ETr, AWC, Drz, start.date = "2023-11-23"),
     "Physically impossible or missing rain values"
   )
 })
@@ -65,7 +65,7 @@ test_that("Missing rain values", {
   AWC <- DataForCWB[,12]
   MAD <- DataForCWB[,13]
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz),
+    tes <- CWB(Rain, ETr, AWC, Drz, start.date = "2023-11-23"),
     "Physically impossible or missing rain values"
   )
 })
@@ -85,7 +85,7 @@ test_that("Physically impossible Kc values", {
   MAD <- DataForCWB[,13]
   Kc <- rep(8,129)
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz,Kc = Kc),
+    tes <- CWB(Rain, ETr, AWC, Drz,Kc = Kc, start.date = "2023-11-23"),
     "Physically impossible Ks or Kc values"
   )
 })
@@ -106,7 +106,7 @@ test_that("Missing Kc values", {
   Kc <- rep(8,129)
   Kc[1] <- NA
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz,Kc = Kc),
+    tes <- CWB(Rain, ETr, AWC, Drz,Kc = Kc, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )
@@ -127,7 +127,7 @@ test_that("Physically impossible Ks values", {
   MAD <- DataForCWB[,13]
   Ks <- rep(-1,129)
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz,Ks = Ks),
+    tes <- CWB(Rain, ETr, AWC, Drz,Ks = Ks, start.date = "2023-11-23"),
     "Physically impossible Ks or Kc values"
   )
 })
@@ -148,7 +148,7 @@ test_that("Missing Ks values", {
   Ks <- rep(0.8,129)
   Ks[1] <- NA
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz,Ks = Ks),
+    tes <- CWB(Rain, ETr, AWC, Drz,Ks = Ks, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )
@@ -168,7 +168,7 @@ test_that("Negative Irrig values", {
   MAD <- DataForCWB[,13]
   Irrig <- rep(-0.8,129)
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz, Irrig = Irrig),
+    tes <- CWB(Rain, ETr, AWC, Drz, Irrig = Irrig, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )
@@ -190,7 +190,7 @@ test_that("Missing Irrig values", {
   Irrig <- rep(0,129)
   Irrig[1] <- NA
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz, Irrig = Irrig),
+    tes <- CWB(Rain, ETr, AWC, Drz, Irrig = Irrig, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )
@@ -211,7 +211,7 @@ test_that("Wrong MAD values", {
   MAD <- DataForCWB[,13]
   MAD[1:4] <- 4
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz, MAD=MAD),
+    tes <- CWB(Rain, ETr, AWC, Drz, MAD=MAD, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )
@@ -231,7 +231,7 @@ test_that("Wrong MAD values. Single number", {
   AWC <- DataForCWB[,12]
   MAD <- 4
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz, MAD=MAD),
+    tes <- CWB(Rain, ETr, AWC, Drz, MAD=MAD, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )
@@ -252,7 +252,7 @@ test_that("Wrong Drz values", {
   AWC <- DataForCWB[,12]
   MAD <- DataForCWB[,13]
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz, Drz = Drz),
+    tes <- CWB(Rain, ETr, AWC, Drz, Drz = Drz, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )
@@ -273,7 +273,7 @@ test_that("Wrong Drz values. Character", {
   AWC <- DataForCWB[,12]
   MAD <- DataForCWB[,13]
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz, Drz = Drz),
+    tes <- CWB(Rain, ETr, AWC, Drz, Drz = Drz, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )
@@ -294,7 +294,7 @@ test_that("Wrong AWC values", {
   AWC[1] <- 0
   MAD <- DataForCWB[,13]
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz, MAD=MAD),
+    tes <- CWB(Rain, ETr, AWC, Drz, MAD=MAD, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )
@@ -315,7 +315,7 @@ test_that("Wrong AWC values. Single number", {
   AWC <- 0.4
   MAD <- DataForCWB[,13]
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz, MAD=MAD),
+    tes <- CWB(Rain, ETr, AWC, Drz, MAD=MAD, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )

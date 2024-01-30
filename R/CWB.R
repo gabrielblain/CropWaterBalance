@@ -22,9 +22,13 @@
 #' @param Irrig
 #' Vector, 1-column matrix or data frame with net irrigation amount infiltrated into the soil
 #' for the current day in millimeters. Default is 0.
+#' @param start.date
+#' date at which the accounting should start. Formats:
+#' \dQuote{YYYY-MM-DD}, \dQuote{YYYY/MM/DD}.
 #' @return
 #' Water Balance Accounting, including the soil water defict.
 #' @export
+#' @importFrom lubridate year
 #' @examples
 #' data(DataForCWB)
 #' Tavg <- DataForCWB[,2]
@@ -39,12 +43,19 @@
 #' Drz <- DataForCWB[,11]
 #' AWC <- DataForCWB[,12]
 #' MAD <- DataForCWB[,13]
-#' CWB(Rain, ETr, AWC,Drz,MAD)
+#' CWB(Rain, ETr, AWC,Drz,MAD,start.date = "2023-11-23")
 
-CWB <- function(Rain, ETr, AWC, Drz,Kc = NULL, Ks = NULL,Irrig = NULL, MAD= NULL){
+CWB <- function(Rain, ETr, AWC, Drz,Kc = NULL, Ks = NULL,Irrig = NULL, MAD= NULL, start.date){
   if (is.numeric(Rain) == FALSE || any(is.na(Rain)) == TRUE || length(Rain[Rain<0]) != 0){
     stop("Physically impossible or missing rain values")}
   n <- length(Rain)
+  start.date <- as.Date(start.date, tryFormats = c("%Y-%m-%d", "%Y/%m/%d"))
+  if (year(start.date) < 1990){
+    warning("Sure about the start.date? Format should be YYYY-MM-DD.
+    The accounting started in:",print(lubridate::year(start.date)))
+  }
+  end.date <- start.date + (n-1)
+  all.period <- seq(start.date, end.date, "days")
   Rain <- as.matrix(Rain)
   ETactul <- matrix(NA,n,1)
   Arm <- matrix(NA,n,1)
@@ -127,5 +138,6 @@ CWB <- function(Rain, ETr, AWC, Drz,Kc = NULL, Ks = NULL,Irrig = NULL, MAD= NULL
   colnames(WB) <- c("DaysSeason","Rain","Irrig","ETr","Kc","Ks","ETc", "P-ETc","ActualCropEvap",
                     "StoredWaterRoot","DeltaWaterRoot","Perc","ET_Defict",
                     "TAW","SoilWaterDeficit","d_MAD", "D>=d_MAD")
+  rownames(WB) <- all.period
   return(WB)
 }

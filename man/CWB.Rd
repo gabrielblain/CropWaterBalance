@@ -4,7 +4,17 @@
 \alias{CWB}
 \title{Crop Water Balance Accounting}
 \usage{
-CWB(Rain, ETr, AWC, Drz, Kc = NULL, Ks = NULL, Irrig = NULL, MAD = NULL)
+CWB(
+  Rain,
+  ETr,
+  AWC,
+  Drz,
+  Kc = NULL,
+  Ks = NULL,
+  Irrig = NULL,
+  MAD = NULL,
+  start.date
+)
 }
 \arguments{
 \item{Rain}{Vector, 1-column matrix or data frame with daily rainfall totals in millimeters.}
@@ -25,6 +35,9 @@ for the current day in millimeters. Default is 0.}
 
 \item{MAD}{Vector, 1-column matrix or data frame defining the management allowed depletion.
 Varies between 0 and 1, default = 0.3.}
+
+\item{start.date}{date at which the accounting should start. Formats:
+\dQuote{YYYY-MM-DD}, \dQuote{YYYY/MM/DD}.}
 }
 \value{
 Water Balance Accounting, including the soil water defict.
@@ -47,5 +60,5 @@ Rain <- DataForCWB[,10]
 Drz <- DataForCWB[,11]
 AWC <- DataForCWB[,12]
 MAD <- DataForCWB[,13]
-CWB(Rain, ETr, AWC,Drz,MAD)
+CWB(Rain, ETr, AWC,Drz,MAD,start.date = "2023-11-23")
 }
