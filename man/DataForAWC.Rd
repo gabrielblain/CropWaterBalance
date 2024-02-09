@@ -25,6 +25,6 @@ A data frame with 4 columns and 12 rows:
 \item{AWC High}{Available water capacity in millimeter of water per centimeter of soil}
 \item{AWC Average}{Available water capacity in millimeter of water per centimeter of soil}
 }
-@source \url{https://extension.colostate.edu/topic-areas/agriculture/irrigation-scheduling-the-water-balance-approach-4-707/}
+@source \url{https://extension.colostate.edu/topic-areas/agriculture/}
 }
 \keyword{datasets}

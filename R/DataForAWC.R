@@ -13,5 +13,5 @@
 #'    \item{AWC High}{Available water capacity in millimeter of water per centimeter of soil}
 #'    \item{AWC Average}{Available water capacity in millimeter of water per centimeter of soil}
 #'    }
-#'    @source <https://extension.colostate.edu/topic-areas/agriculture/irrigation-scheduling-the-water-balance-approach-4-707/>
+#'    @source <https://extension.colostate.edu/topic-areas/agriculture/>
 "DataForAWC"
