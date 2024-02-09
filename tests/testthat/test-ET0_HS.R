@@ -1,8 +1,8 @@
-test_that("ETr_HS() works as expected in example", {
-  ETr <- ETr_HS(Ra=DataForCWB[,5], Tavg=DataForCWB[,2], Tmax=DataForCWB[,3], Tmin=DataForCWB[,4])
-  expect_length(ETr, 129)
+test_that("ET0_HS() works as expected in example", {
+  ET0 <- ET0_HS(Ra=DataForCWB[,5], Tavg=DataForCWB[,2], Tmax=DataForCWB[,3], Tmin=DataForCWB[,4])
+  expect_length(ET0, 129)
   expect_equal(
-    ETr[1:10,1],
+    ET0[1:10,1],
     c(
       4.703700,
       5.331592,
@@ -25,7 +25,7 @@ test_that("Missing Ra value", {
   Ra <- DataForCWB[,5]
   Ra[1] <- NA
   expect_error(
-    Tes <- ETr_HS(Ra, Tavg, Tmax, Tmin),
+    Tes <- ET0_HS(Ra, Tavg, Tmax, Tmin),
     "Ra, Tavg, Tmax, and  Tmin must be numerical single-column variable with no missing data and same length."
   )
 })
@@ -37,7 +37,7 @@ test_that("Missing Tmin value", {
   Ra <- DataForCWB[,5]
   Tmin[1] <- NA
   expect_error(
-    Tes <- ETr_HS(Ra, Tavg, Tmax, Tmin),
+    Tes <- ET0_HS(Ra, Tavg, Tmax, Tmin),
     "Ra, Tavg, Tmax, and  Tmin must be numerical single-column variable with no missing data and same length."
   )
 })
@@ -49,7 +49,7 @@ test_that("Missing Tmax value", {
   Ra <- DataForCWB[,5]
   Tmax[1] <- NA
   expect_error(
-    Tes <- ETr_HS(Ra, Tavg, Tmax, Tmin),
+    Tes <- ET0_HS(Ra, Tavg, Tmax, Tmin),
     "Ra, Tavg, Tmax, and  Tmin must be numerical single-column variable with no missing data and same length."
   )
 })
@@ -61,7 +61,7 @@ test_that("Missing Tavg value", {
   Ra <- DataForCWB[,5]
   Tavg[1] <- NA
   expect_error(
-    Tes <- ETr_HS(Ra, Tavg, Tmax, Tmin),
+    Tes <- ET0_HS(Ra, Tavg, Tmax, Tmin),
     "Ra, Tavg, Tmax, and  Tmin must be numerical single-column variable with no missing data and same length."
   )
 })
@@ -72,7 +72,7 @@ test_that("Tavg and Tmax differente length", {
   Tmin <- DataForCWB[1:10,4]
   Ra <- DataForCWB[1:10,5]
   expect_error(
-    Tes <- ETr_HS(Ra, Tavg, Tmax, Tmin),
+    Tes <- ET0_HS(Ra, Tavg, Tmax, Tmin),
     "Ra, Tavg, Tmax, and  Tmin must be numerical single-column variable with no missing data and same length."
   )
 })
@@ -83,7 +83,7 @@ test_that("Tavg and Tmin differente length", {
   Tmin <- DataForCWB[1:9,4]
   Ra <- DataForCWB[1:10,5]
   expect_error(
-    Tes <- ETr_HS(Ra, Tavg, Tmax, Tmin),
+    Tes <- ET0_HS(Ra, Tavg, Tmax, Tmin),
     "Ra, Tavg, Tmax, and  Tmin must be numerical single-column variable with no missing data and same length."
   )
 })
@@ -94,7 +94,7 @@ test_that("Tavg and Ra differente length", {
   Tmin <- DataForCWB[1:10,4]
   Ra <- DataForCWB[1:9,5]
   expect_error(
-    Tes <- ETr_HS(Ra, Tavg, Tmax, Tmin),
+    Tes <- ET0_HS(Ra, Tavg, Tmax, Tmin),
     "Ra, Tavg, Tmax, and  Tmin must be numerical single-column variable with no missing data and same length."
   )
 })
@@ -105,7 +105,7 @@ test_that("Tmax and Tmin differente length", {
   Tmin <- DataForCWB[1:9,4]
   Ra <- DataForCWB[1:10,5]
   expect_error(
-    Tes <- ETr_HS(Ra, Tavg, Tmax, Tmin),
+    Tes <- ET0_HS(Ra, Tavg, Tmax, Tmin),
     "Ra, Tavg, Tmax, and  Tmin must be numerical single-column variable with no missing data and same length."
   )
 })
@@ -116,7 +116,7 @@ test_that("Tmax and Ra differente length", {
   Tmin <- DataForCWB[1:10,4]
   Ra <- DataForCWB[1:9,5]
   expect_error(
-    Tes <- ETr_HS(Ra, Tavg, Tmax, Tmin),
+    Tes <- ET0_HS(Ra, Tavg, Tmax, Tmin),
     "Ra, Tavg, Tmax, and  Tmin must be numerical single-column variable with no missing data and same length."
   )
 })
@@ -127,7 +127,7 @@ test_that("Tavg and Ra differente length", {
   Tmin <- DataForCWB[1:10,4]
   Ra <- DataForCWB[1:9,5]
   expect_error(
-    Tes <- ETr_HS(Ra, Tavg, Tmax, Tmin),
+    Tes <- ET0_HS(Ra, Tavg, Tmax, Tmin),
     "Ra, Tavg, Tmax, and  Tmin must be numerical single-column variable with no missing data and same length."
   )
 })

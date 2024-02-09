@@ -2,7 +2,7 @@
 % Please edit documentation in R/Soil_Heat_Flux.R
 \name{Soil_Heat_Flux}
 \alias{Soil_Heat_Flux}
-\title{Soil_Heat_Flux}
+\title{Soil Heat Flux}
 \usage{
 Soil_Heat_Flux(Tavg)
 }
@@ -10,10 +10,10 @@ Soil_Heat_Flux(Tavg)
 \item{Tavg}{A vector, 1-column matrix or data frame with daily average air temperature.}
 }
 \value{
-Daily values for soil Heat flux in \acronym{MJ/m^2/day}.
+Daily amounts of soil Heat flux in \acronym{MJ m-2 day-1}.
 }
 \description{
-Calculates the Soil Heat Flux
+Calculates the daily amounts of Soil Heat Flux.
 }
 \examples{
 data(DataForCWB)

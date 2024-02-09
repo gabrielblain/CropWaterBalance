@@ -7,10 +7,10 @@
 Descriptive(Sample)
 }
 \arguments{
-\item{Sample}{A vector, 1-column matrix or data frame with rainfall or evapotranspiration.}
+\item{Sample}{A vector, 1-column matrix or data frame with rainfall, evapotranspiration, or other variable.}
 }
 \value{
-a \code{dataframe}, which contains:
+A \code{dataframe} with:
 
 \itemize{
 \item sample mean (Avg),
@@ -23,7 +23,7 @@ a \code{dataframe}, which contains:
 }
 }
 \description{
-Calculates descriptive statistics for rainfall and evapotranspiration.
+Calculates descriptive statistics for rainfall, evapotranspiration, or other variable.
 }
 \examples{
 data(DataForCWB)

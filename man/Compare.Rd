@@ -2,19 +2,17 @@
 % Please edit documentation in R/Compare.R
 \name{Compare}
 \alias{Compare}
-\title{Compare two potential evapotranspiration methods}
+\title{Compare data from two samples}
 \usage{
 Compare(Method1, Method2)
 }
 \arguments{
-\item{Method1}{A vector, 1-column matrix or data frame with potential evapotranspiration
-calculated from Method1.}
+\item{Method1}{A vector, 1-column matrix or data frame with evapotranspiration or other variable.}
 
-\item{Method2}{A vector, 1-column matrix or data frame with potential evapotranspiration
-calculated from Method2.}
+\item{Method2}{A vector, 1-column matrix or data frame with evapotranspiration or other variable.}
 }
 \value{
-a \code{list}, which contains:
+a \code{list} with:
 
 \itemize{
 \item Absolute mean error (AME),
@@ -40,7 +38,7 @@ Rn <- DataForCWB[,6]
 WS <- DataForCWB[,7]
 RH <- DataForCWB[,8]
 G <- DataForCWB[,9]
-Method1 <- ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
-Method2 <- ETr_PT(Tavg, Rn,G)
+Method1 <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
+Method2 <- ET0_PT(Tavg=Tavg, Rn=Rn,G=G)
 Compare(Method1=Method1, Method2=Method2)
 }

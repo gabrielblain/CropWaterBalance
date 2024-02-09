@@ -1,11 +1,11 @@
-#' Soil_Heat_Flux
+#' Soil Heat Flux
 #'
-#' Calculates the Soil Heat Flux
+#' Calculates the daily amounts of Soil Heat Flux.
 #'
 #' @param Tavg
 #' A vector, 1-column matrix or data frame with daily average air temperature.
 #' @return
-#' Daily values for soil Heat flux in \acronym{MJ/m^2/day}.
+#' Daily amounts of soil Heat flux in \acronym{MJ m-2 day-1}.
 #' @export
 #' @examples
 #' data(DataForCWB)
@@ -22,5 +22,7 @@ Soil_Heat_Flux <- function(Tavg){
   for (i in 4:n){
     G[i,1] <- 0.38*(Tavg[i]-mean(Tavg[(i-1):(i-3)]))
   }
+  G[1:3,1] <- 0
+  warning("The first 3 G values were set to zero")
   return(G)
 }

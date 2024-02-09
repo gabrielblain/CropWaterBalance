@@ -6,41 +6,54 @@
 \usage{
 CWB(
   Rain,
-  ETr,
+  ET0,
   AWC,
   Drz,
   Kc = NULL,
   Ks = NULL,
   Irrig = NULL,
   MAD = NULL,
-  start.date
+  InitialSoilWater = NULL,
+  InitialD = 0,
+  start.date = "2011-11-23"
 )
 }
 \arguments{
 \item{Rain}{Vector, 1-column matrix or data frame with daily rainfall totals in millimeters.}
 
-\item{ETr}{Vector, 1-column matrix or data frame with daily reference evapotranspiration in millimeters.}
+\item{ET0}{Vector, 1-column matrix or data frame with daily reference evapotranspiration in millimeters.}
 
-\item{AWC}{Vector, 1-column matrix or data frame defining the available water capacity of the soil, that is:
-the amount of water between field capacity and permanent wilting point in millimeter of water per centimeter of soil.}
+\item{AWC}{Vector, 1-column matrix or data frame with the available water capacity of the soil, that is:
+the amount of water between field capacity and permanent wilting point
+in millimeter of water per centimeter of soil.}
 
 \item{Drz}{Vector, 1-column matrix or data frame defining the root zone depth in centimeters.}
 
-\item{Kc}{Single number defining the crop coefficient. Default is 1.}
+\item{Kc}{Vector, 1-column matrix or data frame defining the crop coefficient.
+If NULL its values are assumed to be 1.}
 
-\item{Ks}{Single number defining the water stress coefficient. Default is 1.}
+\item{Ks}{Vector, 1-column matrix or data frame defining the water stress coefficient.
+If NULL its values are assumed to be 1.}
 
 \item{Irrig}{Vector, 1-column matrix or data frame with net irrigation amount infiltrated into the soil
-for the current day in millimeters. Default is 0.}
+for the current day in millimeters.}
 
 \item{MAD}{Vector, 1-column matrix or data frame defining the management allowed depletion.
-Varies between 0 and 1, default = 0.3.}
+Varies between 0 and 1.}
 
-\item{start.date}{date at which the accounting should start. Formats:
+\item{InitialSoilWater}{Single number defining in millimeter the initial amount of soil water.
+It is used to start the water balance accounting.
+If NULL it is assumed to be at the field capacity.}
+
+\item{InitialD}{Single number defining in millimeter, the initial soil water deficit.
+It is used to start the water balance accounting.
+Default value is zero, which assumes the root zone is at the field capacity.}
+
+\item{start.date}{Date at which the accounting should start. Formats:
 \dQuote{YYYY-MM-DD}, \dQuote{YYYY/MM/DD}.}
 }
 \value{
-Water Balance Accounting, including the soil water defict.
+Water balance accounting, including the soil water deficit.
 }
 \description{
 Calculates several parameters of the crop water balance.
@@ -55,10 +68,14 @@ Rn <- DataForCWB[,6]
 WS <- DataForCWB[,7]
 RH <- DataForCWB[,8]
 G <- DataForCWB[,9]
-ETr <- ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
 Rain <- DataForCWB[,10]
 Drz <- DataForCWB[,11]
 AWC <- DataForCWB[,12]
 MAD <- DataForCWB[,13]
-CWB(Rain, ETr, AWC,Drz,MAD,start.date = "2023-11-23")
+Kc <- DataForCWB[,14]
+Ks <- DataForCWB[,15]
+Irrig <- DataForCWB[,16]
+CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
+    Kc=Kc, Ks=Ks, Irrig=Irrig, MAD=MAD, start.date = "2023-11-23")
 }

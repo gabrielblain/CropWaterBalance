@@ -1,12 +1,14 @@
 test_that("Soil_Heat_Flux() works as expected in example", {
-  G <- Soil_Heat_Flux(Tavg=DataForCWB[,2])
+  expect_warning(
+    G <- Soil_Heat_Flux(Tavg=DataForCWB[,2]),
+    "The first 3 G values were set to zero")
   expect_length(G, 129)
   expect_equal(
     G[1:10,1],
     c(
-      NA,
-      NA,
-      NA,
+      0,
+      0,
+      0,
        0.3806333333,
       -0.7796333333,
       -0.2007666667,

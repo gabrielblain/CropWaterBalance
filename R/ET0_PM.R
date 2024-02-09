@@ -1,24 +1,25 @@
 #' Reference 'evapotranspiration'
 #'
-#' Daily reference 'evapotranspiration' using 'Penman' and 'Monteith' method.
+#' Calculates daily reference evapotranspiration amounts using the Penman and Monteith method.
 #'
 #' @param Tavg
 #' A vector, 1-column matrix or data frame with daily average air temperature.
 #' @param Tmax
-#' A vector, 1-column matrix or data frame with daily Maximum air temperature in Celsius degrees.
+#' A vector, 1-column matrix or data frame with daily maximum air temperature in Celsius degrees.
 #' @param Tmin
-#' A vector, 1-column matrix or data frame with daily Minimum air temperature in Celsius degrees.
+#' A vector, 1-column matrix or data frame with daily minimum air temperature in Celsius degrees.
 #' @param Rn
 #' A vector, 1-column matrix or data frame with daily net radiation in \acronym{MJ m-2 day-1}.
 #' @param RH
-#' A vector, 1-column matrix or data frame with daily Relative Humidity  in %.
+#' A vector, 1-column matrix or data frame with daily relative Humidity  in %.
 #' @param WS
-#' A vector, 1-column matrix or data frame with daily Wind speed in \acronym{m s-1}.
+#' A vector, 1-column matrix or data frame with daily wind speed in \acronym{m s-1}.
 #' @param G
 #' Optional. A vector, 1-column matrix or data frame with daily soil Heat flux in \acronym{MJ m-2 day-1}.
+#' Default is `NULL` and if `NULL` it is assumed to be zero.
 #' May be provided by \code{\link{Soil_Heat_Flux}}
 #' @return
-#' Daily potential evapotranspiration values (Penman & Monteith \acronym{FAO-1998}).
+#' Daily reference evapotranspiration amounts in millimetres.
 #' @export
 #' @examples
 #' data(DataForCWB)
@@ -29,9 +30,9 @@
 #' WS <- DataForCWB[,7]
 #' RH <- DataForCWB[,8]
 #' G <- DataForCWB[,9]
-#' ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+#' ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
 
-ETr_PM <- function(Tavg, Tmax, Tmin, Rn, RH, WS,G = NULL){
+ET0_PM <- function(Tavg, Tmax, Tmin, Rn, RH, WS,G = NULL){
   Tavg <- as.matrix(Tavg)
   if (is.numeric(Tavg) == FALSE || any(is.na(Tavg)) == TRUE ||
       length(Tavg[Tavg > 70]) != 0 || length(Tavg[Tavg < -70]) != 0 ||
@@ -61,15 +62,17 @@ ETr_PM <- function(Tavg, Tmax, Tmin, Rn, RH, WS,G = NULL){
       is.numeric(G) == FALSE || any(is.na(G)) == TRUE ||
       length(G[G > 20]) != 0 || length(G[G < -20]) != 0 ||
       ncol(Tmax)!= 1 || ncol(Tmin)!= 1 || ncol(Rn)!= 1 ||
-      ncol(RH)!= 1 || ncol(WS)!= 1 || ncol(G)!= 1
+      ncol(RH)!= 1 || ncol(WS)!= 1 || ncol(G)!= 1 ||
+      length(Tmax) != n || length(Tmin) != n || length(Rn) != n ||
+      length(RH) != n || length(WS) != n|| length(G) != n
   ){
     stop("Physically impossible or missing Tmax, Tmin, Rn, RH, WS or G values")}
   es=0.6108*exp((17.27*Tavg)/(Tavg+273.3))
   ea=(RH*es)/100
   slope.pressure=(4098*es)/((Tavg+237.3)^2)
-  ETr <- as.matrix((0.408*slope.pressure*
-                     (Rn-G)+0.063*(900/(Tavg+273))*WS*(es-ea))/
-                    (slope.pressure+0.063*(1+0.34*WS)))
-  colnames(ETr) <- c("ETr_PM")
-  return(ETr)
+  ET0 <- as.matrix((0.408*slope.pressure*
+                      (Rn-G)+0.063*(900/(Tavg+273))*WS*(es-ea))/
+                     (slope.pressure+0.063*(1+0.34*WS)))
+  colnames(ET0) <- c("ET0_PM")
+  return(ET0)
 }

@@ -6,30 +6,358 @@ test_that("CWB() works as expected in example", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ETr <- ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
   MAD <- DataForCWB[,13]
-  tes <- CWB(Rain, ETr, AWC,Drz,MAD, start.date = "2023-11-23")
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
+  tes <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz, Kc=Kc,
+             Ks=Ks, Irrig=Irrig, MAD=MAD, start.date = "2023-11-23")
   expect_s3_class(tes, "data.frame")
   expect_length(tes, 17)
   expect_equal(nrow(tes), 129)
   expect_named(
     tes,
-    c("DaysSeason","Rain","Irrig","ETr","Kc","Ks","ETc", "P-ETc","ActualCropEvap",
+    c("DaysSeason","Rain","Irrig","ET0","Kc","Ks","ETc", "(P+Irrig)-ETc","ActualCropEvap",
       "StoredWaterRoot","DeltaWaterRoot","Perc","ET_Defict",
-      "TAW","SoilWaterDeficit","d_MAD", "D>=d_MAD"))
-  expect_equal(tes[1:3, "ActualCropEvap"], c(0.7321117,1.2407705,1.2418008),tolerance = 0.01)
-  expect_equal(tes[1:3, "StoredWaterRoot"], c(45.72000,44.73323,43.49143),tolerance = 0.01)
-  expect_equal(tes[1:3, "DeltaWaterRoot"], c(0.00000000,-0.98677054,-1.24180079),tolerance = 0.01)
-  expect_equal(tes[1:3, "Perc"], c(44.7378883,0.0000000,0.0000000),tolerance = 0.01)
-  expect_equal(tes[1:3, "ET_Defict"], c(0.000000e+00,1.080443e-02,4.534235e-02),tolerance = 0.01)
+      "TAW","SoilWaterDeficit","d_MAD", "D>=dmad-(MAD*dmad)"))
+  expect_equal(tes[1:3, "ActualCropEvap"], c(2.4403724,4.0087403,3.7589885),tolerance = 0.01)
+  expect_equal(tes[1:3, "StoredWaterRoot"], c(45.72000,41.96526,38.20627),tolerance = 0.01)
+  expect_equal(tes[1:3, "DeltaWaterRoot"], c(0.0000000,-3.7547403,-3.7589885),tolerance = 0.01)
+  expect_equal(tes[1:3, "Perc"], c(43.0296276,0.0000000,0.0000000),tolerance = 0.01)
+  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000,0.163176255,0.531488611),tolerance = 0.01)
   expect_equal(tes[1:3, "TAW"], c(45.72,45.72,45.72),tolerance = 0.01)
-  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.00000000,0.99757497,2.28471811),tolerance = 0.01)
+  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000,3.9179166,8.2083937),tolerance = 0.01)
   expect_equal(tes[1:3, "d_MAD"], c(13.716,13.716,13.716),tolerance = 0.01)
-  expect_equal(tes[1:3, "D>=d_MAD"], c("No","No","No"))
+  expect_equal(tes[1:3, "D>=dmad-(MAD*dmad)"], c("No","No","No"))
   })
+
+test_that("CWB() works When InitialSoilWater is provided", {
+  Tavg <- DataForCWB[,2]
+  Tmax <- DataForCWB[,3]
+  Tmin <- DataForCWB[,4]
+  Rn <- DataForCWB[,6]
+  WS <- DataForCWB[,7]
+  RH <- DataForCWB[,8]
+  G <- DataForCWB[,9]
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  Rain <- DataForCWB[,10]
+  Drz <- DataForCWB[,11]
+  AWC <- DataForCWB[,12]
+  MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
+  tes <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz, Kc=Kc,
+             Ks=Ks, Irrig=Irrig, MAD=MAD, InitialSoilWater=45.7 , start.date = "2023-11-23")
+  expect_s3_class(tes, "data.frame")
+  expect_length(tes, 17)
+  expect_equal(nrow(tes), 129)
+  expect_named(
+    tes,
+    c("DaysSeason","Rain","Irrig","ET0","Kc","Ks","ETc", "(P+Irrig)-ETc","ActualCropEvap",
+      "StoredWaterRoot","DeltaWaterRoot","Perc","ET_Defict",
+      "TAW","SoilWaterDeficit","d_MAD", "D>=dmad-(MAD*dmad)"))
+  expect_equal(tes[1:3, "ActualCropEvap"], c(2.4403724,4.0087403,3.7589885),tolerance = 0.01)
+  expect_equal(tes[1:3, "StoredWaterRoot"], c(45.72000,41.96526,38.20627),tolerance = 0.01)
+  expect_equal(tes[1:3, "DeltaWaterRoot"], c(0.0000000,-3.7547403,-3.7589885),tolerance = 0.01)
+  expect_equal(tes[1:3, "Perc"], c(43.0296276,0.0000000,0.0000000),tolerance = 0.01)
+  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000,0.14,0.531488611),tolerance = 0.01)
+  expect_equal(tes[1:3, "TAW"], c(45.72,45.72,45.72),tolerance = 0.01)
+  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000,3.9179166,8.2083937),tolerance = 0.01)
+  expect_equal(tes[1:3, "d_MAD"], c(13.716,13.716,13.716),tolerance = 0.01)
+  expect_equal(tes[1:3, "D>=dmad-(MAD*dmad)"], c("No","No","No"))
+})
+
+test_that("CWB() works as expected when initialD is provided", {
+  Tavg <- DataForCWB[,2]
+  Tmax <- DataForCWB[,3]
+  Tmin <- DataForCWB[,4]
+  Rn <- DataForCWB[,6]
+  WS <- DataForCWB[,7]
+  RH <- DataForCWB[,8]
+  G <- DataForCWB[,9]
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  Rain <- DataForCWB[,10]
+  Drz <- DataForCWB[,11]
+  AWC <- DataForCWB[,12]
+  MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
+  tes <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz, Kc=Kc,
+             Ks=Ks, Irrig=Irrig, MAD=MAD, InitialD=0, start.date = "2023-11-23")
+  expect_s3_class(tes, "data.frame")
+  expect_length(tes, 17)
+  expect_equal(nrow(tes), 129)
+  expect_named(
+    tes,
+    c("DaysSeason","Rain","Irrig","ET0","Kc","Ks","ETc", "(P+Irrig)-ETc","ActualCropEvap",
+      "StoredWaterRoot","DeltaWaterRoot","Perc","ET_Defict",
+      "TAW","SoilWaterDeficit","d_MAD", "D>=dmad-(MAD*dmad)"))
+  expect_equal(tes[1:3, "ActualCropEvap"], c(2.4403724,4.0087403,3.7589885),tolerance = 0.01)
+  expect_equal(tes[1:3, "StoredWaterRoot"], c(45.72000,41.96526,38.20627),tolerance = 0.01)
+  expect_equal(tes[1:3, "DeltaWaterRoot"], c(0.0000000,-3.7547403,-3.7589885),tolerance = 0.01)
+  expect_equal(tes[1:3, "Perc"], c(43.0296276,0.0000000,0.0000000),tolerance = 0.01)
+  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000,0.163176255,0.531488611),tolerance = 0.01)
+  expect_equal(tes[1:3, "TAW"], c(45.72,45.72,45.72),tolerance = 0.01)
+  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000,3.9179166,8.2083937),tolerance = 0.01)
+  expect_equal(tes[1:3, "d_MAD"], c(13.716,13.716,13.716),tolerance = 0.01)
+  expect_equal(tes[1:3, "D>=dmad-(MAD*dmad)"], c("No","No","No"))
+})
+
+test_that("Wrong date format", {
+  Tavg <- DataForCWB[,2]
+  Tmax <- DataForCWB[,3]
+  Tmin <- DataForCWB[,4]
+  Rn <- DataForCWB[,6]
+  WS <- DataForCWB[,7]
+  RH <- DataForCWB[,8]
+  G <- DataForCWB[,9]
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  Rain <- DataForCWB[,10]
+  Drz <- DataForCWB[,11]
+  AWC <- DataForCWB[,12]
+  MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
+  start.date <- "date"
+  expect_error(
+    tes <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz, Kc=Kc,
+               Ks=Ks, Irrig=Irrig, MAD=MAD, start.date = start.date),
+    "character string is not in a standard unambiguous format")
+})
+
+
+test_that("CWB() works as expected When Kc is NULL", {
+  Tavg <- DataForCWB[,2]
+  Tmax <- DataForCWB[,3]
+  Tmin <- DataForCWB[,4]
+  Rn <- DataForCWB[,6]
+  WS <- DataForCWB[,7]
+  RH <- DataForCWB[,8]
+  G <- DataForCWB[,9]
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  Rain <- DataForCWB[,10]
+  Drz <- DataForCWB[,11]
+  AWC <- DataForCWB[,12]
+  MAD <- DataForCWB[,13]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
+  tes <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz, Ks=Ks, Irri=Irrig,
+             MAD=MAD, start.date = "2023-11-23")
+  expect_s3_class(tes, "data.frame")
+  expect_length(tes, 17)
+  expect_equal(nrow(tes), 129)
+  expect_named(
+    tes,
+    c("DaysSeason","Rain","Irrig","ET0","Kc","Ks","ETc", "(P+Irrig)-ETc","ActualCropEvap",
+      "StoredWaterRoot","DeltaWaterRoot","Perc","ET_Defict",
+      "TAW","SoilWaterDeficit","d_MAD", "D>=dmad-(MAD*dmad)"))
+  expect_equal(tes[1:3, "ActualCropEvap"], c(2.4403724,4.0087403,3.7589885),tolerance = 0.01)
+  expect_equal(tes[1:3, "StoredWaterRoot"], c(45.72000,41.96526,38.20627),tolerance = 0.01)
+  expect_equal(tes[1:3, "DeltaWaterRoot"], c(0.0000000,-3.7547403,-3.7589885),tolerance = 0.01)
+  expect_equal(tes[1:3, "Perc"], c(43.0296276,0.0000000,0.0000000),tolerance = 0.01)
+  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000,0.163176255,0.531488611),tolerance = 0.01)
+  expect_equal(tes[1:3, "TAW"], c(45.72,45.72,45.72),tolerance = 0.01)
+  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000,3.9179166,8.2083937),tolerance = 0.01)
+  expect_equal(tes[1:3, "d_MAD"], c(13.716,13.716,13.716),tolerance = 0.01)
+  expect_equal(tes[1:3, "D>=dmad-(MAD*dmad)"], c("No","No","No"))
+})
+
+test_that("CWB() works as expected When Ks is NULL", {
+  Tavg <- DataForCWB[,2]
+  Tmax <- DataForCWB[,3]
+  Tmin <- DataForCWB[,4]
+  Rn <- DataForCWB[,6]
+  WS <- DataForCWB[,7]
+  RH <- DataForCWB[,8]
+  G <- DataForCWB[,9]
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  Rain <- DataForCWB[,10]
+  Drz <- DataForCWB[,11]
+  AWC <- DataForCWB[,12]
+  MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  #Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
+  tes <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz, Kc=Kc, Irri=Irrig,
+             MAD=MAD, start.date = "2023-11-23")
+  expect_s3_class(tes, "data.frame")
+  expect_length(tes, 17)
+  expect_equal(nrow(tes), 129)
+  expect_named(
+    tes,
+    c("DaysSeason","Rain","Irrig","ET0","Kc","Ks","ETc", "(P+Irrig)-ETc","ActualCropEvap",
+      "StoredWaterRoot","DeltaWaterRoot","Perc","ET_Defict",
+      "TAW","SoilWaterDeficit","d_MAD", "D>=dmad-(MAD*dmad)"))
+  expect_equal(tes[1:3, "ActualCropEvap"], c(2.4403724,4.0087403,3.7589885),tolerance = 0.01)
+  expect_equal(tes[1:3, "StoredWaterRoot"], c(45.72000,41.96526,38.20627),tolerance = 0.01)
+  expect_equal(tes[1:3, "DeltaWaterRoot"], c(0.0000000,-3.7547403,-3.7589885),tolerance = 0.01)
+  expect_equal(tes[1:3, "Perc"], c(43.0296276,0.0000000,0.0000000),tolerance = 0.01)
+  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000,0.163176255,0.531488611),tolerance = 0.01)
+  expect_equal(tes[1:3, "TAW"], c(45.72,45.72,45.72),tolerance = 0.01)
+  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000,3.9179166,8.2083937),tolerance = 0.01)
+  expect_equal(tes[1:3, "d_MAD"], c(13.716,13.716,13.716),tolerance = 0.01)
+  expect_equal(tes[1:3, "D>=dmad-(MAD*dmad)"], c("No","No","No"))
+})
+
+test_that("CWB() works as expected When Irrig is NULL", {
+  Tavg <- DataForCWB[,2]
+  Tmax <- DataForCWB[,3]
+  Tmin <- DataForCWB[,4]
+  Rn <- DataForCWB[,6]
+  WS <- DataForCWB[,7]
+  RH <- DataForCWB[,8]
+  G <- DataForCWB[,9]
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  Rain <- DataForCWB[,10]
+  Drz <- DataForCWB[,11]
+  AWC <- DataForCWB[,12]
+  MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  #Irrig <- DataForCWB[,16]
+  tes <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz, Kc=Kc, Ks=Ks,
+             MAD=MAD, start.date = "2023-11-23")
+  expect_s3_class(tes, "data.frame")
+  expect_length(tes, 17)
+  expect_equal(nrow(tes), 129)
+  expect_named(
+    tes,
+    c("DaysSeason","Rain","Irrig","ET0","Kc","Ks","ETc", "(P+Irrig)-ETc","ActualCropEvap",
+      "StoredWaterRoot","DeltaWaterRoot","Perc","ET_Defict",
+      "TAW","SoilWaterDeficit","d_MAD", "D>=dmad-(MAD*dmad)"))
+  expect_equal(tes[1:3, "ActualCropEvap"], c(2.4403724,4.0087403,3.7589885),tolerance = 0.01)
+  expect_equal(tes[1:3, "StoredWaterRoot"], c(45.72000,41.96526,38.20627),tolerance = 0.01)
+  expect_equal(tes[1:3, "DeltaWaterRoot"], c(0.0000000,-3.7547403,-3.7589885),tolerance = 0.01)
+  expect_equal(tes[1:3, "Perc"], c(43.0296276,0.0000000,0.0000000),tolerance = 0.01)
+  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000,0.163176255,0.531488611),tolerance = 0.01)
+  expect_equal(tes[1:3, "TAW"], c(45.72,45.72,45.72),tolerance = 0.01)
+  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000,3.9179166,8.2083937),tolerance = 0.01)
+  expect_equal(tes[1:3, "d_MAD"], c(13.716,13.716,13.716),tolerance = 0.01)
+  expect_equal(tes[1:3, "D>=dmad-(MAD*dmad)"], c("No","No","No"))
+})
+
+test_that("CWB() works as expected When MAD is NULL", {
+  Tavg <- DataForCWB[,2]
+  Tmax <- DataForCWB[,3]
+  Tmin <- DataForCWB[,4]
+  Rn <- DataForCWB[,6]
+  WS <- DataForCWB[,7]
+  RH <- DataForCWB[,8]
+  G <- DataForCWB[,9]
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  Rain <- DataForCWB[,10]
+  Drz <- DataForCWB[,11]
+  AWC <- DataForCWB[,12]
+  #MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
+  tes <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz, Kc=Kc, Ks=Ks,
+             Irrig=Irrig, start.date = "2023-11-23")
+  expect_s3_class(tes, "data.frame")
+  expect_length(tes, 17)
+  expect_equal(nrow(tes), 129)
+  expect_named(
+    tes,
+    c("DaysSeason","Rain","Irrig","ET0","Kc","Ks","ETc", "(P+Irrig)-ETc","ActualCropEvap",
+      "StoredWaterRoot","DeltaWaterRoot","Perc","ET_Defict",
+      "TAW","SoilWaterDeficit","d_MAD", "D>=dmad-(MAD*dmad)"))
+  expect_equal(tes[1:3, "ActualCropEvap"], c(2.4403724,4.0087403,3.7589885),tolerance = 0.01)
+  expect_equal(tes[1:3, "StoredWaterRoot"], c(45.72000,41.96526,38.20627),tolerance = 0.01)
+  expect_equal(tes[1:3, "DeltaWaterRoot"], c(0.0000000,-3.7547403,-3.7589885),tolerance = 0.01)
+  expect_equal(tes[1:3, "Perc"], c(43.0296276,0.0000000,0.0000000),tolerance = 0.01)
+  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000,0.163176255,0.531488611),tolerance = 0.01)
+  expect_equal(tes[1:3, "TAW"], c(45.72,45.72,45.72),tolerance = 0.01)
+  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000,3.9179166,8.2083937),tolerance = 0.01)
+  expect_equal(tes[1:3, "d_MAD"], c(13.716,13.716,13.716),tolerance = 0.01)
+  expect_equal(tes[1:3, "D>=dmad-(MAD*dmad)"], c("No","No","No"))
+})
+
+test_that("CWB() works as expected when G is NULL", {
+  Tavg <- DataForCWB[,2]
+  Tmax <- DataForCWB[,3]
+  Tmin <- DataForCWB[,4]
+  Rn <- DataForCWB[,6]
+  WS <- DataForCWB[,7]
+  RH <- DataForCWB[,8]
+  expect_warning(
+    ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS),
+    "The first 3 G values were set to zero")
+  Rain <- DataForCWB[,10]
+  Drz <- DataForCWB[,11]
+  AWC <- DataForCWB[,12]
+  MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
+  tes <- CWB(Rain, ET0, AWC, Drz, Kc, Ks, Irrig, MAD, start.date = "2023-11-23")
+  expect_s3_class(tes, "data.frame")
+  expect_length(tes, 17)
+  expect_equal(nrow(tes), 129)
+  expect_named(
+    tes,
+    c("DaysSeason","Rain","Irrig","ET0","Kc","Ks","ETc", "(P+Irrig)-ETc","ActualCropEvap",
+      "StoredWaterRoot","DeltaWaterRoot","Perc","ET_Defict",
+      "TAW","SoilWaterDeficit","d_MAD", "D>=dmad-(MAD*dmad)"))
+  expect_equal(tes[1:3, "ActualCropEvap"], c(2.2931834,3.9465779,3.8004277),tolerance = 0.01)
+  expect_equal(tes[1:3, "StoredWaterRoot"], c(45.72000,42.02742,38.22699),tolerance = 0.01)
+  expect_equal(tes[1:3, "DeltaWaterRoot"], c(0.0000000,-3.6925779,-3.8004277),tolerance = 0.01)
+  expect_equal(tes[1:3, "Perc"], c(43.17681664,0.00000000,0.00000000),tolerance = 0.01)
+  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000,0.157664537,0.532931584),tolerance = 0.01)
+  expect_equal(tes[1:3, "TAW"], c(45.72,45.72,45.72),tolerance = 0.01)
+  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000,3.8502425,8.1836018),tolerance = 0.01)
+  expect_equal(tes[1:3, "d_MAD"], c(13.716,13.716,13.716),tolerance = 0.01)
+  expect_equal(tes[1:3, "D>=dmad-(MAD*dmad)"], c("No","No","No"))
+})
+
+test_that("CWB() works as expected when P<ET0 on the very first day", {
+  data(DataForCWB)
+  Tavg <- DataForCWB[,2]
+  Tmax <- DataForCWB[,3]
+  Tmin <- DataForCWB[,4]
+  Rn <- DataForCWB[,6]
+  WS <- DataForCWB[,7]
+  RH <- DataForCWB[,8]
+  G <- DataForCWB[,9]
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0[2:10]
+  ET0 <- as.matrix(ET0)
+  Rain <- DataForCWB[2:10,10]
+  Drz <- DataForCWB[2:10,11]
+  AWC <- DataForCWB[2:10,12]
+  MAD <- DataForCWB[2:10,13]
+  Kc <- DataForCWB[2:10,14]
+  Ks <- DataForCWB[2:10,15]
+  Irrig <- DataForCWB[2:10,16]
+  expect_warning(
+  tes1 <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
+              Kc=Kc, Ks=Ks, Irrig=Irrig, MAD=MAD, start.date = "2023-11-23"),
+  "On day 1, ETC was larger than Rain. The first days should be analyzed with caution.")
+  expect_s3_class(tes1, "data.frame")
+  expect_length(tes1, 17)
+  expect_equal(nrow(tes1), 9)
+  expect_named(
+    tes1,
+    c("DaysSeason","Rain","Irrig","ET0","Kc","Ks","ETc", "(P+Irrig)-ETc","ActualCropEvap",
+      "StoredWaterRoot","DeltaWaterRoot","Perc","ET_Defict",
+      "TAW","SoilWaterDeficit","d_MAD", "D>=dmad-(MAD*dmad)"))
+  expect_equal(tes1[1:3, "ActualCropEvap"], c(4.171917,3.758989,3.665459),tolerance = 0.01)
+  expect_equal(tes1[1:3, "StoredWaterRoot"], c(41.96526,38.20627,45.72000),tolerance = 0.01)
+  expect_equal(tes1[1:3, "DeltaWaterRoot"], c(-3.75,-3.758989,7.513729),tolerance = 0.01)
+  expect_equal(tes1[1:3, "Perc"], c(0.0000000,0.0000000,0.2508122),tolerance = 0.01)
+  expect_equal(tes1[1:3, "ET_Defict"], c(0.0000000,0.5314886,0.0000000),tolerance = 0.01)
+  expect_equal(tes1[1:3, "TAW"], c(45.72,45.72,45.72),tolerance = 0.01)
+  expect_equal(tes1[1:3, "SoilWaterDeficit"], c(3.9179166,8.2083937,0.4438527),tolerance = 0.01)
+  expect_equal(tes1[1:3, "d_MAD"], c(13.716,13.716,13.716),tolerance = 0.01)
+  expect_equal(tes1[1:3, "D>=dmad-(MAD*dmad)"], c("No","No","No"))
+})
 
 test_that("Physically impossible rain values", {
   Tavg <- DataForCWB[,2]
@@ -39,13 +367,16 @@ test_that("Physically impossible rain values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ETr <- ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
   Rain <- (-1*DataForCWB[,10])
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
   MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz, start.date = "2023-11-23"),
+    tes <- CWB(Rain, ET0, AWC, Drz,  Kc, Ks, Irrig, start.date = "2023-11-23"),
     "Physically impossible or missing rain values"
   )
 })
@@ -58,14 +389,39 @@ test_that("Missing rain values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ETr <- ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
   Rain <- DataForCWB[,10]
   Rain[1] <- NA
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
   MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz, start.date = "2023-11-23"),
+    tes <- CWB(Rain, ET0, AWC, Drz,  Kc, Ks, Irrig, start.date = "2023-11-23"),
+    "Physically impossible or missing rain values"
+  )
+})
+
+test_that("Wrong format rain", {
+  Tavg <- DataForCWB[,2]
+  Tmax <- DataForCWB[,3]
+  Tmin <- DataForCWB[,4]
+  Rn <- DataForCWB[,6]
+  WS <- DataForCWB[,7]
+  RH <- DataForCWB[,8]
+  G <- DataForCWB[,9]
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  Rain <- cbind(DataForCWB[,10],DataForCWB[,10])
+  Drz <- DataForCWB[,11]
+  AWC <- DataForCWB[,12]
+  MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
+  expect_error(
+    tes <- CWB(Rain, ET0, AWC, Drz, Kc, Ks, Irrig, MAD, start.date = "2023-11-23"),
     "Physically impossible or missing rain values"
   )
 })
@@ -78,15 +434,19 @@ test_that("Physically impossible Kc values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ETr <- ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
   MAD <- DataForCWB[,13]
-  Kc <- rep(8,129)
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
+  Kc[1] <- 40
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz,Kc = Kc, start.date = "2023-11-23"),
-    "Physically impossible Ks or Kc values"
+    tes <- CWB(Rain, ET0, AWC, Drz, MAD=MAD, Kc, Ks, Irrig, start.date = "2023-11-23"),
+    "Inputs must be numerical variables with no missing value.
+        Also check if the input are physically sound."
   )
 })
 
@@ -98,15 +458,17 @@ test_that("Missing Kc values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ETr <- ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
   MAD <- DataForCWB[,13]
-  Kc <- rep(8,129)
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
   Kc[1] <- NA
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz,Kc = Kc, start.date = "2023-11-23"),
+    tes <- CWB(Rain, ET0, AWC, Drz, MAD, Kc, Ks, Irrig, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )
@@ -120,15 +482,18 @@ test_that("Physically impossible Ks values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ETr <- ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
   MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Irrig <- DataForCWB[,16]
   Ks <- rep(-1,129)
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz,Ks = Ks, start.date = "2023-11-23"),
-    "Physically impossible Ks or Kc values"
+    tes <- CWB(Rain, ET0, AWC, Drz, MAD=MAD, Kc, Ks, Irrig, start.date = "2023-11-23"),
+    "Inputs must be numerical variables with no missing value.
+        Also check if the input are physically sound."
   )
 })
 
@@ -140,15 +505,17 @@ test_that("Missing Ks values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ETr <- ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
   MAD <- DataForCWB[,13]
-  Ks <- rep(0.8,129)
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
   Ks[1] <- NA
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz,Ks = Ks, start.date = "2023-11-23"),
+    tes <- CWB(Rain, ET0, AWC, Drz, MAD=MAD, Kc, Ks, Irrig, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )
@@ -161,14 +528,16 @@ test_that("Negative Irrig values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ETr <- ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
   MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
   Irrig <- rep(-0.8,129)
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz, Irrig = Irrig, start.date = "2023-11-23"),
+    tes <- CWB(Rain, ET0, AWC, Drz, MAD=MAD, Kc, Ks, Irrig, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )
@@ -182,21 +551,23 @@ test_that("Missing Irrig values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ETr <- ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
   MAD <- DataForCWB[,13]
-  Irrig <- rep(0,129)
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
   Irrig[1] <- NA
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz, Irrig = Irrig, start.date = "2023-11-23"),
+    tes <- CWB(Rain, ET0, AWC, Drz, MAD=MAD, Kc, Ks, Irrig, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )
 })
 
-test_that("Wrong MAD values", {
+test_that("Physically impossible MAD values", {
   Tavg <- DataForCWB[,2]
   Tmax <- DataForCWB[,3]
   Tmin <- DataForCWB[,4]
@@ -204,14 +575,17 @@ test_that("Wrong MAD values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ETr <- ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
   MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
   MAD[1:4] <- 4
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz, MAD=MAD, start.date = "2023-11-23"),
+    tes <- CWB(Rain, ET0, AWC, Drz, MAD=MAD, Kc, Ks, Irrig, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )
@@ -225,19 +599,22 @@ test_that("Wrong MAD values. Single number", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ETr <- ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
   MAD <- 4
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz, MAD=MAD, start.date = "2023-11-23"),
+    tes <- CWB(Rain, ET0, AWC, Drz,  MAD=MAD, Kc, Ks, Irrig, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )
 })
 
-test_that("Wrong Drz values", {
+test_that("Physically impossible Drz values", {
   Tavg <- DataForCWB[,2]
   Tmax <- DataForCWB[,3]
   Tmin <- DataForCWB[,4]
@@ -245,14 +622,17 @@ test_that("Wrong Drz values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ETr <- ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   Drz[1] <- (-4)
   AWC <- DataForCWB[,12]
   MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz, Drz = Drz, start.date = "2023-11-23"),
+    tes <- CWB(Rain, ET0, AWC, Drz, MAD=MAD, Kc, Ks, Irrig, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )
@@ -266,20 +646,23 @@ test_that("Wrong Drz values. Character", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ETr <- ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   Drz[1] <- "profunda"
   AWC <- DataForCWB[,12]
   MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz, Drz = Drz, start.date = "2023-11-23"),
+    tes <- CWB(Rain, ET0, AWC, Drz,  MAD=MAD, Kc, Ks, Irrig, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )
 })
 
-test_that("Wrong AWC values", {
+test_that("Physically impossible AWC values", {
   Tavg <- DataForCWB[,2]
   Tmax <- DataForCWB[,3]
   Tmin <- DataForCWB[,4]
@@ -287,14 +670,17 @@ test_that("Wrong AWC values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ETr <- ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
   AWC[1] <- 0
   MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz, MAD=MAD, start.date = "2023-11-23"),
+    tes <- CWB(Rain, ET0, AWC, Drz, MAD=MAD, Kc, Ks, Irrig, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )
@@ -308,15 +694,154 @@ test_that("Wrong AWC values. Single number", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ETr <- ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
   AWC <- 0.4
   MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
   expect_error(
-    tes <- CWB(Rain, ETr, AWC, Drz, MAD=MAD, start.date = "2023-11-23"),
+    tes <- CWB(Rain, ET0, AWC, Drz,  MAD=MAD, Kc, Ks, Irrig, start.date = "2023-11-23"),
     "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
   )
 })
+
+test_that("Rain and ET0 different lengths", {
+  Tavg <- DataForCWB[,2]
+  Tmax <- DataForCWB[,3]
+  Tmin <- DataForCWB[,4]
+  Rn <- DataForCWB[,6]
+  WS <- DataForCWB[,7]
+  RH <- DataForCWB[,8]
+  G <- DataForCWB[,9]
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0[1:20]
+  Rain <- DataForCWB[,10]
+  Drz <- DataForCWB[,11]
+  AWC <- DataForCWB[,12]
+  AWC <- 0.4
+  MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
+  expect_error(
+    tes <- CWB(Rain, ET0, AWC, Drz,  MAD=MAD, Kc, Ks, Irrig, start.date = "2023-11-23"),
+    "Inputs must be numerical variables with no missing value.
+        Also check if the input are physically sound."
+  )
+})
+
+test_that("Wrong InitialSoilWater string", {
+  Tavg <- DataForCWB[,2]
+  Tmax <- DataForCWB[,3]
+  Tmin <- DataForCWB[,4]
+  Rn <- DataForCWB[,6]
+  WS <- DataForCWB[,7]
+  RH <- DataForCWB[,8]
+  G <- DataForCWB[,9]
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  Rain <- DataForCWB[,10]
+  Drz <- DataForCWB[,11]
+  AWC <- DataForCWB[,12]
+  MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
+  expect_error(
+    tes <- CWB(Rain, ET0, AWC, Drz,  MAD=MAD, Kc, Ks, Irrig, InitialSoilWater="string", start.date = "2023-11-23"),
+    "InitialSoilWater must be a single positive number no larger than TAW"
+  )
+})
+
+test_that("Wrong InitialSoilWater larger than TAW", {
+  Tavg <- DataForCWB[,2]
+  Tmax <- DataForCWB[,3]
+  Tmin <- DataForCWB[,4]
+  Rn <- DataForCWB[,6]
+  WS <- DataForCWB[,7]
+  RH <- DataForCWB[,8]
+  G <- DataForCWB[,9]
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  Rain <- DataForCWB[,10]
+  Drz <- DataForCWB[,11]
+  AWC <- DataForCWB[,12]
+  MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
+  expect_error(
+    tes <- CWB(Rain, ET0, AWC, Drz,  MAD=MAD, Kc, Ks, Irrig, InitialSoilWater=80, start.date = "2023-11-23"),
+    "InitialSoilWater must be a single positive number no larger than TAW"
+  )
+})
+
+test_that("Wrong InitialD larger than TAW", {
+  Tavg <- DataForCWB[,2]
+  Tmax <- DataForCWB[,3]
+  Tmin <- DataForCWB[,4]
+  Rn <- DataForCWB[,6]
+  WS <- DataForCWB[,7]
+  RH <- DataForCWB[,8]
+  G <- DataForCWB[,9]
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  Rain <- DataForCWB[,10]
+  Drz <- DataForCWB[,11]
+  AWC <- DataForCWB[,12]
+  MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
+  expect_error(
+    tes <- CWB(Rain, ET0, AWC, Drz,  MAD=MAD, Kc, Ks, Irrig, InitialD=80, start.date = "2023-11-23"),
+    "InitialD must be a single positive number no larger than TAW"
+  )
+})
+
+test_that("Wrong InitialD negative value", {
+  Tavg <- DataForCWB[,2]
+  Tmax <- DataForCWB[,3]
+  Tmin <- DataForCWB[,4]
+  Rn <- DataForCWB[,6]
+  WS <- DataForCWB[,7]
+  RH <- DataForCWB[,8]
+  G <- DataForCWB[,9]
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  Rain <- DataForCWB[,10]
+  Drz <- DataForCWB[,11]
+  AWC <- DataForCWB[,12]
+  MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
+  expect_error(
+    tes <- CWB(Rain, ET0, AWC, Drz,  MAD=MAD, Kc, Ks, Irrig, InitialD=-80, start.date = "2023-11-23"),
+    "InitialD must be a single positive number no larger than TAW"
+  )
+})
+
+test_that("Wrong start.date", {
+  Tavg <- DataForCWB[,2]
+  Tmax <- DataForCWB[,3]
+  Tmin <- DataForCWB[,4]
+  Rn <- DataForCWB[,6]
+  WS <- DataForCWB[,7]
+  RH <- DataForCWB[,8]
+  G <- DataForCWB[,9]
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  Rain <- DataForCWB[,10]
+  Drz <- DataForCWB[,11]
+  AWC <- DataForCWB[,12]
+  MAD <- DataForCWB[,13]
+  Kc <- DataForCWB[,14]
+  Ks <- DataForCWB[,15]
+  Irrig <- DataForCWB[,16]
+  expect_error(
+    tes <- CWB(Rain, ET0, AWC, Drz,  MAD=MAD, Kc, Ks, Irrig, start.date = "string"),
+    "character string is not in a standard unambiguous format"
+  )
+})
+

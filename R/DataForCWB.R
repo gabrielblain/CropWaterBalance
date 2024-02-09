@@ -1,10 +1,11 @@
 #' Data for Water Balance Accounting
 #'
-#' Daily meteorological data from a weather station in Campinas, Brazil.
-#' Belongs to the Agronomic Institute \acronym{IAC}
+#' Daily meteorological data from a weather station in Campinas, Brazil
+#' and other parameters required for calculating the crop water balance.
+#' The meteorological data belongs to the Agronomic Institute \acronym{(IAC)}.
 #'
 #'  @format ## `DataForCWB`
-#'  A data frame with 13 columns and 129 rows:
+#'  A data frame with 16 columns and 129 rows:
 #'  \describe{
 #'    \item{date}{date}
 #'    \item{tmed}{Average air temperature in Celsius degrees}
@@ -20,6 +21,9 @@
 #'    \item{AWC}{available water capacity (amount of water between field capacity and permanent wilting point)
 #'               in millimeter of water per centimeter of soil}
 #'    \item{MAD}{management allowed depletion (between 0 and 1)}
+#'    \item{Kc}{Crop coefficient (between 0 and 1)}
+#'    \item{Ks}{Water stress coefficient (between 0 and 1)}
+#'    \item{Irrig}{Applied net irrigation in millimeters}
 #'    }
-#'    @source <https://clima.iac.sp.gov.br/>
+#'    @source <http://www.ciiagro.org.br/>
 "DataForCWB"

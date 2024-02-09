@@ -1,5 +1,5 @@
 Package: CropWaterBalance
-Title: Climate Water Balance For Irrigation Purposes
+Title: Climate Water Balance for Irrigation Purposes
 Version: 0.0.0.9000
 Authors@R: c(
   person(
@@ -22,8 +22,8 @@ Authors@R: c(
     comment = c(ORCID = "0000-0003-4200-7094")
   ))
 Description: Calculates daily climate water balance for irrigation purposes. 
-  The package also calculates the reference evapotranspiration using three methods.
-  Penman and Monteith, Priestley and Taylor, or Hargreaves and Samani. 
+  The package also calculates the reference 'evapotranspiration' using three methods.
+  Penman and 'Monteith', Priestley and Taylor, or Hargreaves and 'Samani'. 
   Users may specify a management allowed depletion ('MAD'), which is used by the package 
   to suggest when irrigate. It also allows the use of crop and water stress coefficients.
 License: MIT + file LICENSE

@@ -1,15 +1,13 @@
-#' Compare two potential evapotranspiration methods
+#' Compare data from two samples
 #'
 #' Calculates measures of accuracy and agreement.
 #'
 #' @param Method1
-#' A vector, 1-column matrix or data frame with potential evapotranspiration
-#' calculated from Method1.
+#' A vector, 1-column matrix or data frame with evapotranspiration or other variable.
 #' @param Method2
-#' A vector, 1-column matrix or data frame with potential evapotranspiration
-#' calculated from Method2.
+#' A vector, 1-column matrix or data frame with evapotranspiration or other variable.
 #' @return
-#' a \code{list}, which contains:
+#' a \code{list} with:
 #'
 #' \itemize{
 #'  \item Absolute mean error (AME),
@@ -32,8 +30,8 @@
 #' WS <- DataForCWB[,7]
 #' RH <- DataForCWB[,8]
 #' G <- DataForCWB[,9]
-#' Method1 <- ETr_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
-#' Method2 <- ETr_PT(Tavg, Rn,G)
+#' Method1 <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
+#' Method2 <- ET0_PT(Tavg=Tavg, Rn=Rn,G=G)
 #' Compare(Method1=Method1, Method2=Method2)
 #' @export
 #' @importFrom PowerSDI Accuracy
