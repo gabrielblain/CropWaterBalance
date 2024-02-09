@@ -400,8 +400,9 @@ Andales, A.A.; Chávez, J.L.;Bauder, T.A. Irrigation Scheduling: The Water Balan
 
 Hargreaves, G.H.; Samani, Z.A. 1985.Reference crop evapotranspiration from temperature. Appl. Eng. Agric,1, 96–99.
 
-Package ‘lubridate', Version 1.9.3, Author Vitalie Spinu et al., https://CRAN.R-project.org/package=lubridate
+Package ‘lubridate', Version 1.9.3, Author Vitalie Spinu et al., <https://CRAN.R-project.org/package=lubridate>
 
-Package ‘PowerSDI', Version 1.0. 0, Author Gabriel C. Blain et al., https://CRAN.R-project.org/package=PowerSDI
+Package ‘PowerSDI', Version 1.0. 0, Author Gabriel C. Blain et al., <https://CRAN.R-project.org/package=PowerSDI>
 
-Priestley, C.H.B., Taylor, R.J., 1972. On the Assessment of Surface Heat Flux and Evaporation Using Large-Scale Parameters. Monthly Weather Review, 100 (2), 81–92. https://doi.org/10.1175/1520-0493(1972)100<0081:OTAOSH>2.3.CO;2
+Priestley, C.H.B., Taylor, R.J., 1972. On the Assessment of Surface Heat Flux and Evaporation Using Large-Scale Parameters. Monthly Weather Review, 100 (2), 81–92.
+<https://journals.ametsoc.org/view/journals/mwre/100/2/1520-0493_1972_100_0081_otaosh_2_3_co_2.xml>
