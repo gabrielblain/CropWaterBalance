@@ -389,7 +389,7 @@ MIT
 Gabriel Constantino Blain, Graciela da Rocha Sobierajski, Regina Célia Matos Pires
 Maintainer: Gabriel Constantino Blain, <gabriel.blain@sp.gov.br>
 
-## Acknowledgments: Falar do trabalho da Irrigação.
+## Acknowledgments:
 The package uses data from the Fact Sheet number 4707 Irrigation Scheduling: The Water Balance Approach, by A. A. Andales, J. L. Chávez, and T. A. Bauder.
 The authors greatly appreciate this initiative.
 
