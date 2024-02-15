@@ -405,4 +405,3 @@ Package ‘lubridate', Version 1.9.3, Author Vitalie Spinu et al., <https://CRAN
 Package ‘PowerSDI', Version 1.0. 0, Author Gabriel C. Blain et al., <https://CRAN.R-project.org/package=PowerSDI>
 
 Priestley, C.H.B., Taylor, R.J., 1972. On the Assessment of Surface Heat Flux and Evaporation Using Large-Scale Parameters. Monthly Weather Review, 100 (2), 81–92.
-<https://journals.ametsoc.org/view/journals/mwre/100/2/1520-0493_1972_100_0081_otaosh_2_3_co_2.xml>
