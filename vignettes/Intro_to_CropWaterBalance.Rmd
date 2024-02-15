@@ -1,0 +1,167 @@
+---
+title:  "Introduction to CropWaterBalance"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to CropWaterBalance}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  bibliography: bibliography.bib
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+# Introduction
+
+Irrigated areas have increased throughout the globe to support the growing global population and to cope with climate change impacts (@Siyal2023). In this context, the {CropWaterBalance} allows users to keep track of the soil water deficit in the root zone through the crop water balance accounting (@Andales2012). The goal of the package is to assist users in making decisions about when and how much to irrigate.
+The most important function of the package is the `CWB()`, which calculates several parameters of the crop water balance, including crop evapotranspiration (ETc), actual crop evapotranspiration, stored water in the root zone and soil water deficit (D). The function also suggests when irrigate, considering the management allowed depletion (MAD) provided by the users.
+Although the FAO-Penman and Monteith equation is recognized as the standard method for estimating daily amounts of reference evapotranspiration (ETO) (@Allen1998), the high number of variables required for calculating this model limits its operational use in several regions in the world. Thus, the package includes the function `ETO_PM()`, which estimate daily ETO amounts through the FAO-Penman and Monteith equation, and the functions `ETO_PT()` and `ETO_HS()`), which calculates this agrometeorological parameter through other two alternative (and simpler) methods: Priestley-Taylor (@Priestley1972) and Hargreaves-Samani (@Hargreaves1985), respectively. 
+Additionally, the {CropWaterBalance} has other two functions (`Compare()` and `Descriptive()`). The first calculates measures of accuracy and agreement between two data samples and the second calculates descriptive statistics for these samples. Therefore, these two functions assist users in selecting suitable ET0 estimating methods for a particular region or season.
+
+# Getting Started
+Load the library in your R session.
+
+```{r setup}
+library(CropWaterBalance)
+```
+## Using ETO_PM() to calculate daily amounts of reference evapotranspiration 
+
+Reference evapotranspiration (ET0) is the combined process of evaporation and transpiration that occurs from well-fertilized and disease-free hypothetical grass reference crop, grown in large fields under no soil water restriction and achieving full production (@Allen1998). 
+The `ETO_PM()` function calculates daily ETO amounts using the FAO-Penman and Monteith equation (in millimetres).
+
+## Step 1: Applying `ETO_PM()` in Campinas-SP, Brazil
+
+
+```{r CpsET0PM}
+data(DataForCWB)
+Tavg <- DataForCWB[,2]
+Tmax <- DataForCWB[,3]
+Tmin <- DataForCWB[,4]
+Rn <- DataForCWB[,6]
+WS <- DataForCWB[,7]
+RH <- DataForCWB[,8]
+G <- DataForCWB[,9]
+CpsET0PM <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
+head(CpsET0PM)
+```
+
+By analyzing the `ET0_PM()` function, the user verify that the FAO-Penman and Monteith equation requires several inputs, which includes the soil heat flux (G). This latter variable is rarely measure. This is the reason why the {CropWaterBalance} has an auxiliary function (`Soil_Heat_Flux()`) that estimates G as function of daily average air temperature values. The users may use this auxiliary function to estimate G and then apply the `ET0_PM()` function. Alternatively, the users may simple run `ET0_PM()` without the G argument. In this case, this latter function will automatically use `Soil_Heat_Flux()` and then estimate ETO. See the example below.
+
+```{r CpsET0PM estimating G}
+data(DataForCWB)
+Tavg <- DataForCWB[,2]
+Tmax <- DataForCWB[,3]
+Tmin <- DataForCWB[,4]
+Rn <- DataForCWB[,6]
+WS <- DataForCWB[,7]
+RH <- DataForCWB[,8]
+G <- Soil_Heat_Flux(Tavg)
+CpsET0PM_WithG <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
+CpsET0PM_WithoutG <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS)
+head(cbind(CpsET0PM_WithG,CpsET0PM_WithoutG))
+```
+
+## Step 2: Applying `ETO_PT()` and `ET0_HS()` in Campinas-SP, Brazil
+
+As described in the introduction, the users may need to estimate ETO using non-standard methods, which require fewer input than the FAO-Penman and Monteith. The {CropWaterBalance} allows users to estimate this agrometeorological parameter using the Priestley-Taylor (`ETO_PT()`) and Hargreaves-Samani (`ET0_HS()`) methods. Note that the same considerations made for G in respect to `ETO_PM()` are valid for `ETO_PM()`.
+
+```{r CpsET0PT and CpsET0HS}
+data(DataForCWB)
+Tavg <- DataForCWB[,2]
+Tmax <- DataForCWB[,3]
+Tmin <- DataForCWB[,4]
+Ra <- DataForCWB[,5]
+Rn <- DataForCWB[,6]
+G <- DataForCWB[,9]
+CpsET0PT <- ET0_PT(Tavg=Tavg, Rn=Rn,G=G)
+CpsET0HS <- ET0_HS(Ra=Ra, Tavg=Tavg, Tmax=Tmax, Tmin=Tmin)
+head(cbind(CpsET0PT,CpsET0HS))
+```
+
+The estimation of CpsET0PT and/or CpsET0HS raises the following question: Can these alternative methods really replace the FAO-Penman and Monteith model? Although the answer to this question may be regarded as a complex function involving local weather conditions and users' subjective choices, the (`Compare()`) and (`Descriptive()`) functions provide statistical information, which may assist users in such decision. In this context, the `Compare()` and `Descriptive()` functions may be used to verify how well an alternative ET0 estimating method approaches ET0_PM.
+
+```{r Evaluating alternative methods for ETO}
+data(DataForCWB)
+Tavg <- DataForCWB[,2]
+Tmax <- DataForCWB[,3]
+Tmin <- DataForCWB[,4]
+Ra <- DataForCWB[,5]
+Rn <- DataForCWB[,6]
+WS <- DataForCWB[,7]
+RH <- DataForCWB[,8]
+G <- DataForCWB[,9]
+CpsET0PM <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
+CpsET0PT <- ET0_PT(Tavg=Tavg, Rn=Rn,G=G)
+CpsET0HS <- ET0_HS(Ra=Ra, Tavg=Tavg, Tmax=Tmax, Tmin=Tmin)
+PM_PT <- Compare(Method1=CpsET0PM, Method2=CpsET0PT)
+PM_PT
+Descrp_PM_PT <- cbind(Descriptive(Sample = CpsET0PM),Descriptive(Sample = CpsET0PT))
+Descrp_PM_PT
+PM_HS <- Compare(Method1=CpsET0PM, Method2=CpsET0HS)
+PM_HS
+Descrp_PM_HS <- cbind(Descriptive(Sample = CpsET0PM),Descriptive(Sample = CpsET0HS))
+Descrp_PM_HS
+```
+
+The results provided by the `Compare()` and `Descriptive()` functions, indicate that none of the two alternative methods can be used to replace the for calculating daily ET0 amounts. For instance, the values of the modified index of agreement (dmod)  (@Willmott1985) remained below 0.4 for both comparisons  (PM vs PT) and (PM vs HS). Additionally, the corresponding absolute mean errors (AME; 1.69222 and 1.468722) represents, approximately, 50% and 43% of the average value of the ET0_PM (3.367377).  
+
+## Step 3: The Crop Water Balance Accounting. Applying `CWB()` in Campinas-SP, Brazil
+
+Considering the previous results, we applied the `CWB()` using daily values of rainfall and ET0_PM obtained/estimated from daily data of the weather station of Campinas. We included this meteorological data in the package (DataForCWB), along with parameters required for calculating the crop water balance: depth of the root zone (Drz), available water capacity (AWC; amount of water between field capacity and permanent wilting point), management allowed depletion (MAD), crop coefficient (Kc), and   water stress coefficient (Ks). The example below loaded DataForCWB to apply `CWB()` in Campinas-SP. Only for sake of simplicity, Kc and Ks were set to 1 for the entire period.
+
+```{r `CWB()` in Campinas-SP, Brazil}
+data(DataForCWB)
+Tavg <- DataForCWB[,2]
+Tmax <- DataForCWB[,3]
+Tmin <- DataForCWB[,4]
+Rn <- DataForCWB[,6]
+WS <- DataForCWB[,7]
+RH <- DataForCWB[,8]
+G <- DataForCWB[,9]
+ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+Rain <- DataForCWB[,10]
+Drz <- DataForCWB[,11]
+AWC <- DataForCWB[,12]
+MAD <- DataForCWB[,13]
+Kc <- DataForCWB[,14]
+Ks <- DataForCWB[,15]
+Irrig <- DataForCWB[,16]
+ CWB_Cps <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
+     Kc=Kc, Ks=Ks, Irrig=Irrig, MAD=MAD, start.date = "2011-11-23")
+CWB_Cps
+```
+
+## Step 4: Calculating the water stress coefficient and re-calculating `CWB()`.
+
+Within the crop water balance framework, the ETc represents the potential water depletion in the soil which can occur under the following standard conditions: well-fertilized and disease-free crops, grown in large fields under no soil water restriction and achieving full production (@Allen1998). Under such conditions, the water stress coefficient (Ks) may be set to 1, and the ETc may be related to the ET0 using only Kc. In cases where such conditions are not met, the ETc should be related to the ET0 using Kc and Ks.On such background, function (`Water_Stress_Coef`) calculates Ks as function of AWC, MAD, Drz, and soil water deficit. 
+
+```{r `Water_Stress_Coef()` in Campinas-SP, Brazil}
+data(DataForCWB)
+Tavg <- DataForCWB[,2]
+Tmax <- DataForCWB[,3]
+Tmin <- DataForCWB[,4]
+Rn <- DataForCWB[,6]
+WS <- DataForCWB[,7]
+RH <- DataForCWB[,8]
+G <- DataForCWB[,9]
+ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+Rain <- DataForCWB[,10]
+Drz <- DataForCWB[,11]
+AWC <- DataForCWB[,12]
+MAD <- DataForCWB[,13]
+Kc <- DataForCWB[,14]
+Ks <- DataForCWB[,15]
+Irrig <- DataForCWB[,16]
+ CWB_Cps <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
+     Kc=Kc, Ks=Ks, Irrig=Irrig, MAD=MAD, start.date = "2011-11-23")
+D <- CWB_Cps$SoilWaterDeficit
+Ks <- Water_Stress_Coef(AWC = AWC,MAD = MAD, Drz = Drz, SoilWaterDeficit = D)
+CWB_Cps <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
+     Kc=Kc, Ks=Ks, Irrig=Irrig, MAD=MAD, start.date = "2011-11-23")
+CWB_Cps
+```
+
+# References
