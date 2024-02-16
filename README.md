@@ -396,7 +396,7 @@ The authors greatly appreciate this initiative.
 ## References
 Allen, R.G.; Pereira, L.S.; Raes, D.; Smith, M. Crop evapotranspiration. In Guidelines for Computing Crop Water Requirements. Irrigation and Drainage Paper 56; FAO: Rome, Italy, 1998; p. 300.
 
-Andales, A.A.; Chávez, J.L.;Bauder, T.A. Irrigation Scheduling: The Water Balance Approach. Fact Sheet number 4707, crop series | irrigation. <https://extension.colostate.edu/docs/pubs/crops/04707.pdf>
+Andales, A.A.; Chávez, J.L.;Bauder, T.A. 2012. Irrigation Scheduling: The Water Balance Approach. Fact Sheet number 4707, crop series | irrigation. <https://extension.colostate.edu/docs/pubs/crops/04707.pdf>
 
 Hargreaves, G.H.; Samani, Z.A. 1985.Reference crop evapotranspiration from temperature. Appl. Eng. Agric,1, 96–99.
 
