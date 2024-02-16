@@ -48,7 +48,7 @@ CpsET0PM <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
 head(CpsET0PM)
 ```
 
-By analyzing the `ET0_PM()` function, the user verify that the FAO-Penman and Monteith equation requires several inputs, which includes the soil heat flux (G). This latter variable is rarely measure. This is the reason why the {CropWaterBalance} has an auxiliary function (`Soil_Heat_Flux()`) that estimates G as function of daily average air temperature values. The users may use this auxiliary function to estimate G and then apply the `ET0_PM()` function. Alternatively, the users may simple run `ET0_PM()` without the G argument. In this case, this latter function will automatically use `Soil_Heat_Flux()` and then estimate ETO. See the example below.
+By analyzing the `ET0_PM()` function, the user verify that the FAO-Penman and Monteith equation requires several inputs, which includes the soil heat flux (G). This latter variable is rarely measure. This is the reason why the {CropWaterBalance} has an auxiliary function (`Soil_Heat_Flux()`) that estimates G as function of daily average air temperature values. The users may use this auxiliary function to estimate G and then apply the `ET0_PM()` function. Alternatively, the users may simply run `ET0_PM()` without the G argument. In this case, this latter function will automatically use `Soil_Heat_Flux()` and then estimate ETO. See the example below.
 
 ```{r CpsET0PM estimating G}
 data(DataForCWB)
