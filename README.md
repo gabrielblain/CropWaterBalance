@@ -178,13 +178,13 @@ Calculates measures of accuracy and agreement.
 
 ## Usage
 ```r
-Compare(Method1, Method2)
+Compare(Sample1, Sample2)
 ```
 
 ## Arguments
 
-* Method1: A vector, 1-column matrix or data frame with evapotranspiration or other variable.
-* Method2: A vector, 1-column matrix or data frame with evapotranspiration or other variable.
+* Sample1: A vector, 1-column matrix or data frame with evapotranspiration or other variable.
+* Sample2: A vector, 1-column matrix or data frame with evapotranspiration or other variable.
 ## Value
 
 * Absolute mean error (AME), Square root of the mean squared error (RMSE), Willmott's indices of agreement: original (dorig), Modified (dmod) and refined (dref), Pearson determination coefficient (R2).
@@ -199,9 +199,9 @@ Rn <- DataForCWB[,6]
 WS <- DataForCWB[,7]
 RH <- DataForCWB[,8]
 G <- DataForCWB[,9]
-Method1 <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
-Method2 <- ET0_PT(Tavg=Tavg, Rn=Rn,G=G)
-Compare(Method1=Method1, Method2=Method2)
+Sample1 <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
+Sample2 <- ET0_PT(Tavg=Tavg, Rn=Rn,G=G)
+Compare(Sample1=Sample1, Sample2=Sample2)
 ```
 
 ## Function CWB()
@@ -216,10 +216,8 @@ ET0,
 AWC,
 Drz,
 Kc = NULL,
-Ks = NULL,
 Irrig = NULL,
 MAD = NULL,
-InitialSoilWater = NULL,
 InitialD = 0,
 start.date = "2011-11-23"
 )
@@ -232,10 +230,8 @@ start.date = "2011-11-23"
 * AWC: Vector, 1-column matrix or data frame with the available water capacity of the soil, that is: the amount of water between field capacity and permanent wilting point in millimeter of water per centimeter of soil.
 * Drz: Vector, 1-column matrix or data frame defining the root zone depth in centimeters.
 * Kc: Vector, 1-column matrix or data frame defining the crop coefficient. If NULL its values are assumed to be 1.
-* Ks: Vector, 1-column matrix or data frame defining the water stress coefficient. If NULL its values are assumed to be 1.
 * Irrig: Vector, 1-column matrix or data frame with net irrigation amount infiltrated into the soil for the current day in millimeters.
 * MAD: Vector, 1-column matrix or data frame defining the management allowed depletion. Varies between 0 and 1.
-* InitialSoilWater: Single number defining in millimeter the initial amount of soil water. It is used to start the water balance accounting. If NULL it is assumed to be at the field capacity.
 * InitialD Single number defining in millimeter, the initial soil water deficit. It is used to start the water balance accounting. Default value is 0, which assumes the root zone is at the field capacity.
 * start.date: Date at which the accounting should start. Formats: “YYYY-MM-DD”, “YYYY/MM/DD”.
 ## Value
@@ -258,60 +254,9 @@ Drz <- DataForCWB[,11]
 AWC <- DataForCWB[,12]
 MAD <- DataForCWB[,13]
 Kc <- DataForCWB[,14]
-Ks <- DataForCWB[,15]
 Irrig <- DataForCWB[,16]
 CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
-Kc=Kc, Ks=Ks, Irrig=Irrig, MAD=MAD, start.date = "2023-11-23")
-```
-
-## Function Water_Stress_Coef()
-
-Calculates the water stress coefficient (Ks).
-
-## Usage 
-
-```r
-Water_Stress_Coef(
-AWC, 
-MAD, 
-Drz, 
-SoilWaterDeficit
-)
-```
-
-## Arguments
-
-* AWC: Vector, 1-column matrix or data frame defining the available water capacity of the soil, that is: the amount of water between field capacity and permanent wilting point in millimeters of water per centimeter of soil.
-*MAD: Vector, 1-column matrix or data frame defining the management allowed depletion. Varies between 0 and 1, default is 0.3.
-* Drz: Vector, 1-column matrix or data frame defining the root zone depth in centimeters.
-* SoilWaterDeficit: Vector, 1-column matrix or data frame with soil water deficit in millimeters. It may be provided by the CWB() function.
-## Value
-
-Water stress coefficient (Ks).
-
-## Examples
-
-```r
-data(DataForCWB)
-Tavg <- DataForCWB[,2]
-Tmax <- DataForCWB[,3]
-Tmin <- DataForCWB[,4]
-Rn <- DataForCWB[,6]
-WS <- DataForCWB[,7]
-RH <- DataForCWB[,8]
-G <- DataForCWB[,9]
-ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
-Rain <- DataForCWB[,10]
-Drz <- DataForCWB[,11]
-AWC <- DataForCWB[,12]
-MAD <- DataForCWB[,13]
-Kc <- DataForCWB[,14]
-Ks <- DataForCWB[,15]
-Irrig <- DataForCWB[,16]
-CWB.been <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
-Kc=Kc, Ks=Ks, Irrig=Irrig, MAD=MAD, start.date = "2023-11-23")
-D <- CWB.been$SoilWaterDeficit
-Water_Stress_Coef(AWC = AWC,MAD = MAD, Drz = Drz, SoilWaterDeficit = D) 
+Kc=Kc, Irrig=Irrig, MAD=MAD, start.date = "2023-11-23")
 ```
 
 ## DataForAWC: Soil texture and plant available water capacity (AWC).
@@ -365,7 +310,6 @@ DataForCWB
 * AWC available water capacity (amount of water between field capacity and permanent wilting point) in millimeter of water per centimeter of soil
 * MAD management allowed depletion (between 0 and 1)
 * Kc Crop coefficient (between 0 and 1)
-* Ks Water stress coefficient (between 0 and 1)
 * Irrig Applied net irrigation in millimeters
 
 ## Source

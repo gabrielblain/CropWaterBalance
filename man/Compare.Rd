@@ -4,12 +4,12 @@
 \alias{Compare}
 \title{Compare data from two samples}
 \usage{
-Compare(Method1, Method2)
+Compare(Sample1, Sample2)
 }
 \arguments{
-\item{Method1}{A vector, 1-column matrix or data frame with evapotranspiration or other variable.}
+\item{Sample1}{A vector, 1-column matrix or data frame with evapotranspiration or other variable.}
 
-\item{Method2}{A vector, 1-column matrix or data frame with evapotranspiration or other variable.}
+\item{Sample2}{A vector, 1-column matrix or data frame with evapotranspiration or other variable.}
 }
 \value{
 a \code{list} with:
@@ -38,7 +38,7 @@ Rn <- DataForCWB[,6]
 WS <- DataForCWB[,7]
 RH <- DataForCWB[,8]
 G <- DataForCWB[,9]
-Method1 <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
-Method2 <- ET0_PT(Tavg=Tavg, Rn=Rn,G=G)
-Compare(Method1=Method1, Method2=Method2)
+Sample1 <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
+Sample2 <- ET0_PT(Tavg=Tavg, Rn=Rn,G=G)
+Compare(Sample1=Sample1, Sample2=Sample2)
 }

@@ -10,10 +10,8 @@ CWB(
   AWC,
   Drz,
   Kc = NULL,
-  Ks = NULL,
   Irrig = NULL,
   MAD = NULL,
-  InitialSoilWater = NULL,
   InitialD = 0,
   start.date = "2011-11-23"
 )
@@ -25,14 +23,11 @@ CWB(
 
 \item{AWC}{Vector, 1-column matrix or data frame with the available water capacity of the soil, that is:
 the amount of water between field capacity and permanent wilting point
-in millimeter of water per centimeter of soil.}
+in millimeter of water per meters of soil.}
 
-\item{Drz}{Vector, 1-column matrix or data frame defining the root zone depth in centimeters.}
+\item{Drz}{Vector, 1-column matrix or data frame defining the root zone depth in meters.}
 
 \item{Kc}{Vector, 1-column matrix or data frame defining the crop coefficient.
-If NULL its values are assumed to be 1.}
-
-\item{Ks}{Vector, 1-column matrix or data frame defining the water stress coefficient.
 If NULL its values are assumed to be 1.}
 
 \item{Irrig}{Vector, 1-column matrix or data frame with net irrigation amount infiltrated into the soil
@@ -40,10 +35,6 @@ for the current day in millimeters.}
 
 \item{MAD}{Vector, 1-column matrix or data frame defining the management allowed depletion.
 Varies between 0 and 1.}
-
-\item{InitialSoilWater}{Single number defining in millimeter the initial amount of soil water.
-It is used to start the water balance accounting.
-If NULL it is assumed to be at the field capacity.}
 
 \item{InitialD}{Single number defining in millimeter, the initial soil water deficit.
 It is used to start the water balance accounting.
@@ -74,8 +65,7 @@ Drz <- DataForCWB[,11]
 AWC <- DataForCWB[,12]
 MAD <- DataForCWB[,13]
 Kc <- DataForCWB[,14]
-Ks <- DataForCWB[,15]
-Irrig <- DataForCWB[,16]
+Irrig <- DataForCWB[,15]
 CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
-    Kc=Kc, Ks=Ks, Irrig=Irrig, MAD=MAD, start.date = "2023-11-23")
+    Kc=Kc, Irrig=Irrig, MAD=MAD, start.date = "2023-11-23")
 }

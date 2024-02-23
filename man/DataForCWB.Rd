@@ -5,7 +5,7 @@
 \alias{DataForCWB}
 \title{Data for Water Balance Accounting}
 \format{
-An object of class \code{data.frame} with 129 rows and 16 columns.
+An object of class \code{data.frame} with 129 rows and 15 columns.
 }
 \usage{
 DataForCWB
@@ -17,7 +17,7 @@ The meteorological data belongs to the Agronomic Institute \acronym{(IAC)}.
 }
 \details{
 @format ## \code{DataForCWB}
-A data frame with 16 columns and 129 rows:
+A data frame with 15 columns and 129 rows:
 \describe{
 \item{date}{date}
 \item{tmed}{Average air temperature in Celsius degrees}
@@ -29,12 +29,11 @@ A data frame with 16 columns and 129 rows:
 \item{RH}{Relative Humidity  in \%}
 \item{G}{Soil Heat Flux  in \acronym{MJ m-2 day-1}}
 \item{Rain}{Rain in millimeters}
-\item{Drz}{Depth of the root zone in centimeters}
+\item{Drz}{Depth of the root zone in meters}
 \item{AWC}{available water capacity (amount of water between field capacity and permanent wilting point)
-in millimeter of water per centimeter of soil}
+in millimeter of water per meter of soil}
 \item{MAD}{management allowed depletion (between 0 and 1)}
 \item{Kc}{Crop coefficient (between 0 and 1)}
-\item{Ks}{Water stress coefficient (between 0 and 1)}
 \item{Irrig}{Applied net irrigation in millimeters}
 }
 @source \url{http://www.ciiagro.org.br/}

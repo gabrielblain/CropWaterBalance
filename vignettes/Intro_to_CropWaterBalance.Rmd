@@ -66,7 +66,7 @@ head(cbind(CpsET0PM_WithG,CpsET0PM_WithoutG))
 
 ## Step 2: Applying `ETO_PT()` and `ET0_HS()` in Campinas-SP, Brazil
 
-As described in the introduction, the users may need to estimate ETO using non-standard methods, which require fewer input than the FAO-Penman and Monteith. The {CropWaterBalance} allows users to estimate this agrometeorological parameter using the Priestley-Taylor (`ETO_PT()`) and Hargreaves-Samani (`ET0_HS()`) methods. Note that the same considerations made for G in respect to `ETO_PM()` are valid for `ETO_PM()`.
+As described in the introduction, the users may need to estimate ETO using non-standard methods, which require less input than the FAO-Penman and Monteith. The {CropWaterBalance} allows users to estimate this agrometeorological parameter using the Priestley-Taylor (`ETO_PT()`) and Hargreaves-Samani (`ET0_HS()`) methods. Note that the same considerations made for G in respect to `ETO_PM()` are valid for `ETO_PT()`.
 
 ```{r CpsET0PT and CpsET0HS}
 data(DataForCWB)
@@ -96,11 +96,11 @@ G <- DataForCWB[,9]
 CpsET0PM <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
 CpsET0PT <- ET0_PT(Tavg=Tavg, Rn=Rn,G=G)
 CpsET0HS <- ET0_HS(Ra=Ra, Tavg=Tavg, Tmax=Tmax, Tmin=Tmin)
-PM_PT <- Compare(Method1=CpsET0PM, Method2=CpsET0PT)
+PM_PT <- Compare(Sample1=CpsET0PM, Sample2=CpsET0PT)
 PM_PT
 Descrp_PM_PT <- cbind(Descriptive(Sample = CpsET0PM),Descriptive(Sample = CpsET0PT))
 Descrp_PM_PT
-PM_HS <- Compare(Method1=CpsET0PM, Method2=CpsET0HS)
+PM_HS <- Compare(Sample1=CpsET0PM, Sample2=CpsET0HS)
 PM_HS
 Descrp_PM_HS <- cbind(Descriptive(Sample = CpsET0PM),Descriptive(Sample = CpsET0HS))
 Descrp_PM_HS
@@ -108,11 +108,11 @@ Descrp_PM_HS
 
 The results provided by the `Compare()` and `Descriptive()` functions, indicate that none of the two alternative methods can be used to replace the for calculating daily ET0 amounts. For instance, the values of the modified index of agreement (dmod)  (@Willmott1985) remained below 0.4 for both comparisons  (PM vs PT) and (PM vs HS). Additionally, the corresponding absolute mean errors (AME; 1.69222 and 1.468722) represents, approximately, 50% and 43% of the average value of the ET0_PM (3.367377).  
 
-## Step 3: The Crop Water Balance Accounting. Applying `CWB()` in Campinas-SP, Brazil
+## Step 3: The Crop Water Balance Accounting. Applying `InitialD()` and `CWB()` in Campinas-SP, Brazil
 
-Considering the previous results, we applied the `CWB()` using daily values of rainfall and ET0_PM obtained/estimated from daily data of the weather station of Campinas. We included this meteorological data in the package (DataForCWB), along with parameters required for calculating the crop water balance: depth of the root zone (Drz), available water capacity (AWC; amount of water between field capacity and permanent wilting point), management allowed depletion (MAD), crop coefficient (Kc), and   water stress coefficient (Ks). The example below loaded DataForCWB to apply `CWB()` in Campinas-SP. Only for sake of simplicity, Kc and Ks were set to 1 for the entire period.
+Considering the previous results, we applied the `CWB()` using daily values of rainfall and ET0_PM obtained/estimated from daily data of the weather station of Campinas. We included this meteorological data in the package (DataForCWB), along with parameters required for calculating the crop water balance: depth of the root zone (Drz), available water capacity (AWC; amount of water between field capacity and permanent wilting point), management allowed depletion (MAD), and crop coefficient (Kc). The example below loaded DataForCWB to apply `CWB()` in Campinas-SP. Only for sake of simplicity, Kc values were set to 1 for the entire period. The initial D value (Dinitial) required for initiating the crop water balance account was obtained  using function `DInitial()` with teta_FC and AWC values obtained from two data sets included in the package (DataForSWC.rda and DataForAWC). These data sets provide soil water content values (m3/m3) for the effective root zone at the field capacity and at permanent wilting point, and AWC values (mm/m), respectively (teta_obs was measured in the field).
 
-```{r `CWB()` in Campinas-SP, Brazil}
+```{r `CWB()` and `DInitial()` in Campinas-SP, Brazil}
 data(DataForCWB)
 Tavg <- DataForCWB[,2]
 Tmax <- DataForCWB[,3]
@@ -122,46 +122,17 @@ WS <- DataForCWB[,7]
 RH <- DataForCWB[,8]
 G <- DataForCWB[,9]
 ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+Dinitial <- Dinitial(teta_FC=0.30,teta_Obs=0.17,Drz=DataForCWB[1,11])
 Rain <- DataForCWB[,10]
 Drz <- DataForCWB[,11]
 AWC <- DataForCWB[,12]
 MAD <- DataForCWB[,13]
 Kc <- DataForCWB[,14]
-Ks <- DataForCWB[,15]
-Irrig <- DataForCWB[,16]
+Irrig <- DataForCWB[,15]
  CWB_Cps <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
-     Kc=Kc, Ks=Ks, Irrig=Irrig, MAD=MAD, start.date = "2011-11-23")
-CWB_Cps
+     Kc=Kc, Irrig=Irrig, MAD=MAD, InitialD = Dinitial, start.date = "2011-11-23")
+CWB_Cps[1:10,]
 ```
 
-## Step 4: Calculating the water stress coefficient and re-calculating `CWB()`.
-
-Within the crop water balance framework, the ETc represents the potential water depletion in the soil which can occur under the following standard conditions: well-fertilized and disease-free crops, grown in large fields under no soil water restriction and achieving full production (@Allen1998). Under such conditions, the water stress coefficient (Ks) may be set to 1, and the ETc may be related to the ET0 using only Kc. In cases where such conditions are not met, the ETc should be related to the ET0 using Kc and Ks.On such background, function (`Water_Stress_Coef`) calculates Ks as function of AWC, MAD, Drz, and soil water deficit. 
-
-```{r `Water_Stress_Coef()` in Campinas-SP, Brazil}
-data(DataForCWB)
-Tavg <- DataForCWB[,2]
-Tmax <- DataForCWB[,3]
-Tmin <- DataForCWB[,4]
-Rn <- DataForCWB[,6]
-WS <- DataForCWB[,7]
-RH <- DataForCWB[,8]
-G <- DataForCWB[,9]
-ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
-Rain <- DataForCWB[,10]
-Drz <- DataForCWB[,11]
-AWC <- DataForCWB[,12]
-MAD <- DataForCWB[,13]
-Kc <- DataForCWB[,14]
-Ks <- DataForCWB[,15]
-Irrig <- DataForCWB[,16]
- CWB_Cps <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
-     Kc=Kc, Ks=Ks, Irrig=Irrig, MAD=MAD, start.date = "2011-11-23")
-D <- CWB_Cps$SoilWaterDeficit
-Ks <- Water_Stress_Coef(AWC = AWC,MAD = MAD, Drz = Drz, SoilWaterDeficit = D)
-CWB_Cps <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
-     Kc=Kc, Ks=Ks, Irrig=Irrig, MAD=MAD, start.date = "2011-11-23")
-CWB_Cps
-```
 
 # References

@@ -12,7 +12,7 @@ DataForAWC
 }
 \description{
 AWC is the amount of water between field capacity and permanent wilting point.
-Given in millimeter of water per centimeter of soil.
+Given in millimeter of water per meter of soil.
 Extracted from: Irrigation Scheduling: The Water Balance Approach
 Fact Sheet No. 4.707 by A. A. Andales, J. L. Chávez, T. A. Bauder.
 }
@@ -23,7 +23,7 @@ A data frame with 4 columns and 12 rows:
 \item{Soil Texture}{Soil Texture}
 \item{AWC Low}{Available water capacity in millimeter of water per centimeter of soil}
 \item{AWC High}{Available water capacity in millimeter of water per centimeter of soil}
-\item{AWC Average}{Available water capacity in millimeter of water per centimeter of soil}
+\item{AWC Average}{Available water capacity in millimeter of water per meter of soil}
 }
 @source \url{https://extension.colostate.edu/topic-areas/agriculture/}
 }

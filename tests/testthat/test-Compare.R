@@ -7,9 +7,9 @@ test_that("Campare() works as expected in example", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  Method1 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
-  Method2 <- ET0_PT(Tavg, Rn,G)
-  Tes <- Compare(Method1=Method1, Method2=Method2)
+  Sample1 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  Sample2 <- ET0_PT(Tavg, Rn,G)
+  Tes <- Compare(Sample1=Sample1, Sample2=Sample2)
   expect_s3_class(Tes, "data.frame")
   expect_length(Tes, 6)
   expect_equal(nrow(Tes), 1)
@@ -29,7 +29,7 @@ test_that("Campare() works as expected in example", {
   expect_equal(Tes[, "RQuad"], c(0.8675223),tolerance = 0.01)
 })
 
-test_that("Compare errors when there is just one Method", {
+test_that("Compare errors when there is just one Sample", {
   Tavg <- DataForCWB[,2]
   Tmax <- DataForCWB[,3]
   Tmin <- DataForCWB[,4]
@@ -38,14 +38,14 @@ test_that("Compare errors when there is just one Method", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,7]
   G <- DataForCWB[,9]
-  Method1 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  Sample1 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
   expect_error(
-    Tes <- Compare(Method1=Method1, Method2="Method2"),
-    "Methods 1 and 2 must be numerical single column variables with at least 5 records each. Missing data are not allowed."
+    Tes <- Compare(Sample1=Sample1, Sample2="Sample2"),
+    "Samples 1 and 2 must be numerical single column variables with at least 5 records each. Missing data are not allowed."
   )
 })
 
-test_that("Compare errors when there is just one Method", {
+test_that("Compare errors when there is just one Sample", {
   Tavg <- DataForCWB[,2]
   Tmax <- DataForCWB[,3]
   Tmin <- DataForCWB[,4]
@@ -54,15 +54,15 @@ test_that("Compare errors when there is just one Method", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,7]
   G <- DataForCWB[,9]
-  Method1 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
-  Method2 <- ET0_PT(Tavg, Rn,G)
+  Sample1 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  Sample2 <- ET0_PT(Tavg, Rn,G)
   expect_error(
-    Tes <- Compare(Method1=Method1[1:4,1], Method2=Method2[1:4,1]),
-    "Methods 1 and 2 must be numerical single column variables with at least 5 records each. Missing data are not allowed."
+    Tes <- Compare(Sample1=Sample1[1:4,1], Sample2=Sample2[1:4,1]),
+    "Samples 1 and 2 must be numerical single column variables with at least 5 records each. Missing data are not allowed."
   )
 })
 
-test_that("Compare errors when there is just one Method", {
+test_that("Compare errors when there is just one Sample", {
   Tavg <- DataForCWB[,2]
   Tmax <- DataForCWB[,3]
   Tmin <- DataForCWB[,4]
@@ -71,15 +71,15 @@ test_that("Compare errors when there is just one Method", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,7]
   G <- DataForCWB[,9]
-  Method1 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
-  Method2 <- ET0_PT(Tavg, Rn,G)
+  Sample1 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  Sample2 <- ET0_PT(Tavg, Rn,G)
   expect_error(
-    Tes <- Compare(Method1=Method1, Method2=Method2[1:4,1]),
-    "Methods 1 and 2 must be numerical single column variables with at least 5 records each. Missing data are not allowed."
+    Tes <- Compare(Sample1=Sample1, Sample2=Sample2[1:4,1]),
+    "Samples 1 and 2 must be numerical single column variables with at least 5 records each. Missing data are not allowed."
   )
 })
 
-test_that("Compare errors when there is just one Method", {
+test_that("Compare errors when there is just one Sample", {
   Tavg <- DataForCWB[,2]
   Tmax <- DataForCWB[,3]
   Tmin <- DataForCWB[,4]
@@ -88,13 +88,13 @@ test_that("Compare errors when there is just one Method", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,7]
   G <- DataForCWB[,9]
-  Method1 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  Sample1 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
   expect_error(
-    Tes <- Compare(Method1=Method1[1:5,1], Method2=c(NA,1,2,3,4)),
-    "Methods 1 and 2 must be numerical single column variables with at least 5 records each. Missing data are not allowed."
+    Tes <- Compare(Sample1=Sample1[1:5,1], Sample2=c(NA,1,2,3,4)),
+    "Samples 1 and 2 must be numerical single column variables with at least 5 records each. Missing data are not allowed."
   )
 })
-test_that("Compare errors when there is just one Method", {
+test_that("Compare errors when there is just one Sample", {
   Tavg <- DataForCWB[,2]
   Tmax <- DataForCWB[,3]
   Tmin <- DataForCWB[,4]
@@ -103,9 +103,9 @@ test_that("Compare errors when there is just one Method", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,7]
   G <- DataForCWB[,9]
-  Method1 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  Sample1 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
   expect_error(
-    Tes <- Compare(Method1=Method1[1:5,1], Method2=c(1,2,3,4)),
-    "Methods 1 and 2 must be numerical single column variables with at least 5 records each. Missing data are not allowed."
+    Tes <- Compare(Sample1=Sample1[1:5,1], Sample2=c(1,2,3,4)),
+    "Samples 1 and 2 must be numerical single column variables with at least 5 records each. Missing data are not allowed."
   )
 })

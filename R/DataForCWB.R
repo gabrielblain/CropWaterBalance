@@ -5,7 +5,7 @@
 #' The meteorological data belongs to the Agronomic Institute \acronym{(IAC)}.
 #'
 #'  @format ## `DataForCWB`
-#'  A data frame with 16 columns and 129 rows:
+#'  A data frame with 15 columns and 129 rows:
 #'  \describe{
 #'    \item{date}{date}
 #'    \item{tmed}{Average air temperature in Celsius degrees}
@@ -17,12 +17,11 @@
 #'    \item{RH}{Relative Humidity  in %}
 #'    \item{G}{Soil Heat Flux  in \acronym{MJ m-2 day-1}}
 #'    \item{Rain}{Rain in millimeters}
-#'    \item{Drz}{Depth of the root zone in centimeters}
+#'    \item{Drz}{Depth of the root zone in meters}
 #'    \item{AWC}{available water capacity (amount of water between field capacity and permanent wilting point)
-#'               in millimeter of water per centimeter of soil}
+#'               in millimeter of water per meter of soil}
 #'    \item{MAD}{management allowed depletion (between 0 and 1)}
 #'    \item{Kc}{Crop coefficient (between 0 and 1)}
-#'    \item{Ks}{Water stress coefficient (between 0 and 1)}
 #'    \item{Irrig}{Applied net irrigation in millimeters}
 #'    }
 #'    @source <http://www.ciiagro.org.br/>
