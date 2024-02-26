@@ -37,12 +37,12 @@
 #' @importFrom PowerSDI Accuracy
 
 Compare <- function(Sample1, Sample2){
-  if (is.numeric(Sample1) == FALSE ||
-      is.numeric(Sample2) == FALSE ||
+  if (!is.numeric(Sample1) ||
+      !is.numeric(Sample2) ||
       length(Sample1) < 5 ||
       length(Sample1) != length(Sample2) ||
-      any(is.na(Sample1)) == TRUE  ||
-      any(is.na(Sample2)) == TRUE ) {
+      any(is.na(Sample1))  ||
+      any(is.na(Sample2))) {
     stop("Samples 1 and 2 must be numerical single column variables with at least 5 records each. Missing data are not allowed.")
   } else{
     ObsEst <- as.data.frame(cbind(Sample1,Sample2))
