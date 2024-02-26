@@ -110,9 +110,9 @@ The results provided by the `Compare()` and `Descriptive()` functions, indicate 
 
 ## Step 3: The Crop Water Balance Accounting. Applying `InitialD()` and `CWB()` in Campinas-SP, Brazil
 
-Considering the previous results, we applied the `CWB()` using daily values of rainfall and ET0_PM obtained/estimated from daily data of the weather station of Campinas. We included this meteorological data in the package (DataForCWB), along with parameters required for calculating the crop water balance: depth of the root zone (Drz), available water capacity (AWC; amount of water between field capacity and permanent wilting point), management allowed depletion (MAD), and crop coefficient (Kc). The example below loaded DataForCWB to apply `CWB()` in Campinas-SP. Only for sake of simplicity, Kc values were set to 1 for the entire period. The initial D value (Dinitial) required for initiating the crop water balance account was obtained  using function `DInitial()` with teta_FC and AWC values obtained from two data sets included in the package (DataForSWC.rda and DataForAWC). These data sets provide soil water content values (m3/m3) for the effective root zone at the field capacity and at permanent wilting point, and AWC values (mm/m), respectively (teta_obs was measured in the field).
+Considering the previous results, we applied the `CWB()` using daily values of rainfall and ET0_PM obtained/estimated from daily data of the weather station of Campinas. We included this meteorological data in the package (DataForCWB), along with parameters required for calculating the crop water balance: depth of the root zone (Drz), available water capacity (AWC; amount of water between field capacity and permanent wilting point), management allowed depletion (MAD), and crop coefficient (Kc). The example below loaded DataForCWB to apply `CWB()` in Campinas-SP. Only for sake of simplicity, Kc values were set to 1 for the entire period. The initial D value (Dinitial) required for initiating the crop water balance account was obtained  using function `DInitial()` with teta_FC and AWC values obtained from two data sets included in the package (DataForSWC.rda and DataForAWC). These data sets provide soil water content values (m3/m3) for the effective root zone at the field capacity and at permanent wilting point, and AWC values (mm/m), respectively (teta_obs was measured in the field). We applied the `CWB()` function considering two scenarios. Scenario 1 in which no irrigation was applied and scenario 2 in which the package’s recommendation about when and how much to irrigate was met. 
 
-```{r `CWB()` and `DInitial()` in Campinas-SP, Brazil}
+```{r `CWB()` and `DInitial()` in Campinas-SP, Brazil: scenario 1}
 data(DataForCWB)
 Tavg <- DataForCWB[,2]
 Tmax <- DataForCWB[,3]
@@ -129,10 +129,15 @@ AWC <- DataForCWB[,12]
 MAD <- DataForCWB[,13]
 Kc <- DataForCWB[,14]
 Irrig <- DataForCWB[,15]
- CWB_Cps <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
+ Scenario1 <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
      Kc=Kc, Irrig=Irrig, MAD=MAD, InitialD = Dinitial, start.date = "2011-11-23")
-CWB_Cps[1:10,]
+Scenario1[1:8,]
+Irrig[7] <- 11
+ Scenario2 <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
+     Kc=Kc, Irrig=Irrig, MAD=MAD, InitialD = Dinitial, start.date = "2011-11-23")
+Scenario2[1:8,]
 ```
 
+In both scenarios, the package suggested irrigating on 28/11/2011 because the soil water deficit had become larger than MAD.dmad. Since in scenario 1 we applied no irrigation, the Ks coefficient assumed on the next two days (29 and 30) values smaller than 1 and the NonStandardCropEvap becomes smaller than ETc, which may prevent the crop from achieving its potential yield. In scenario 2, we followed the package's recommendation and applied irrigation on day 29 (Irrig = 11mm, in the early morning). In this case, no crop evapotranspiration deficit was observed, indicating no water shortage in the root zone.   
 
 # References
