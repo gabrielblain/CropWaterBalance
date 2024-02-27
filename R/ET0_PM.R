@@ -34,7 +34,7 @@
 
 ET0_PM <- function(Tavg, Tmax, Tmin, Rn, RH, WS,G = NULL){
   Tavg <- as.matrix(Tavg)
-  if (is.numeric(Tavg) == FALSE || any(is.na(Tavg)) == TRUE ||
+  if (!is.numeric(Tavg) || any(is.na(Tavg)) ||
       length(Tavg[Tavg > 70]) != 0 || length(Tavg[Tavg < -70]) != 0 ||
       ncol(Tavg)!= 1){
     stop("Physically impossible or missing Tavg values")}
@@ -47,19 +47,19 @@ ET0_PM <- function(Tavg, Tmax, Tmin, Rn, RH, WS,G = NULL){
   RH <- as.matrix(RH)
   WS <- as.matrix(WS)
   G <- as.matrix(G)
-  if (is.numeric(Tavg) == FALSE || any(is.na(Tavg)) == TRUE ||
+  if (!is.numeric(Tavg) || any(is.na(Tavg))  ||
       length(Tavg[Tavg > 70]) != 0 || length(Tavg[Tavg < -70]) != 0 ||
-      is.numeric(Tmax) == FALSE || any(is.na(Tmax)) == TRUE ||
+      !is.numeric(Tmax) || any(is.na(Tmax)) ||
       length(Tmax[Tmax > 70]) != 0 || length(Tmax[Tmax < -70]) != 0 ||
-      is.numeric(Tmin) == FALSE || any(is.na(Tmin)) == TRUE ||
+      !is.numeric(Tmin) || any(is.na(Tmin)) ||
       length(Tmin[Tmin > 70]) != 0 || length(Tmin[Tmin < -70]) != 0 ||
-      is.numeric(Rn) == FALSE || any(is.na(Rn)) == TRUE ||
+      !is.numeric(Rn) || any(is.na(Rn)) ||
       length(Rn[Rn > 70]) != 0 || length(Rn[Rn < -70]) != 0 ||
-      is.numeric(RH) == FALSE || any(is.na(RH)) == TRUE ||
+      !is.numeric(RH) || any(is.na(RH)) ||
       length(RH[RH > 100]) != 0 || length(RH[RH < 0]) != 0 ||
-      is.numeric(WS) == FALSE || any(is.na(WS)) == TRUE ||
+      !is.numeric(WS) || any(is.na(WS)) ||
       length(WS[WS > 150]) != 0 || length(WS[WS < 0]) != 0 ||
-      is.numeric(G) == FALSE || any(is.na(G)) == TRUE ||
+      !is.numeric(G) || any(is.na(G)) ||
       length(G[G > 20]) != 0 || length(G[G < -20]) != 0 ||
       ncol(Tmax)!= 1 || ncol(Tmin)!= 1 || ncol(Rn)!= 1 ||
       ncol(RH)!= 1 || ncol(WS)!= 1 || ncol(G)!= 1 ||

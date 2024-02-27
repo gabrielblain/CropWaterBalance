@@ -63,7 +63,7 @@ CWB <- function(Rain,
                 start.date = "2011-11-23"){
 
   Rain <- as.matrix(Rain)
-  if (is.numeric(Rain) == FALSE || any(is.na(Rain)) == TRUE ||
+  if (!is.numeric(Rain) || any(is.na(Rain)) ||
       length(Rain[Rain<0]) != 0 || ncol(Rain) != 1){
     stop("Physically impossible or missing rain values")}
   n <- length(Rain)
@@ -80,19 +80,19 @@ CWB <- function(Rain,
   P_ETc <- matrix(NA,n,1)
   D <- matrix(NA,n,1)
   recom <- matrix(NA,n,1)
-  if (is.null(Kc) == TRUE) {Kc <- matrix(1,n,1)} else {Kc <- as.matrix(Kc)}
-  if (is.null(MAD) == TRUE) {MAD <- matrix(0.3,n,1)} else {MAD <- as.matrix(MAD)}
-  if (is.null(Irrig) == TRUE) {Irrig <- matrix(0,n,1)} else {Irrig <- as.matrix(Irrig)}
+  if (is.null(Kc)) {Kc <- matrix(1,n,1)} else {Kc <- as.matrix(Kc)}
+  if (is.null(MAD)) {MAD <- matrix(0.3,n,1)} else {MAD <- as.matrix(MAD)}
+  if (is.null(Irrig)) {Irrig <- matrix(0,n,1)} else {Irrig <- as.matrix(Irrig)}
   ET0 <- as.matrix(ET0)
   Drz <- as.matrix(Drz)
-  if (is.numeric(Kc) == FALSE || length(Kc) != n || any(is.na(Kc)) == TRUE ||
-      is.numeric(ET0) == FALSE || length(ET0) != n || any(is.na(ET0)) == TRUE ||
-      is.numeric(Irrig) == FALSE || length(Irrig) != n || any(is.na(Irrig)) == TRUE ||
-      is.numeric(AWC) == FALSE || length(AWC) != n || any(is.na(AWC)) == TRUE ||
-      is.numeric(MAD) == FALSE || length(MAD) != n || any(is.na(MAD)) == TRUE ||
+  if (!is.numeric(Kc) || length(Kc) != n || any(is.na(Kc)) ||
+      !is.numeric(ET0) || length(ET0) != n || any(is.na(ET0)) ||
+      !is.numeric(Irrig) || length(Irrig) != n || any(is.na(Irrig)) ||
+      !is.numeric(AWC) || length(AWC) != n || any(is.na(AWC)) ||
+      !is.numeric(MAD) || length(MAD) != n || any(is.na(MAD)) ||
       length(MAD[MAD>1]) != 0 || length(MAD[MAD<0])!= 0 ||
       length(AWC[AWC<=0])!= 0 ||
-      is.numeric(Drz) == FALSE || length(Drz) != n || any(is.na(Drz)) == TRUE ||
+      !is.numeric(Drz) || length(Drz) != n || any(is.na(Drz)) ||
       length(Irrig[Irrig<0]) != 0 || length(ET0[ET0<0]) != 0 ||
       length(Drz[Drz<0]) != 0 || length(Drz[Drz<0]) != 0 ||
       length(Kc[Kc < 0.1]) != 0 || length(Kc[Kc > 3]) != 0 ||

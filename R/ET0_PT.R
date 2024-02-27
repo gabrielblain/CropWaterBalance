@@ -24,12 +24,12 @@
 
 ET0_PT <- function(Tavg, Rn, G = NULL, Coeff = 1.26){
   Tavg <- as.matrix(Tavg)
-  if (is.numeric(Tavg) == FALSE || any(is.na(Tavg)) == TRUE ||
+  if (!is.numeric(Tavg) || any(is.na(Tavg)) ||
       length(Tavg[Tavg > 70]) != 0 || length(Tavg[Tavg < -70]) != 0 ||
       ncol(Tavg)!= 1){
     stop("Physically impossible or missing Tavg values")}
   n <- length(Tavg)
-  if (is.null(G) == TRUE) {G <- Soil_Heat_Flux(Tavg)}
+  if (is.null(G)) {G <- Soil_Heat_Flux(Tavg)}
   G <- as.matrix(G)
   Rn <- as.matrix(Rn)
   if (!is.numeric(Rn) || any(is.na(Rn)) ||

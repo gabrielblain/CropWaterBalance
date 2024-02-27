@@ -26,18 +26,18 @@ ET0_HS <- function(Ra, Tavg, Tmax, Tmin){
   nTavg <- length(Tavg)
   nTmax <- length(Tmax)
   nTmin <- length(Tmin)
-  if (is.numeric(Ra) == FALSE ||
+  if (!is.numeric(Ra) ||
       nRa == 0 ||
-      any(is.na(Ra)) == TRUE ||
-      is.numeric(Tavg) == FALSE ||
+      any(is.na(Ra)) ||
+      !is.numeric(Tavg) ||
       nTavg == 0 ||
-      any(is.na(Tavg)) == TRUE ||
-      is.numeric(Tmax) == FALSE ||
+      any(is.na(Tavg)) ||
+      !is.numeric(Tmax) ||
       nTmax == 0 ||
-      any(is.na(Tmax)) == TRUE ||
-      is.numeric(Tmin) == FALSE ||
+      any(is.na(Tmax)) ||
+      !is.numeric(Tmin)  ||
       nTmin == 0 ||
-      any(is.na(Tmin)) == TRUE ||
+      any(is.na(Tmin)) ||
       nRa !=nTavg || nRa !=nTmax || nRa !=nTmin ||
       nTavg !=nTmax || nTavg !=nTmin || nTmax !=nTmin)
   {stop("Ra, Tavg, Tmax, and  Tmin must be numerical single-column variable with no missing data and same length.")}
