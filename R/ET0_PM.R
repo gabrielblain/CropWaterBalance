@@ -1,6 +1,6 @@
 #' Reference 'evapotranspiration' Using the Penman and Monteith Method
 #'
-#' Calculates daily reference evapotranspiration amounts using the Penman and 
+#' Calculates daily reference evapotranspiration amounts using the Penman and
 #'  Monteith method.
 #'
 #' @param Tavg
@@ -29,57 +29,57 @@
 #' @export
 #' @examples
 #' data(DataForCWB)
-#' Tavg <- DataForCWB[,2]
-#' Tmax <- DataForCWB[,3]
-#' Tmin <- DataForCWB[,4]
-#' Rn <- DataForCWB[,6]
-#' WS <- DataForCWB[,7]
-#' RH <- DataForCWB[,8]
-#' G <- DataForCWB[,9]
-#' ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
-
+#' Tavg <- DataForCWB[, 2]
+#' Tmax <- DataForCWB[, 3]
+#' Tmin <- DataForCWB[, 4]
+#' Rn <- DataForCWB[, 6]
+#' WS <- DataForCWB[, 7]
+#' RH <- DataForCWB[, 8]
+#' G <- DataForCWB[, 9]
+#' ET0_PM(Tavg = Tavg, Tmax = Tmax, Tmin = Tmin, Rn = Rn, RH = RH, WS = WS, G = G)
 ET0_PM <- function(Tavg, Tmax, Tmin, Rn, RH, WS, G = NULL) {
-  Tavg <- as.matrix(Tavgf
+  Tavg <- as.matrix(Tavg)
   if (!is.numeric(Tavg) || any(is.na(Tavg)) ||
-      length(Tavg[Tavg > 70]) != 0 || length(Tavg[Tavg < -70]) != 0 ||
-      ncol(Tavg) != 1) {
-          stop("Physically impossible or missing Tavg values")
+    length(Tavg[Tavg > 70]) != 0 || length(Tavg[Tavg < -70]) != 0 ||
+    ncol(Tavg) != 1) {
+    stop("Physically impossible or missing Tavg values")
   }
   n <- length(Tavg)
-  if (is.null(G) {
-  G <- Soil_Heat_Flux(Tavg)}
+  if (is.null(G)) {
+    G <- Soil_Heat_Flux(Tavg)
+  }
   Tmax <- as.matrix(Tmax)
   Tmin <- as.matrix(Tmin)
   Rn <- as.matrix(Rn)
   RH <- as.matrix(RH)
   WS <- as.matrix(WS)
   G <- as.matrix(G)
-  if (!is.numeric(Tavg) || any(is.na(Tavg))  ||
-      length(Tavg[Tavg > 70]) != 0 || length(Tavg[Tavg < -70]) != 0 ||
-      !is.numeric(Tmax) || any(is.na(Tmax)) ||
-      length(Tmax[Tmax > 70]) != 0 || length(Tmax[Tmax < -70]) != 0 ||
-      !is.numeric(Tmin) || any(is.na(Tmin)) ||
-      length(Tmin[Tmin > 70]) != 0 || length(Tmin[Tmin < -70]) != 0 ||
-      !is.numeric(Rn) || any(is.na(Rn)) ||
-      length(Rn[Rn > 70]) != 0 || length(Rn[Rn < -70]) != 0 ||
-      !is.numeric(RH) || any(is.na(RH)) ||
-      length(RH[RH > 100]) != 0 || length(RH[RH < 0]) != 0 ||
-      !is.numeric(WS) || any(is.na(WS)) ||
-      length(WS[WS > 150]) != 0 || length(WS[WS < 0]) != 0 ||
-      !is.numeric(G) || any(is.na(G)) ||
-      length(G[G > 20]) != 0 || length(G[G < -20]) != 0 ||
-      ncol(Tmax)!= 1 || ncol(Tmin)!= 1 || ncol(Rn)!= 1 ||
-      ncol(RH)!= 1 || ncol(WS)!= 1 || ncol(G)!= 1 ||
-      length(Tmax) != n || length(Tmin) != n || length(Rn) != n ||
-      length(RH) != n || length(WS) != n|| length(G) != n) {
+  if (!is.numeric(Tavg) || any(is.na(Tavg)) ||
+    length(Tavg[Tavg > 70]) != 0 || length(Tavg[Tavg < -70]) != 0 ||
+    !is.numeric(Tmax) || any(is.na(Tmax)) ||
+    length(Tmax[Tmax > 70]) != 0 || length(Tmax[Tmax < -70]) != 0 ||
+    !is.numeric(Tmin) || any(is.na(Tmin)) ||
+    length(Tmin[Tmin > 70]) != 0 || length(Tmin[Tmin < -70]) != 0 ||
+    !is.numeric(Rn) || any(is.na(Rn)) ||
+    length(Rn[Rn > 70]) != 0 || length(Rn[Rn < -70]) != 0 ||
+    !is.numeric(RH) || any(is.na(RH)) ||
+    length(RH[RH > 100]) != 0 || length(RH[RH < 0]) != 0 ||
+    !is.numeric(WS) || any(is.na(WS)) ||
+    length(WS[WS > 150]) != 0 || length(WS[WS < 0]) != 0 ||
+    !is.numeric(G) || any(is.na(G)) ||
+    length(G[G > 20]) != 0 || length(G[G < -20]) != 0 ||
+    ncol(Tmax) != 1 || ncol(Tmin) != 1 || ncol(Rn) != 1 ||
+    ncol(RH) != 1 || ncol(WS) != 1 || ncol(G) != 1 ||
+    length(Tmax) != n || length(Tmin) != n || length(Rn) != n ||
+    length(RH) != n || length(WS) != n || length(G) != n) {
     stop("Physically impossible or missing Tmax, Tmin, Rn, RH, WS or G values")
   }
-  es = 0.6108 * exp((17.27 * Tavg) / (Tavg + 273.3))
-  ea = (RH * es) / 100
-  slope.pressure = (4098 * es) / ((Tavg + 237.3)^ 2)
+  es <- 0.6108 * exp((17.27 * Tavg) / (Tavg + 273.3))
+  ea <- (RH * es) / 100
+  slope.pressure <- (4098 * es) / ((Tavg + 237.3)^2)
   ET0 <- as.matrix((0.408 * slope.pressure *
-                      (Rn-G) + 0.063 * (900 / (Tavg + 273)) * WS *
-                      (es - ea)) / (slope.pressure+0.063*(1+0.34*WS)))
+    (Rn - G) + 0.063 * (900 / (Tavg + 273)) * WS *
+      (es - ea)) / (slope.pressure + 0.063 * (1 + 0.34 * WS)))
   colnames(ET0) <- "ET0_PM"
   return(ET0)
 }

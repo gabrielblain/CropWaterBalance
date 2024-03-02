@@ -1,23 +1,23 @@
-#' Reference 'evapotranspiration'
+#' Reference 'evapotranspiration' Using the Preistley-Taylor Method
 #'
 #' Calculates daily reference evapotranspiration amounts using the
 #'   Priestley-Taylor method.
 #'
 #' @param Rn
 #' A vector, 1-column matrix or data frame with daily net radiation in
-#'  MJ m-2 day-1
+#'  \eqn{MJ m-2 day-1}.
 #' @param Tavg
 #' A vector, 1-column matrix or data frame with daily average air temperature.
 #' @param G
-#' Optional. A vector, 1-column matrix or data frame with daily soil Heat flux
-#'   in MJ m-2 day-1.
+#' Optional. A vector, 1-column matrix or data frame with daily soil heat flux
+#'   in \eqn{MJ m-2 day-1}.
 #' May be provided by \code{\link{Soil_Heat_Flux}}
 #' @param Coeff
 #' Single number defining the 'Priestley' and 'Taylor' coefficient. Default is
-#'   1.26
+#'   1.26.
 #
 #' @return
-#' A data.frame objec of the daily potential evapotranspiration values in
+#' A matrix object of the daily potential evapotranspiration values in
 #'  millimetres.
 #' @export
 #' @examples
