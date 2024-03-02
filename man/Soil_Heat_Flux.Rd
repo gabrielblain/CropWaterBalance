@@ -17,6 +17,6 @@ Calculates the daily amounts of Soil Heat Flux.
 }
 \examples{
 data(DataForCWB)
-Tavg <- DataForCWB[,2]
+Tavg <- DataForCWB[, 2]
 Soil_Heat_Flux(Tavg)
 }

@@ -2,30 +2,35 @@
 % Please edit documentation in R/ET0_PT.R
 \name{ET0_PT}
 \alias{ET0_PT}
-\title{Reference 'evapotranspiration'}
+\title{Reference 'evapotranspiration' Using the Preistley-Taylor Method}
 \usage{
 ET0_PT(Tavg, Rn, G = NULL, Coeff = 1.26)
 }
 \arguments{
 \item{Tavg}{A vector, 1-column matrix or data frame with daily average air temperature.}
 
-\item{Rn}{A vector, 1-column matrix or data frame with daily net radiation in \acronym{MJ m-2 day-1}}
+\item{Rn}{A vector, 1-column matrix or data frame with daily net radiation in
+\eqn{MJ m-2 day-1}.}
 
-\item{G}{Optional. A vector, 1-column matrix or data frame with daily soil Heat flux in \acronym{MJ m-2 day-1}.
+\item{G}{Optional. A vector, 1-column matrix or data frame with daily soil heat flux
+in \eqn{MJ m-2 day-1}.
 May be provided by \code{\link{Soil_Heat_Flux}}}
 
-\item{Coeff}{Single number defining the 'Priestley' and 'Taylor' coefficient. Default is 1.26}
+\item{Coeff}{Single number defining the 'Priestley' and 'Taylor' coefficient. Default is
+1.26.}
 }
 \value{
-Daily potential evapotranspiration values in millimetres.
+A matrix object of the daily potential evapotranspiration values in
+millimetres.
 }
 \description{
-Calculates daily reference evapotranspiration amounts using the  Priestley-Taylor method.
+Calculates daily reference evapotranspiration amounts using the
+Priestley-Taylor method.
 }
 \examples{
 data(DataForCWB)
-Tavg <- DataForCWB[,2]
-Rn <- DataForCWB[,6]
-G <- DataForCWB[,9]
-ET0_PT(Tavg=Tavg, Rn=Rn,G=G)
+Tavg <- DataForCWB[, 2]
+Rn <- DataForCWB[, 6]
+G <- DataForCWB[, 9]
+ET0_PT(Tavg = Tavg, Rn = Rn, G = G)
 }

@@ -2,26 +2,30 @@
 % Please edit documentation in R/InitialD.R
 \name{Dinitial}
 \alias{Dinitial}
-\title{Soil water deficit in the root zone}
+\title{Soil Water Deficit in the Root Zone}
 \usage{
 Dinitial(teta_FC, teta_Obs, Drz)
 }
 \arguments{
-\item{teta_FC}{Soil water content for the effective root zone at the field capacity \acronym{m3/m3}}
+\item{teta_FC}{Soil water content for the effective root zone at the field capacity
+\acronym{m3/m3}}
 
-\item{teta_Obs}{Soil water content for the effective root zone at the wilting point \acronym{m3/m3}}
+\item{teta_Obs}{Soil water content for the effective root zone at the wilting point
+\acronym{m3/m3}}
 
-\item{Drz}{Vector, 1-column matrix or data frame defining the root zone depth in meters.}
+\item{Drz}{Vector, 1-column matrix or data frame defining the root zone depth in
+metres.}
 }
 \value{
 Initial soil water deficit in the root zone (millimetres).
 }
 \description{
-Estimates initial values for soil water deficit. Required to initiate the water balance accounting.
+Estimates initial values for soil water deficit. Required to initiate the
+water balance accounting.
 }
 \examples{
 teta_FC <- 0.30
 teta_Obs <- 0.17
 Drz <- 0.3048
-Dinitial(teta_FC=teta_FC,teta_Obs=teta_Obs,Drz=Drz)
+Dinitial(teta_FC = teta_FC, teta_Obs = teta_Obs, Drz = Drz)
 }

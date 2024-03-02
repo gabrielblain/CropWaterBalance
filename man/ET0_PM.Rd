@@ -2,41 +2,47 @@
 % Please edit documentation in R/ET0_PM.R
 \name{ET0_PM}
 \alias{ET0_PM}
-\title{Reference 'evapotranspiration'}
+\title{Reference 'evapotranspiration' Using the Penman and Monteith Method}
 \usage{
 ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS, G = NULL)
 }
 \arguments{
 \item{Tavg}{A vector, 1-column matrix or data frame with daily average air temperature.}
 
-\item{Tmax}{A vector, 1-column matrix or data frame with daily maximum air temperature in Celsius degrees.}
+\item{Tmax}{A vector, 1-column matrix or data frame with daily maximum air temperature
+in Celsius degrees.}
 
-\item{Tmin}{A vector, 1-column matrix or data frame with daily minimum air temperature in Celsius degrees.}
+\item{Tmin}{A vector, 1-column matrix or data frame with daily minimum air temperature
+in Celsius degrees.}
 
-\item{Rn}{A vector, 1-column matrix or data frame with daily net radiation in \acronym{MJ m-2 day-1}.}
+\item{Rn}{A vector, 1-column matrix or data frame with daily net radiation in
+\eqn{MJ m-2 day-1}.}
 
-\item{RH}{A vector, 1-column matrix or data frame with daily relative Humidity  in \%.}
+\item{RH}{A vector, 1-column matrix or data frame with daily relative Humidity in \\\%.}
 
-\item{WS}{A vector, 1-column matrix or data frame with daily wind speed in \acronym{m s-1}.}
+\item{WS}{A vector, 1-column matrix or data frame with daily wind speed in
+\eqn{m s-1}.}
 
-\item{G}{Optional. A vector, 1-column matrix or data frame with daily soil Heat flux in \acronym{MJ m-2 day-1}.
+\item{G}{Optional. A vector, 1-column matrix or data frame with daily soil heat flux
+in \eqn{MJ m-2 day-1}.
 Default is \code{NULL} and if \code{NULL} it is assumed to be zero.
 May be provided by \code{\link{Soil_Heat_Flux}}}
 }
 \value{
-Daily reference evapotranspiration amounts in millimetres.
+A maxtrix of daily reference evapotranspiration amounts in millimetres.
 }
 \description{
-Calculates daily reference evapotranspiration amounts using the Penman and Monteith method.
+Calculates daily reference evapotranspiration amounts using the Penman and
+Monteith method.
 }
 \examples{
 data(DataForCWB)
-Tavg <- DataForCWB[,2]
-Tmax <- DataForCWB[,3]
-Tmin <- DataForCWB[,4]
-Rn <- DataForCWB[,6]
-WS <- DataForCWB[,7]
-RH <- DataForCWB[,8]
-G <- DataForCWB[,9]
-ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
+Tavg <- DataForCWB[, 2]
+Tmax <- DataForCWB[, 3]
+Tmin <- DataForCWB[, 4]
+Rn <- DataForCWB[, 6]
+WS <- DataForCWB[, 7]
+RH <- DataForCWB[, 8]
+G <- DataForCWB[, 9]
+ET0_PM(Tavg = Tavg, Tmax = Tmax, Tmin = Tmin, Rn = Rn, RH = RH, WS = WS, G = G)
 }

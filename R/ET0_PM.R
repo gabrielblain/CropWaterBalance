@@ -15,7 +15,7 @@
 #' A vector, 1-column matrix or data frame with daily net radiation in
 #' \eqn{MJ m-2 day-1}.
 #' @param RH
-#' A vector, 1-column matrix or data frame with daily relative Humidity in \%.
+#' A vector, 1-column matrix or data frame with daily relative Humidity in \\%.
 #' @param WS
 #' A vector, 1-column matrix or data frame with daily wind speed in
 #'  \eqn{m s-1}.

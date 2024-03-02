@@ -2,7 +2,7 @@
 % Please edit documentation in R/ET0_HS.R
 \name{ET0_HS}
 \alias{ET0_HS}
-\title{Reference 'evapotranspiration'}
+\title{Reference 'evapotranspiration' Using Hargreaves-Samani Method}
 \usage{
 ET0_HS(Ra, Tavg, Tmax, Tmin)
 }
@@ -11,21 +11,23 @@ ET0_HS(Ra, Tavg, Tmax, Tmin)
 
 \item{Tavg}{A vector, 1-column matrix or data frame with daily average air temperature.}
 
-\item{Tmax}{A vector, 1-column matrix or data frame with daily maximum air temperature in Celsius degrees.}
+\item{Tmax}{A vector, 1-column matrix or data frame with daily maximum air temperature
+in Celsius degrees.}
 
-\item{Tmin}{A vector, 1-column matrix or data frame with daily minimum air temperature in Celsius degrees.}
+\item{Tmin}{A vector, 1-column matrix or data frame with daily minimum air temperature
+in Celsius degrees.}
 }
 \value{
-Daily potential evapotranspiration values in millimetres.
+A maxtrix with the daily potential evapotranspiration values in millimetres.
 }
 \description{
 Calculates daily reference evapotranspiration amounts using the Hargreaves-Samani method.
 }
 \examples{
 data(DataForCWB)
-Tavg <- DataForCWB[,2]
-Tmax <- DataForCWB[,3]
-Tmin <- DataForCWB[,4]
-Ra <- DataForCWB[,5]
-ET0_HS(Ra=Ra, Tavg=Tavg, Tmax=Tmax, Tmin=Tmin)
+Tavg <- DataForCWB[, 2]
+Tmax <- DataForCWB[, 3]
+Tmin <- DataForCWB[, 4]
+Ra <- DataForCWB[, 5]
+ET0_HS(Ra = Ra, Tavg = Tavg, Tmax = Tmax, Tmin = Tmin)
 }
