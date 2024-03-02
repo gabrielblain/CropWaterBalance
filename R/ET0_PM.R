@@ -1,4 +1,4 @@
-#' Reference 'evapotranspiration'
+#' Reference 'evapotranspiration' Using the Penman and Monteith Method
 #'
 #' Calculates daily reference evapotranspiration amounts using the Penman and 
 #'  Monteith method.
