@@ -3,28 +3,32 @@
 \docType{data}
 \name{DataForAWC}
 \alias{DataForAWC}
-\title{Soil texture and plant available water capacity (AWC)}
+\title{Soil Texture and Plant Available Water Capacity (AWC)}
 \format{
-An object of class \code{data.frame} with 12 rows and 4 columns.
+A data frame with 4 columns and 12 rows:
+\describe{
+\item{Soil Texture}{Soil Texture}
+\item{AWC Low}{Available water capacity in millimetre of water per
+centimetre of soil}
+\item{AWC High}{Available water capacity in millimetre of water per
+centimetre of soil}
+\item{AWC Average}{Available water capacity in millimetre of water per
+metre of soil}
+}
+}
+\source{
+\url{https://extension.colostate.edu/topic-areas/agriculture/},
+\url{https://extension.colostate.edu/topic-areas/agriculture/irrigation-scheduling-the-water-balance-approach-4-707/}
 }
 \usage{
 DataForAWC
 }
 \description{
-AWC is the amount of water between field capacity and permanent wilting point.
-Given in millimeter of water per meter of soil.
-Extracted from: Irrigation Scheduling: The Water Balance Approach
-Fact Sheet No. 4.707 by A. A. Andales, J. L. Chávez, T. A. Bauder.
+AWC is the amount of water between field capacity and permanent wilting
+point.  Given in millimetre of water per meter of soil.
 }
-\details{
-@format ## \code{DataForAWC}
-A data frame with 4 columns and 12 rows:
-\describe{
-\item{Soil Texture}{Soil Texture}
-\item{AWC Low}{Available water capacity in millimeter of water per centimeter of soil}
-\item{AWC High}{Available water capacity in millimeter of water per centimeter of soil}
-\item{AWC Average}{Available water capacity in millimeter of water per meter of soil}
-}
-@source \url{https://extension.colostate.edu/topic-areas/agriculture/}
+\references{
+Irrigation Scheduling: The Water Balance Approach Fact Sheet No.
+4.707 by A. A. Andales, J. L. Chávez, T. A. Bauder.
 }
 \keyword{datasets}
