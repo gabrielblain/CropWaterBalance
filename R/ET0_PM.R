@@ -25,10 +25,10 @@
 #' Default is `NULL` and if `NULL` it is assumed to be zero.
 #' May be provided by \code{\link{Soil_Heat_Flux}}
 #' @return
-#' A maxtrix of daily reference evapotranspiration amounts in millimetres.
+#' A matrix of daily reference evapotranspiration amounts in millimetres.
 #' @export
 #' @examples
-#' data(DataForCWB)
+#' # See `?DataForCWB` for more on this data set
 #' Tavg <- DataForCWB[, 2]
 #' Tmax <- DataForCWB[, 3]
 #' Tmin <- DataForCWB[, 4]
