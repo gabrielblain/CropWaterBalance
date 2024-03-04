@@ -30,11 +30,11 @@ ET0_HS <- function(Ra, Tavg, Tmax, Tmin) {
   w <- list(Ra, Tavg, Tmax, Tmin)
   names(w) <- c("Ra", "Tavg", "Tmax", "Tmin")
 
-  if (isFALSE(any(sapply(w, is.numeric))) ||
-      any(sapply(w, length) == 0) ||
+  if (isFALSE(any(unlist(lapply(w, is.numeric)))) ||
+      any(lapply(w, length) == 0) ||
       anyNA(w) ||
-      any(sapply(w, length) != max(sapply(w, length))) ||
-      any(sapply(w, length) != min(sapply(w, length)))) {
+      any(lapply(w, length) != max(unlist(lapply(w, length)))) ||
+      any(lapply(w, length) != min(unlist(lapply(w, length))))) {
     stop(
       "`Ra`, `Tavg`, `Tmax`, and `Tmin` must be a numerical vector object with
       no missing data and all of the same length."
