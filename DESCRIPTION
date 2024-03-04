@@ -43,6 +43,7 @@ LazyData: true
 Suggests: 
     knitr,
     rmarkdown,
+    spelling,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
@@ -52,3 +53,4 @@ Imports:
 URL: https://github.com/gabrielblain/CropWaterBalance
 BugReports: https://github.com/gabrielblain/CropWaterBalance/issues
 VignetteBuilder: knitr
+Language: en-US
