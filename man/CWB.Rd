@@ -17,26 +17,28 @@ CWB(
 )
 }
 \arguments{
-\item{Rain}{Vector, 1-column matrix or data frame with daily rainfall totals in millimeters.}
+\item{Rain}{Vector, 1-column matrix or data frame with daily rainfall totals in
+millimeters.}
 
-\item{ET0}{Vector, 1-column matrix or data frame with daily reference evapotranspiration in millimeters.}
+\item{ET0}{Vector, 1-column matrix or data frame with daily reference evapotranspiration
+in millimeters.}
 
-\item{AWC}{Vector, 1-column matrix or data frame with the available water capacity of the soil, that is:
-the amount of water between field capacity and permanent wilting point
-in millimeter of water per meters of soil.}
+\item{AWC}{Vector, 1-column matrix or data frame with the available water capacity of
+the soil, that is: the amount of water between field capacity and permanent
+wilting point in millimetre of water per meters of soil.}
 
 \item{Drz}{Vector, 1-column matrix or data frame defining the root zone depth in meters.}
 
 \item{Kc}{Vector, 1-column matrix or data frame defining the crop coefficient.
 If NULL its values are assumed to be 1.}
 
-\item{Irrig}{Vector, 1-column matrix or data frame with net irrigation amount infiltrated into the soil
-for the current day in millimeters.}
+\item{Irrig}{Vector, 1-column matrix or data frame with net irrigation amount infiltrated
+into the soil for the current day in millimeters.}
 
-\item{MAD}{Vector, 1-column matrix or data frame defining the management allowed depletion.
-Varies between 0 and 1.}
+\item{MAD}{Vector, 1-column matrix or data frame defining the management allowed
+depletion.  Varies between 0 and 1.}
 
-\item{InitialD}{Single number defining in millimeter, the initial soil water deficit.
+\item{InitialD}{Single number defining in millimetre, the initial soil water deficit.
 It is used to start the water balance accounting.
 Default value is zero, which assumes the root zone is at the field capacity.}
 
@@ -44,7 +46,7 @@ Default value is zero, which assumes the root zone is at the field capacity.}
 \dQuote{YYYY-MM-DD}, \dQuote{YYYY/MM/DD}.}
 }
 \value{
-Water balance accounting, including the soil water deficit.
+A data frame of water balance accounting, including the soil water deficit.
 }
 \description{
 Calculates several parameters of the crop water balance.
