@@ -18,6 +18,6 @@
 #'      metre of soil}
 #'    }
 #'
-#' @source <https://extension.colostate.edu/topic-areas/agriculture/>,
+#' @source
 #'    <https://extension.colostate.edu/topic-areas/agriculture/irrigation-scheduling-the-water-balance-approach-4-707/>
 "DataForAWC"

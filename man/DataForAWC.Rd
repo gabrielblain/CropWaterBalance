@@ -17,7 +17,6 @@ metre of soil}
 }
 }
 \source{
-\url{https://extension.colostate.edu/topic-areas/agriculture/},
 \url{https://extension.colostate.edu/topic-areas/agriculture/irrigation-scheduling-the-water-balance-approach-4-707/}
 }
 \usage{
