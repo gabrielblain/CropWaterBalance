@@ -28,7 +28,7 @@ Calculates daily reference evapotranspiration amounts using the
 Priestley-Taylor method.
 }
 \examples{
-data(DataForCWB)
+# See `?DataForCWB` for more on this data set
 Tavg <- DataForCWB[, 2]
 Rn <- DataForCWB[, 6]
 G <- DataForCWB[, 9]

@@ -29,14 +29,14 @@ Default is \code{NULL} and if \code{NULL} it is assumed to be zero.
 May be provided by \code{\link{Soil_Heat_Flux}}}
 }
 \value{
-A maxtrix of daily reference evapotranspiration amounts in millimetres.
+A matrix of daily reference evapotranspiration amounts in millimetres.
 }
 \description{
 Calculates daily reference evapotranspiration amounts using the Penman and
 Monteith method.
 }
 \examples{
-data(DataForCWB)
+# See `?DataForCWB` for more on this data set
 Tavg <- DataForCWB[, 2]
 Tmax <- DataForCWB[, 3]
 Tmin <- DataForCWB[, 4]
