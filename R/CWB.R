@@ -4,55 +4,65 @@
 #' It also suggests when irrigate.
 #'
 #' @param Rain
-#' Vector, 1-column matrix or data frame with daily rainfall totals in
+#' A `vector`, 1-column `matrix` or `data.frame` with daily rainfall totals in
 #'   millimeters.
 #' @param ET0
-#' Vector, 1-column matrix or data frame with daily reference evapotranspiration
-#'   in millimeters.
+#' A `vector`, 1-column `matrix` or `data.frame` with daily reference
+#'   evapotranspiration in millimetres.
 #' @param AWC
-#' Vector, 1-column matrix or data frame with the available water capacity of
-#'   the soil, that is: the amount of water between field capacity and permanent
-#'   wilting point in millimetre of water per meters of soil.
+#' A `vector`, 1-column `matrix` or `data.frame` with the available water
+#'   capacity of the soil, that is: the amount of water between field capacity
+#'   and permanent wilting point in millimetre of water per meters of soil.
 #' @param InitialD
-#' Single number defining in millimetre, the initial soil water deficit.
-#' It is used to start the water balance accounting.
-#' Default value is zero, which assumes the root zone is at the field capacity.
+#' Single number defining in millimetres, the initial soil water deficit.  It is
+#'    used to start the water balance accounting.  Default value is 0, which
+#'    assumes the root zone is at the field capacity.
 #' @param Kc
-#' Vector, 1-column matrix or data frame defining the crop coefficient.
-#' If NULL its values are assumed to be 1.
+#' A `vector`, 1-column `matrix` or `data.frame` defining the crop coefficient.
+#' If `NULL` its values are assumed to be 1.
 #' @param MAD
-#' Vector, 1-column matrix or data frame defining the management allowed
+#' A `vector`, 1-column `matrix` or `data.frame` defining the management allowed
 #'   depletion.  Varies between 0 and 1.
 #' @param Drz
-#' Vector, 1-column matrix or data frame defining the root zone depth in meters.
+#' A `vector`, 1-column `matrix` or `data.frame` defining the root zone depth in
+#'  metres.
 #' @param Irrig
-#' Vector, 1-column matrix or data frame with net irrigation amount infiltrated
-#'   into the soil for the current day in millimeters.
+#' A `vector`, 1-column `matrix` or `data.frame` with  net irrigation amount
+#'   infiltrated into the soil for the current day in millimeters.
 #' @param start.date
 #' Date at which the accounting should start. Formats:
 #' \dQuote{YYYY-MM-DD}, \dQuote{YYYY/MM/DD}.
 #' @return
-#' A data frame of water balance accounting, including the soil water deficit.
+#' A `data.frame` of water balance accounting, including the soil water deficit.
 #' @export
 #' @importFrom lubridate year is.Date
 #' @examples
-#' data(DataForCWB)
-#' Tavg <- DataForCWB[,2]
-#' Tmax <- DataForCWB[,3]
-#' Tmin <- DataForCWB[,4]
-#' Rn <- DataForCWB[,6]
-#' WS <- DataForCWB[,7]
-#' RH <- DataForCWB[,8]
-#' G <- DataForCWB[,9]
+#' # See `?DataForCWB` for more on this data set
+#'
+#' Tavg <- DataForCWB[, 2]
+#' Tmax <- DataForCWB[, 3]
+#' Tmin <- DataForCWB[, 4]
+#' Rn <- DataForCWB[, 6]
+#' WS <- DataForCWB[, 7]
+#' RH <- DataForCWB[, 8]
+#' G <- DataForCWB[, 9]
 #' ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
-#' Rain <- DataForCWB[,10]
-#' Drz <- DataForCWB[,11]
-#' AWC <- DataForCWB[,12]
-#' MAD <- DataForCWB[,13]
-#' Kc <- DataForCWB[,14]
-#' Irrig <- DataForCWB[,15]
-#' CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
-#'     Kc=Kc, Irrig=Irrig, MAD=MAD, start.date = "2023-11-23")
+#' Rain <- DataForCWB[, 10]
+#' Drz <- DataForCWB[, 11]
+#' AWC <- DataForCWB[, 12]
+#' MAD <- DataForCWB[, 13]
+#' Kc <- DataForCWB[,1 4]
+#' Irrig <- DataForCWB[, 15]
+#' CWB(
+#' Rain = Rain,
+#'   ET0 = ET0,
+#'   AWC = AWC,
+#'   Drz = Drz,
+#'   Kc = Kc,
+#'   Irrig = Irrig,
+#'   MAD = MAD,
+#'   start.date = "2023-11-23"
+#' )
 
 CWB <- function(Rain,
                 ET0,
