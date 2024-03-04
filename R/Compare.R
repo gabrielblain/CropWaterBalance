@@ -3,10 +3,10 @@
 #' Calculates measures of accuracy and agreement.
 #'
 #' @param Sample1
-#' A vector, 1-column matrix or data frame with evapotranspiration or other
+#' A `vector`, 1-column `matrix` or `data.frame` with evapotranspiration or other
 #'  variable.
 #' @param Sample2
-#' A vector, 1-column matrix or data frame with evapotranspiration or other
+#' A `vector`, 1-column `matrix` or `data.frame` with evapotranspiration or other
 #'  variable.
 #' @return
 #' A \code{data.frame} with:
