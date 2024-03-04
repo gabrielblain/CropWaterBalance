@@ -27,9 +27,9 @@
 #' Ra <- DataForCWB[, 5]
 #' ET0_HS(Ra = Ra, Tavg = Tavg, Tmax = Tmax, Tmin = Tmin)
 ET0_HS <- function(Ra, Tavg, Tmax, Tmin) {
+
   w <- list(Ra, Tavg, Tmax, Tmin)
   names(w) <- c("Ra", "Tavg", "Tmax", "Tmin")
-
   if (isFALSE(any(unlist(lapply(w, is.numeric)))) ||
       any(lapply(w, length) == 0) ||
       anyNA(w) ||
@@ -39,7 +39,7 @@ ET0_HS <- function(Ra, Tavg, Tmax, Tmin) {
       "`Ra`, `Tavg`, `Tmax`, and `Tmin` must be a numerical vector object with
       no missing data and all of the same length."
     )
-  }
+    }
 
   ET0 <-
     as.matrix(0.0023 * (w$Ra / 2.45) * (w$Tmax - w$Tmin) ^ 0.5 *
