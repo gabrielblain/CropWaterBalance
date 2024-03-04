@@ -54,8 +54,8 @@ Compare <- function(Sample1, Sample2) {
   length(Sample1) != length(Sample2) ||
   any(unlist(lapply(ObsEst, anyNA)))) {
     stop(
-      "Samples 1 and 2 must be numerical single column variables with at least 5
-      records each. Missing data are not allowed."
+      "`Sample1` and `Sample2` must be numerical single column variables with at
+      least 5 records each. Missing data are not allowed."
     )
   }
 
