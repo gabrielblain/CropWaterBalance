@@ -125,7 +125,8 @@ CWB <- function(Rain,
 
   ETactul[,1] <- ETc[,1]*Ks[,1]
   Def[,1] <- ETc[,1] - ETactul[,1]
-  WB=data.frame(DaysSeason,Rain,Irrig,ET0,Kc,Ks,ETc,P_ETc,ETactul,Def,TAW,D,dmad,recom)
+  WB <- data.frame(DaysSeason,Rain,Irrig,ET0,Kc,Ks,ETc,P_ETc,ETactul,Def,TAW,D,dmad,recom)
+  WB[,2:13] <- round(WB[,2:13],1)
   colnames(WB) <- c("DaysSeason","Rain","Irrig","ET0","Kc","WaterStressCoef_Ks","ETc", "(P+Irrig)-ETc","NonStandardCropEvap",
                     "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "D>=dmad-(MAD*dmad)")
   rownames(WB) <- all.period
