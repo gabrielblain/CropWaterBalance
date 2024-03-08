@@ -126,7 +126,7 @@ CWB_FixedSchedule <- function(Rain,
   days.irrig <- 1
   if (days.irrig == Scheduling) {
     recom[1,1]=c("Time to Irrig")
-    days.irrig <- 0}
+    days.irrig <- 1}
   else {
     recom[1,1]=c("No")
     days.irrig <- days.irrig+1}
@@ -135,7 +135,7 @@ CWB_FixedSchedule <- function(Rain,
     if(D[i,1] < 0){D[i,1] <- 0}
     if (days.irrig == Scheduling) {
       recom[i,1]=paste("Irrigate", round(D[i,1],0),"mm")
-      days.irrig <- 0}
+      days.irrig <- 1}
     else {
       recom[i,1]=c("No")
       days.irrig <- days.irrig+1}
