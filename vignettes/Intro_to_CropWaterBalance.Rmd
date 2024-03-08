@@ -138,6 +138,33 @@ Irrig[7] <- 11
 Scenario2[1:8,]
 ```
 
-In both scenarios, the package suggested irrigating on 28/11/2011 because the soil water deficit had become larger than MAD.dmad. Since in scenario 1 we applied no irrigation, the Ks coefficient assumed on the next two days (29 and 30) values smaller than 1 and the NonStandardCropEvap becomes smaller than ETc, which may prevent the crop from achieving its potential yield. In scenario 2, we followed the package's recommendation and applied irrigation on day 29 (Irrig = 11mm, in the early morning). In this case, no crop evapotranspiration deficit was observed, indicating no water shortage in the root zone.   
+In both scenarios, the package suggested irrigating on 28/11/2011 because the soil water deficit had become larger than MAD.dmad. Since in scenario 1 we applied no irrigation, the Ks coefficient assumed on the next two days (29 and 30) values smaller than 1 and the NonStandardCropEvap becomes smaller than ETc, which may prevent the crop from achieving its potential yield. In scenario 2, we followed the package's recommendation and applied irrigation on day 29 (Irrig = 11mm, in the early morning). In this case, no crop evapotranspiration deficit was observed, indicating no water shortage in the root zone. 
+
+## Step 3 (Alternative): The Crop Water Balance Accounting. Applying `InitialD()` and `CWB_fixedSchedule` in Campinas-SP, Brazil
+
+Until now, we have assumed that the decision of when and how much to irrigate was solely dependent on soil-plant-atmosphere factors. However, it is well-known that this decision may also be significantly influenced by the design and operation of the irrigation system, as well as the availability of labor and water. This is why we included in the package the `CWB_fixedSchedule` fuction that, as the `CWB()`, also calculates the crop water balance in the root zone. However, it allows users to specify the number of days between consecutive irrigations.This is accompliched by setting the parameter Scheduling to the number of days defining this fixed interval between two consecutive irrigations. The estimation of how much to irrigate is performed on this specific days. This is why we included in the package the `CWB_fixedSchedule()` function that, as the `CWB`, also calculates the crop water balance in the root zone. However, it allows users to specify the number of days between consecutive irrigations.This is accompliched by setting the parameter Scheduling to the number of days defining this fixed interval between two consecutive irrigations. The estimation of how much to irrigate is performed on this specific days. 
+
+```{r `CWB_fixedSchedule()` and `DInitial()` in Campinas-SP, Brazil: scenario 1}
+data(DataForCWB)
+Tavg <- DataForCWB[,2]
+Tmax <- DataForCWB[,3]
+Tmin <- DataForCWB[,4]
+Rn <- DataForCWB[,6]
+WS <- DataForCWB[,7]
+RH <- DataForCWB[,8]
+G <- DataForCWB[,9]
+ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+Dinitial <- Dinitial(teta_FC=0.30,teta_Obs=0.17,Drz=DataForCWB[1,11])
+Rain <- DataForCWB[,10]
+Drz <- DataForCWB[,11]
+AWC <- DataForCWB[,12]
+MAD <- DataForCWB[,13]
+Kc <- DataForCWB[,14]
+Scheduling <- 5
+Irrig <- DataForCWB[,15]
+ Scenario_FixedSchedule <- CWB_FixedSchedule(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
+     Kc=Kc, Irrig=Irrig, MAD=MAD, InitialD = Dinitial, Scheduling=Scheduling, start.date = "2011-11-23")
+Scenario_FixedSchedule[1:15,]
+```
 
 # References
