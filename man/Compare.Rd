@@ -7,11 +7,11 @@
 Compare(Sample1, Sample2)
 }
 \arguments{
-\item{Sample1}{A \code{vector}, 1-column \code{matrix} or \code{data.frame} with evapotranspiration or other
-variable.}
+\item{Sample1}{A \code{vector}, 1-column \code{matrix} or \code{data.frame} with evapotranspiration or
+other variable.}
 
-\item{Sample2}{A \code{vector}, 1-column \code{matrix} or \code{data.frame} with evapotranspiration or other
-variable.}
+\item{Sample2}{A \code{vector}, 1-column \code{matrix} or \code{data.frame} with evapotranspiration or
+other variable.}
 }
 \value{
 A \code{data.frame} with:

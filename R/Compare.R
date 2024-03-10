@@ -3,11 +3,11 @@
 #' Calculates measures of accuracy and agreement.
 #'
 #' @param Sample1
-#' A `vector`, 1-column `matrix` or `data.frame` with evapotranspiration or other
-#'  variable.
+#' A `vector`, 1-column `matrix` or `data.frame` with evapotranspiration or
+#'  other variable.
 #' @param Sample2
-#' A `vector`, 1-column `matrix` or `data.frame` with evapotranspiration or other
-#'  variable.
+#' A `vector`, 1-column `matrix` or `data.frame` with evapotranspiration or
+#'  other variable.
 #' @return
 #' A \code{data.frame} with:
 #'
@@ -50,9 +50,9 @@
 Compare <- function(Sample1, Sample2) {
   ObsEst <- list(Sample1, Sample2)
   if (isFALSE(any(unlist(lapply(ObsEst, is.numeric)))) ||
-  length(Sample1) < 5 ||
-  length(Sample1) != length(Sample2) ||
-  any(unlist(lapply(ObsEst, anyNA)))) {
+    length(Sample1) < 5 ||
+    length(Sample1) != length(Sample2) ||
+    any(unlist(lapply(ObsEst, anyNA)))) {
     stop(
       "`Sample1` and `Sample2` must be numerical single column variables with at
       least 5 records each. Missing data are not allowed."
@@ -60,8 +60,10 @@ Compare <- function(Sample1, Sample2) {
   }
 
   Comp <-
-    as.data.frame(Accuracy(obs_est = as.data.frame(ObsEst),
-                           conf.int = "No"))[1, 3:8]
+    as.data.frame(Accuracy(
+      obs_est = as.data.frame(ObsEst),
+      conf.int = "No"
+    ))[1, 3:8]
   colnames(Comp) <-
     c("AME", "RMSE", "dorig", "dmod", "dref", "RQuad")
   return(Comp)
