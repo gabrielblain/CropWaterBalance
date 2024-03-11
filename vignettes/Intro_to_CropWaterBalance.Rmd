@@ -132,13 +132,13 @@ Irrig <- DataForCWB[,15]
  Scenario1 <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
      Kc=Kc, Irrig=Irrig, MAD=MAD, InitialD = Dinitial, start.date = "2011-11-23")
 Scenario1[1:8,]
-Irrig[7] <- 11
+Irrig[7] <- 16
  Scenario2 <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
      Kc=Kc, Irrig=Irrig, MAD=MAD, InitialD = Dinitial, start.date = "2011-11-23")
 Scenario2[1:8,]
 ```
 
-In both scenarios, the package suggested irrigating on 28/11/2011 because the soil water deficit had become larger than MAD.dmad. Since in scenario 1 we applied no irrigation, the Ks coefficient assumed on the next two days (29 and 30) values smaller than 1 and the NonStandardCropEvap becomes smaller than ETc, which may prevent the crop from achieving its potential yield. In scenario 2, we followed the package's recommendation and applied irrigation on day 29 (Irrig = 11mm, in the early morning). In this case, no crop evapotranspiration deficit was observed, indicating no water shortage in the root zone. 
+In both scenarios, the package suggested irrigating on 29/11/2011 because the soil water deficit had become larger than dmad. Since in scenario 1 we applied no irrigation, the Ks coefficient started to assume values smaller than 1 and the NonStandardCropEvap becomes smaller than ETc, which may prevent the crop from achieving its potential yield. In scenario 2, we followed the package's recommendation and applied irrigation on day 29 (Irrig = 16 mm). In this case, no crop evapotranspiration deficit was observed, indicating no water shortage in the root zone. 
 
 ## Step 3 (Alternative): The Crop Water Balance Accounting. Applying `InitialD()` and `CWB_fixedSchedule` in Campinas-SP, Brazil
 
