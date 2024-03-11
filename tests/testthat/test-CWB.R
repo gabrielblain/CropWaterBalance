@@ -21,13 +21,13 @@ test_that("CWB() works as expected in example", {
   expect_named(
     tes,
     c("DaysSeason","Rain","Irrig","ET0","Kc","WaterStressCoef_Ks","ETc", "(P+Irrig)-ETc","NonStandardCropEvap",
-      "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "D>=dmad-(MAD*dmad)"))
+      "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "D>=dmad"))
   expect_equal(tes[1:3, "NonStandardCropEvap"], c(2.440372,4.171917,4.290477),tolerance = 0.01)
   expect_equal(tes[1:3, "ET_Defict"], c(0.000000000,0.000000000,0.000000000),tolerance = 0.01)
   expect_equal(tes[1:3, "TAW"], c(45.72,45.72,45.72),tolerance = 0.01)
   expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000,3.9179166,8.2083937),tolerance = 0.01)
   expect_equal(tes[1:3, "d_MAD"], c(13.716,13.716,13.716),tolerance = 0.01)
-  expect_equal(tes[1:3, "D>=dmad-(MAD*dmad)"], c("No","No","No"))
+  expect_equal(tes[1:3, "D>=dmad"], c("No","No","No"))
   })
 
 test_that("CWB() works as expected when initialD is provided", {
@@ -53,13 +53,13 @@ test_that("CWB() works as expected when initialD is provided", {
   expect_named(
     tes,
     c("DaysSeason","Rain","Irrig","ET0","Kc","WaterStressCoef_Ks","ETc", "(P+Irrig)-ETc","NonStandardCropEvap",
-      "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "D>=dmad-(MAD*dmad)"))
+      "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "D>=dmad"))
   expect_equal(tes[1:3, "NonStandardCropEvap"], c(2.440372,4.171917,4.290477),tolerance = 0.01)
   expect_equal(tes[1:3, "ET_Defict"], c(0.000000000,0.000000000,0.000000000),tolerance = 0.01)
   expect_equal(tes[1:3, "TAW"], c(45.72,45.72,45.72),tolerance = 0.01)
   expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000,3.9179166,8.2083937),tolerance = 0.01)
   expect_equal(tes[1:3, "d_MAD"], c(13.716,13.716,13.716),tolerance = 0.01)
-  expect_equal(tes[1:3, "D>=dmad-(MAD*dmad)"], c("No","No","No"))
+  expect_equal(tes[1:3, "D>=dmad"], c("No","No","No"))
 })
 
 test_that("Wrong date format", {
@@ -107,13 +107,13 @@ test_that("CWB() works as expected When Kc is NULL", {
   expect_named(
     tes,
     c("DaysSeason","Rain","Irrig","ET0","Kc","WaterStressCoef_Ks","ETc", "(P+Irrig)-ETc","NonStandardCropEvap",
-      "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "D>=dmad-(MAD*dmad)"))
+      "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "D>=dmad"))
   expect_equal(tes[1:3, "NonStandardCropEvap"], c(2.440372,4.171917,4.290477),tolerance = 0.01)
   expect_equal(tes[1:3, "ET_Defict"], c(0.000000000,0.000000000,0.000000000),tolerance = 0.01)
   expect_equal(tes[1:3, "TAW"], c(45.72,45.72,45.72),tolerance = 0.01)
   expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000,3.9179166,8.2083937),tolerance = 0.01)
   expect_equal(tes[1:3, "d_MAD"], c(13.716,13.716,13.716),tolerance = 0.01)
-  expect_equal(tes[1:3, "D>=dmad-(MAD*dmad)"], c("No","No","No"))
+  expect_equal(tes[1:3, "D>=dmad"], c("No","No","No"))
 })
 
 test_that("CWB() works as expected When Irrig is NULL", {
@@ -139,13 +139,13 @@ test_that("CWB() works as expected When Irrig is NULL", {
   expect_named(
     tes,
     c("DaysSeason","Rain","Irrig","ET0","Kc","WaterStressCoef_Ks","ETc", "(P+Irrig)-ETc","NonStandardCropEvap",
-      "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "D>=dmad-(MAD*dmad)"))
+      "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "D>=dmad"))
   expect_equal(tes[1:3, "NonStandardCropEvap"], c(2.440372,4.171917,4.290477),tolerance = 0.01)
   expect_equal(tes[1:3, "ET_Defict"], c(0.000000000,0.000000000,0.000000000),tolerance = 0.01)
   expect_equal(tes[1:3, "TAW"], c(45.72,45.72,45.72),tolerance = 0.01)
   expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000,3.9179166,8.2083937),tolerance = 0.01)
   expect_equal(tes[1:3, "d_MAD"], c(13.716,13.716,13.716),tolerance = 0.01)
-  expect_equal(tes[1:3, "D>=dmad-(MAD*dmad)"], c("No","No","No"))
+  expect_equal(tes[1:3, "D>=dmad"], c("No","No","No"))
 })
 
 test_that("CWB() works as expected When MAD is NULL", {
@@ -171,13 +171,13 @@ test_that("CWB() works as expected When MAD is NULL", {
   expect_named(
     tes,
     c("DaysSeason","Rain","Irrig","ET0","Kc","WaterStressCoef_Ks","ETc", "(P+Irrig)-ETc","NonStandardCropEvap",
-      "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "D>=dmad-(MAD*dmad)"))
+      "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "D>=dmad"))
   expect_equal(tes[1:3, "NonStandardCropEvap"], c(2.440372,4.171917,4.290477),tolerance = 0.01)
   expect_equal(tes[1:3, "ET_Defict"], c(0.000000000,0.000000000,0.000000000),tolerance = 0.01)
   expect_equal(tes[1:3, "TAW"], c(45.72,45.72,45.72),tolerance = 0.01)
   expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000,3.9179166,8.2083937),tolerance = 0.01)
   expect_equal(tes[1:3, "d_MAD"], c(13.716,13.716,13.716),tolerance = 0.01)
-  expect_equal(tes[1:3, "D>=dmad-(MAD*dmad)"], c("No","No","No"))
+  expect_equal(tes[1:3, "D>=dmad"], c("No","No","No"))
 })
 
 test_that("CWB() works as expected when G is NULL", {
@@ -204,13 +204,13 @@ test_that("CWB() works as expected when G is NULL", {
   expect_named(
     tes,
     c("DaysSeason","Rain","Irrig","ET0","Kc","WaterStressCoef_Ks","ETc", "(P+Irrig)-ETc","NonStandardCropEvap",
-      "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "D>=dmad-(MAD*dmad)"))
+      "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "D>=dmad"))
   expect_equal(tes[1:3, "NonStandardCropEvap"], c(2.293183,4.104242,4.333359),tolerance = 0.01)
   expect_equal(tes[1:3, "ET_Defict"], c(0.000000000,0.000000000,0.000000000),tolerance = 0.01)
   expect_equal(tes[1:3, "TAW"], c(45.72,45.72,45.72),tolerance = 0.01)
   expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000,3.8502425,8.1836018),tolerance = 0.01)
   expect_equal(tes[1:3, "d_MAD"], c(13.716,13.716,13.716),tolerance = 0.01)
-  expect_equal(tes[1:3, "D>=dmad-(MAD*dmad)"], c("No","No","No"))
+  expect_equal(tes[1:3, "D>=dmad"], c("No","No","No"))
 })
 
 test_that("CWB() works as expected when P<ET0 on the very first day", {
@@ -240,13 +240,13 @@ test_that("CWB() works as expected when P<ET0 on the very first day", {
   expect_named(
     tes1,
     c("DaysSeason","Rain","Irrig","ET0","Kc","WaterStressCoef_Ks","ETc", "(P+Irrig)-ETc","NonStandardCropEvap",
-      "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "D>=dmad-(MAD*dmad)"))
+      "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "D>=dmad"))
   expect_equal(tes1[1:3, "NonStandardCropEvap"], c(4.171917,4.290477,3.665459),tolerance = 0.01)
   expect_equal(tes1[1:3, "ET_Defict"], c(0.0000000,0.0000000,0.0000000),tolerance = 0.01)
   expect_equal(tes1[1:3, "TAW"], c(45.72,45.72,45.72),tolerance = 0.01)
   expect_equal(tes1[1:3, "SoilWaterDeficit"], c(3.9179166,8.2083937,0.4438527),tolerance = 0.01)
   expect_equal(tes1[1:3, "d_MAD"], c(13.716,13.716,13.716),tolerance = 0.01)
-  expect_equal(tes1[1:3, "D>=dmad-(MAD*dmad)"], c("No","No","No"))
+  expect_equal(tes1[1:3, "D>=dmad"], c("No","No","No"))
 })
 
 test_that("Physically impossible rain values", {

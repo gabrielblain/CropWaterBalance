@@ -111,14 +111,14 @@ CWB <- function(Rain,
   {stop("InitialD must be a single positive number no larger than TAW")}
   D[1,1] <- InitialD + ETc[1,1] - RainIrrig[1,1]
   if(D[1,1] < 0){D[1,1] <- 0}
-    if (D[1,1] >= (dmad[1,1]-(MAD[1,1]*dmad[1,1]))) {recom[1,1]=paste("Yes. Irrigate",round(D[1,1],0),"mm")}
+    if (D[1,1] >= dmad[1,1]) {recom[1,1]=paste("Yes. Irrigate",round(D[1,1],0),"mm")}
     else {recom[1,1]=c("No")}
  if (D[1,1] > dmad[1,1]) {Ks[1,1] <- ((TAW[1,1]-D[1,1])/((1-MAD[1,1])*TAW[1,1]))}
 
     for (i in 2:n){
     D[i,1] <- D[(i-1),1] + ETc[i,1] - RainIrrig[i,1]
     if(D[i,1] < 0){D[i,1] <- 0}
-    if (D[i,1] >= (dmad[i,1]-(MAD[i,1]*dmad[i,1]))) {recom[i,1]=paste("Yes. Irrigate",round(D[i,1],0),"mm")}
+    if (D[i,1] >= dmad[i,1]) {recom[i,1]=paste("Yes. Irrigate",round(D[i,1],0),"mm")}
     else {recom[i,1]=c("No")}
     if (D[i,1] >= dmad[i,1]) {Ks[i,1] <- ((TAW[i,1]-D[i,1])/((1-MAD[i,1])*TAW[i,1]))}
     }
@@ -128,7 +128,7 @@ CWB <- function(Rain,
   WB <- data.frame(DaysSeason,Rain,Irrig,ET0,Kc,Ks,ETc,P_ETc,ETactul,Def,TAW,D,dmad,recom)
   WB[,2:13] <- round(WB[,2:13],1)
   colnames(WB) <- c("DaysSeason","Rain","Irrig","ET0","Kc","WaterStressCoef_Ks","ETc", "(P+Irrig)-ETc","NonStandardCropEvap",
-                    "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "D>=dmad-(MAD*dmad)")
+                    "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "D>=dmad")
   rownames(WB) <- all.period
   return(WB)
 }

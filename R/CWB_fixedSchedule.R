@@ -146,7 +146,7 @@ CWB_FixedSchedule <- function(Rain,
   Def[,1] <- ETc[,1] - ETactul[,1]
   WB=data.frame(DaysSeason,Rain,Irrig,ET0,Kc,Ks,ETc,P_ETc,ETactul,Def,TAW,D,dmad,recom)
   colnames(WB) <- c("DaysSeason","Rain","Irrig","ET0","Kc","WaterStressCoef_Ks","ETc", "(P+Irrig)-ETc","NonStandardCropEvap",
-                    "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "D>=dmad-(MAD*dmad)")
+                    "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "Scheduling")
   rownames(WB) <- all.period
   return(WB)
 }
