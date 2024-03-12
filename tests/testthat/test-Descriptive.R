@@ -14,13 +14,13 @@ test_that("Descriptive() works as expected in example", {
       "MinValue",
       "FreqZero%"))
   expect_equal(G[, "SampleSize"], c(129),tolerance = 0)
-  expect_equal(G[, "Avg"], c(6.53307),tolerance = 0.01)
-  expect_equal(G[, "Med"], c(0.254),tolerance = 0.01)
-  expect_equal(G[, "SD"], c(13.06466),tolerance = 0.01)
-  expect_equal(G[, "SE"], c(1.150279),tolerance = 0.01)
+  expect_equal(G[, "Avg"], c(6.53),tolerance = 0.01)
+  expect_equal(G[, "Med"], c(0.25),tolerance = 0.01)
+  expect_equal(G[, "SD"], c(13.06),tolerance = 0.01)
+  expect_equal(G[, "SE"], c(1.15),tolerance = 0.01)
   expect_equal(G[, "MaxValue"], c(71.37),tolerance = 0.01)
   expect_equal(G[, "MinValue"], c(0),tolerance = 0.01)
-  expect_equal(G[, "FreqZero%"], c(48.06202),tolerance = 0.01)
+  expect_equal(G[, "FreqZero%"], c(48.06),tolerance = 0.01)
 })
 test_that("Descriptive errors when Samples has negative values", {
   expect_error(

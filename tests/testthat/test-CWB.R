@@ -6,7 +6,7 @@ test_that("CWB() works as expected in example", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -38,7 +38,7 @@ test_that("CWB() works as expected when initialD is provided", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -70,7 +70,7 @@ test_that("Wrong date format", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -93,7 +93,7 @@ test_that("CWB() works as expected When Kc is NULL", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -124,7 +124,7 @@ test_that("CWB() works as expected When Irrig is NULL", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -156,7 +156,7 @@ test_that("CWB() works as expected When MAD is NULL", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -188,7 +188,7 @@ test_that("CWB() works as expected when G is NULL", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   expect_warning(
-    ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS),
+    ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,Alt=700),
     "The first 3 G values were set to zero")
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
@@ -222,7 +222,7 @@ test_that("CWB() works as expected when P<ET0 on the very first day", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   ET0 <- ET0[2:10]
   ET0 <- as.matrix(ET0)
   Rain <- DataForCWB[2:10,10]
@@ -257,7 +257,7 @@ test_that("Physically impossible rain values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- (-1*DataForCWB[,10])
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -278,7 +278,7 @@ test_that("Missing rain values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Rain[1] <- NA
   Drz <- DataForCWB[,11]
@@ -300,7 +300,7 @@ test_that("Wrong format rain", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- cbind(DataForCWB[,10],DataForCWB[,10])
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -321,7 +321,7 @@ test_that("Physically impossible Kc values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -345,7 +345,7 @@ test_that("Missing Kc values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -370,7 +370,7 @@ test_that("Negative Irrig values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -393,7 +393,7 @@ test_that("Missing Irrig values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -417,7 +417,7 @@ test_that("Physically impossible MAD values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -441,7 +441,7 @@ test_that("Wrong MAD values. Single number", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -464,7 +464,7 @@ test_that("Physically impossible Drz values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   Drz[1] <- (-4)
@@ -488,7 +488,7 @@ test_that("Wrong Drz values. Character", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   Drz[1] <- "profunda"
@@ -512,7 +512,7 @@ test_that("Physically impossible AWC values", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -536,7 +536,7 @@ test_that("Wrong AWC values. Single number", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -560,7 +560,7 @@ test_that("Rain and ET0 different lengths", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   ET0 <- ET0[1:20]
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
@@ -586,7 +586,7 @@ test_that("Wrong InitialD larger than TAW", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -608,7 +608,7 @@ test_that("Wrong InitialD negative value", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -630,7 +630,7 @@ test_that("Wrong InitialD length", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -652,7 +652,7 @@ test_that("Wrong InitialD character", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
@@ -674,7 +674,7 @@ test_that("Wrong start.date", {
   WS <- DataForCWB[,7]
   RH <- DataForCWB[,8]
   G <- DataForCWB[,9]
-  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+  ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
   Rain <- DataForCWB[,10]
   Drz <- DataForCWB[,11]
   AWC <- DataForCWB[,12]
