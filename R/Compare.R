@@ -30,7 +30,7 @@
 #' WS <- DataForCWB[,7]
 #' RH <- DataForCWB[,8]
 #' G <- DataForCWB[,9]
-#' Sample1 <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
+#' Sample1 <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G,Alt=700)
 #' Sample2 <- ET0_PT(Tavg=Tavg, Rn=Rn,G=G)
 #' Compare(Sample1=Sample1, Sample2=Sample2)
 #' @export
@@ -48,6 +48,7 @@ Compare <- function(Sample1, Sample2){
     ObsEst <- as.data.frame(cbind(Sample1,Sample2))
     Comp.orig <- as.data.frame((Accuracy(obs_est = ObsEst, conf.int = "No")))
     Comp <- as.data.frame(Comp.orig[1,3:8])
+    Comp <- round(Comp,2)
     colnames(Comp) <- c("AME","RMSE","dorig","dmod","dref","RQuad")
   }
   return(Comp)
