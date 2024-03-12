@@ -4,7 +4,7 @@
 \alias{ET0_PM}
 \title{Reference 'evapotranspiration'}
 \usage{
-ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS, G = NULL)
+ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS, G = NULL, Alt)
 }
 \arguments{
 \item{Tavg}{A vector, 1-column matrix or data frame with daily average air temperature.}
@@ -22,6 +22,8 @@ ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS, G = NULL)
 \item{G}{Optional. A vector, 1-column matrix or data frame with daily soil Heat flux in \acronym{MJ m-2 day-1}.
 Default is \code{NULL} and if \code{NULL} it is assumed to be zero.
 May be provided by \code{\link{Soil_Heat_Flux}}}
+
+\item{Alt}{A single number defining the altitude at crop's location  in meters.}
 }
 \value{
 Daily reference evapotranspiration amounts in millimetres.
@@ -38,5 +40,5 @@ Rn <- DataForCWB[,6]
 WS <- DataForCWB[,7]
 RH <- DataForCWB[,8]
 G <- DataForCWB[,9]
-ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
+ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G, Alt=700)
 }

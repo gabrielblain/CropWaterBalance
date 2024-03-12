@@ -38,7 +38,7 @@ Rn <- DataForCWB[,6]
 WS <- DataForCWB[,7]
 RH <- DataForCWB[,8]
 G <- DataForCWB[,9]
-Sample1 <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
+Sample1 <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G,Alt=700)
 Sample2 <- ET0_PT(Tavg=Tavg, Rn=Rn,G=G)
 Compare(Sample1=Sample1, Sample2=Sample2)
 }

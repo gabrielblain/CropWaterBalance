@@ -62,7 +62,7 @@ Rn <- DataForCWB[,6]
 WS <- DataForCWB[,7]
 RH <- DataForCWB[,8]
 G <- DataForCWB[,9]
-ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
 Rain <- DataForCWB[,10]
 Drz <- DataForCWB[,11]
 AWC <- DataForCWB[,12]
