@@ -42,6 +42,7 @@ Descriptive <- function(Sample){
 
     }
   Desc <- as.data.frame(t(Desc))
+  Desc[2:8] <- round(Desc[2:8],2)
   colnames(Desc) <- c("SampleSize","Avg","Med","SD","SE","MaxValue","MinValue","FreqZero%")
   return(Desc)
 }
