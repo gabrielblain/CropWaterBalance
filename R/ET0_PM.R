@@ -19,7 +19,7 @@
 #' Default is `NULL` and if `NULL` it is assumed to be zero.
 #' May be provided by \code{\link{Soil_Heat_Flux}}
 #' @param Alt
-#' A single number defining the altitude at crop's location  in meters.
+#' A single number defining the altitude at crop's location in meters.
 #' @return
 #' Daily reference evapotranspiration amounts in millimetres.
 #' @export

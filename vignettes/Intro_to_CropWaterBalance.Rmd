@@ -44,7 +44,7 @@ Rn <- DataForCWB[,6]
 WS <- DataForCWB[,7]
 RH <- DataForCWB[,8]
 G <- DataForCWB[,9]
-CpsET0PM <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
+CpsET0PM <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G,Alt=700)
 head(CpsET0PM)
 ```
 
@@ -59,8 +59,8 @@ Rn <- DataForCWB[,6]
 WS <- DataForCWB[,7]
 RH <- DataForCWB[,8]
 G <- Soil_Heat_Flux(Tavg)
-CpsET0PM_WithG <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
-CpsET0PM_WithoutG <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS)
+CpsET0PM_WithG <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G,Alt=700)
+CpsET0PM_WithoutG <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,Alt=700)
 head(cbind(CpsET0PM_WithG,CpsET0PM_WithoutG))
 ```
 
@@ -93,7 +93,7 @@ Rn <- DataForCWB[,6]
 WS <- DataForCWB[,7]
 RH <- DataForCWB[,8]
 G <- DataForCWB[,9]
-CpsET0PM <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
+CpsET0PM <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G,Alt=700)
 CpsET0PT <- ET0_PT(Tavg=Tavg, Rn=Rn,G=G)
 CpsET0HS <- ET0_HS(Ra=Ra, Tavg=Tavg, Tmax=Tmax, Tmin=Tmin)
 PM_PT <- Compare(Sample1=CpsET0PM, Sample2=CpsET0PT)
@@ -121,7 +121,7 @@ Rn <- DataForCWB[,6]
 WS <- DataForCWB[,7]
 RH <- DataForCWB[,8]
 G <- DataForCWB[,9]
-ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
 Dinitial <- Dinitial(teta_FC=0.30,teta_Obs=0.17,Drz=DataForCWB[1,11])
 Rain <- DataForCWB[,10]
 Drz <- DataForCWB[,11]
@@ -153,7 +153,7 @@ Rn <- DataForCWB[,6]
 WS <- DataForCWB[,7]
 RH <- DataForCWB[,8]
 G <- DataForCWB[,9]
-ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
 Dinitial <- Dinitial(teta_FC=0.30,teta_Obs=0.17,Drz=DataForCWB[1,11])
 Rain <- DataForCWB[,10]
 Drz <- DataForCWB[,11]

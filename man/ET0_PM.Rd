@@ -23,7 +23,7 @@ ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS, G = NULL, Alt)
 Default is \code{NULL} and if \code{NULL} it is assumed to be zero.
 May be provided by \code{\link{Soil_Heat_Flux}}}
 
-\item{Alt}{A single number defining the altitude at crop's location  in meters.}
+\item{Alt}{A single number defining the altitude at crop's location in meters.}
 }
 \value{
 Daily reference evapotranspiration amounts in millimetres.
