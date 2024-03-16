@@ -8,10 +8,10 @@ Dinitial(teta_FC, teta_Obs, Drz)
 }
 \arguments{
 \item{teta_FC}{Soil water content for the effective root zone at the field capacity
-\acronym{m3/m3}}
+\eqn{m3/m3}}
 
 \item{teta_Obs}{Soil water content for the effective root zone at the wilting point
-\acronym{m3/m3}}
+\eqn{m3/m3}}
 
 \item{Drz}{Vector, 1-column matrix or data frame defining the root zone depth in
 metres.}
