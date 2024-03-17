@@ -30,8 +30,8 @@ test_that("Missing Ra value", {
   Tmin <- DataForCWB[, 4]
   Ra <- DataForCWB[, 5]
   Ra[1] <- NA
-  expect_error(Tes <- ET0_HS(Ra, Tavg, Tmax, Tmin),
-               regexp = "Ra, Tavg, Tmax, and Tmin mustbe")
+  expect_error(ET0_HS(Ra, Tavg, Tmax, Tmin),
+               regexp = "`Ra`, `Tavg`, `Tmax`, and `Tmin` must be.*")
 })
 
 test_that("Missing Tmin value", {
@@ -40,9 +40,8 @@ test_that("Missing Tmin value", {
   Tmin <- DataForCWB[, 4]
   Ra <- DataForCWB[, 5]
   Tmin[1] <- NA
-  expect_error(Tes <-
-                 ET0_HS(Ra, Tavg, Tmax, Tmin),
-               "Ra, Tavg, Tmax, and Tmin mustbe")
+  expect_error(ET0_HS(Ra, Tavg, Tmax, Tmin),
+               regexp = "`Ra`, `Tavg`, `Tmax`, and `Tmin` must be.*")
 })
 
 test_that("Missing Tmax value", {
@@ -51,9 +50,8 @@ test_that("Missing Tmax value", {
   Tmin <- DataForCWB[, 4]
   Ra <- DataForCWB[, 5]
   Tmax[1] <- NA
-  expect_error(Tes <-
-                 ET0_HS(Ra, Tavg, Tmax, Tmin),
-               "Ra, Tavg, Tmax, and Tmin mustbe")
+  expect_error(ET0_HS(Ra, Tavg, Tmax, Tmin),
+               regexp = "`Ra`, `Tavg`, `Tmax`, and `Tmin` must be.*")
 })
 
 test_that("Missing Tavg value", {
@@ -62,9 +60,8 @@ test_that("Missing Tavg value", {
   Tmin <- DataForCWB[, 4]
   Ra <- DataForCWB[, 5]
   Tavg[1] <- NA
-  expect_error(Tes <-
-                 ET0_HS(Ra, Tavg, Tmax, Tmin),
-               regexp = "Ra, Tavg, Tmax, and Tmin must be")
+  expect_error(ET0_HS(Ra, Tavg, Tmax, Tmin),
+               regexp = "`Ra`, `Tavg`, `Tmax`, and `Tmin` must be.*")
 })
 
 test_that("Tavg and Tmax different length", {
@@ -72,9 +69,8 @@ test_that("Tavg and Tmax different length", {
   Tmax <- DataForCWB[1:9, 3]
   Tmin <- DataForCWB[1:10, 4]
   Ra <- DataForCWB[1:10, 5]
-  expect_error(Tes <-
-                 ET0_HS(Ra, Tavg, Tmax, Tmin),
-               regexp = "Ra, Tavg, Tmax, and Tmin must be")
+  expect_error(ET0_HS(Ra, Tavg, Tmax, Tmin),
+               regexp = "`Ra`, `Tavg`, `Tmax`, and `Tmin` must be.*")
 })
 
 test_that("Tavg and Tmin different length", {
@@ -82,9 +78,8 @@ test_that("Tavg and Tmin different length", {
   Tmax <- DataForCWB[1:10, 3]
   Tmin <- DataForCWB[1:9, 4]
   Ra <- DataForCWB[1:10, 5]
-  expect_error(Tes <-
-                 ET0_HS(Ra, Tavg, Tmax, Tmin),
-               regexp = "Ra, Tavg, Tmax, and Tmin must be")
+  expect_error(ET0_HS(Ra, Tavg, Tmax, Tmin),
+               regexp = "`Ra`, `Tavg`, `Tmax`, and `Tmin` must be.*")
 })
 
 test_that("Tavg and Ra different length", {
@@ -92,9 +87,8 @@ test_that("Tavg and Ra different length", {
   Tmax <- DataForCWB[1:10, 3]
   Tmin <- DataForCWB[1:10, 4]
   Ra <- DataForCWB[1:9, 5]
-  expect_error(Tes <-
-                 ET0_HS(Ra, Tavg, Tmax, Tmin),
-               regexp = "Ra, Tavg, Tmax, and Tmin must be")
+  expect_error(ET0_HS(Ra, Tavg, Tmax, Tmin),
+               regexp = "`Ra`, `Tavg`, `Tmax`, and `Tmin` must be.*")
 })
 
 test_that("Tmax and Tmin different length", {
@@ -102,9 +96,8 @@ test_that("Tmax and Tmin different length", {
   Tmax <- DataForCWB[1:10, 3]
   Tmin <- DataForCWB[1:9, 4]
   Ra <- DataForCWB[1:10, 5]
-  expect_error(Tes <-
-                 ET0_HS(Ra, Tavg, Tmax, Tmin),
-               regexp = "Ra, Tavg, Tmax, and Tmin must be")
+  expect_error(ET0_HS(Ra, Tavg, Tmax, Tmin),
+               regexp = "`Ra`, `Tavg`, `Tmax`, and `Tmin` must be.*")
 })
 
 test_that("Tmax and Ra different length", {
@@ -112,9 +105,8 @@ test_that("Tmax and Ra different length", {
   Tmax <- DataForCWB[1:10, 3]
   Tmin <- DataForCWB[1:10, 4]
   Ra <- DataForCWB[1:9, 5]
-  expect_error(Tes <-
-                 ET0_HS(Ra, Tavg, Tmax, Tmin),
-               regep = "Ra, Tavg, Tmax, and Tmin must be")
+  expect_error(ET0_HS(Ra, Tavg, Tmax, Tmin),
+               regexp = "`Ra`, `Tavg`, `Tmax`, and `Tmin` must be.*")
 })
 
 test_that("Tavg and Ra different length", {
@@ -122,7 +114,6 @@ test_that("Tavg and Ra different length", {
   Tmax <- DataForCWB[1:10, 3]
   Tmin <- DataForCWB[1:10, 4]
   Ra <- DataForCWB[1:9, 5]
-  expect_error(Tes <-
-                 ET0_HS(Ra, Tavg, Tmax, Tmin),
-               regexp = "Ra, Tavg, Tmax, and Tmin mustbe")
+  expect_error(ET0_HS(Ra, Tavg, Tmax, Tmin),
+               regexp = "`Ra`, `Tavg`, `Tmax`, and `Tmin` must be.*"))
 })
