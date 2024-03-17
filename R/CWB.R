@@ -84,8 +84,13 @@ CWB <- function(Rain,
     as.Date(start.date, tryFormats = c("%Y-%m-%d", "%Y/%m/%d"))
   end.date <- start.date + (n - 1)
   all.period <- seq(start.date, end.date, "days")
+
+  pars <- list(Kc, ET0, Irrig, AWC, MAD, Drz)
+
+  pars <- lapply(X = pars, FUN = as.matrix)
+
   Ks <- matrix(1, n, 1)
-  ETactul <- matrix(NA, n, 1)
+  ETactual <- matrix(NA, n, 1)
   Arm <- matrix(NA, n, 1)
   Alt <- matrix(NA, n, 1)
   Exd <- matrix(NA, n, 1)
@@ -111,6 +116,9 @@ CWB <- function(Rain,
   }
   ET0 <- as.matrix(ET0)
   Drz <- as.matrix(Drz)
+  
+  
+
   if (!is.numeric(Kc) || length(Kc) != n || any(is.na(Kc)) ||
       !is.numeric(ET0) || length(ET0) != n || any(is.na(ET0)) ||
       !is.numeric(Irrig) ||
@@ -173,8 +181,8 @@ CWB <- function(Rain,
     }
   }
 
-  ETactul[, 1] <- ETc[, 1] * Ks[, 1]
-  Def[, 1] <- ETc[, 1] - ETactul[, 1]
+  ETactual[, 1] <- ETc[, 1] * Ks[, 1]
+  Def[, 1] <- ETc[, 1] - ETactual[, 1]
   WB = data.frame(DaysSeason,
                   Rain,
                   Irrig,
@@ -183,7 +191,7 @@ CWB <- function(Rain,
                   Ks,
                   ETc,
                   P_ETc,
-                  ETactul,
+                  ETactual,
                   Def,
                   TAW,
                   D,
