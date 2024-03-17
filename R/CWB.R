@@ -76,25 +76,18 @@ CWB <- function(Rain,
                 start.date = "2011-11-23") {
   Rain <- as.matrix(Rain)
   if (!is.numeric(Rain) || any(is.na(Rain)) ||
-        length(Rain[Rain < 0]) != 0 || ncol(Rain) != 1) {
+      length(Rain[Rain < 0]) != 0 || ncol(Rain) != 1) {
     stop("Physically impossible or missing rain values")
   }
   n <- length(Rain)
-  start.date <-
-    as.Date(start.date, tryFormats = c("%Y-%m-%d", "%Y/%m/%d"))
+
+  start.date <- .check_date(start.date)
   end.date <- start.date + (n - 1)
   all.period <- seq(start.date, end.date, "days")
 
-  pars <- list(Kc, ET0, Irrig, AWC, MAD, Drz)
-
-  pars <- lapply(X = pars, FUN = as.matrix)
-
   Ks <- matrix(1, n, 1)
-  ETactual <- matrix(NA, n, 1)
-  Def <- matrix(NA, n, 1)
-  P_ETc <- matrix(NA, n, 1)
-  D <- matrix(NA, n, 1)
-  recom <- matrix(NA, n, 1)
+  ETactual <- Def <- P_ETc <- D <- recom <- matrix(NA, n, 1)
+
   if (is.null(Kc)) {
     Kc <- matrix(1, n, 1)
   } else {
@@ -112,26 +105,35 @@ CWB <- function(Rain,
   }
   ET0 <- as.matrix(ET0)
   Drz <- as.matrix(Drz)
- 
-  if (!is.numeric(Kc) || length(Kc) != n || any(is.na(Kc)) ||
-      !is.numeric(ET0) || length(ET0) != n || any(is.na(ET0)) ||
-      !is.numeric(Irrig) ||
-      length(Irrig) != n || any(is.na(Irrig)) ||
-      !is.numeric(AWC) || length(AWC) != n || any(is.na(AWC)) ||
-      !is.numeric(MAD) || length(MAD) != n || any(is.na(MAD)) ||
-      length(MAD[MAD > 1]) != 0 || length(MAD[MAD < 0]) != 0 ||
-      length(AWC[AWC <= 0]) != 0 ||
-      !is.numeric(Drz) || length(Drz) != n || any(is.na(Drz)) ||
-      length(Irrig[Irrig < 0]) != 0 || length(ET0[ET0 < 0]) != 0 ||
-      length(Drz[Drz < 0]) != 0 || length(Drz[Drz < 0]) != 0 ||
-      length(Kc[Kc < 0.1]) != 0 || length(Kc[Kc > 3]) != 0 ||
-      ncol(Drz) != 1 ||
-      ncol(Kc) != 1 || ncol(MAD) != 1 || ncol(ET0) != 1) {
+
+  pars <-
+    list(
+      "Kc" = Kc,
+      "ET0" = ET0,
+      "Irrig" = Irrig,
+      "AWC" = AWC,
+      "MAD" = MAD,
+      "Drz" = Drz
+    )
+
+  if (!all(unlist(lapply(pars, is.numeric))) ||
+      any(lapply(pars, length) == 0) ||
+      any(unlist(lapply(pars, anyNA))) ||
+      any(unlist(lapply(pars, length)) != n) ||
+      any(unlist(lapply(pars, ncol)) != 1) ||
+      any(pars$MAD <= 0) || any(pars$MAD >= 1) ||
+      any(pars$AWC <= 0) ||
+      any(pars$Irrig < 0) ||
+      any(pars$ET0 < 0) ||
+      any(pars$Drz < 0) ||
+      any(pars$Kc < 0.1) ||
+      any(pars$Kc > 3)) {
     stop(
       "Inputs must be numerical variables with no missing value.
         Also check if the input are physically sound."
     )
   }
+
   ETc <- ET0 * Kc
   TAW <- matrix((AWC * Drz), n, 1)
   dmad <- matrix((MAD * TAW), n, 1)
@@ -140,8 +142,8 @@ CWB <- function(Rain,
   P_ETc[, 1] <- RainIrrig[, 1] - ETc[, 1]
 
   if (!is.numeric(InitialD) || length(InitialD) != 1 ||
-        InitialD > TAW[1, 1] || InitialD < 0) {
-    stop("InitialD must be a single positive number no larger than TAW")
+      InitialD > TAW[1] || InitialD < 0) {
+    stop("`InitialD` must be a single positive number no larger than `TAW`.")
   }
   D[1, 1] <- InitialD + ETc[1, 1] - RainIrrig[1, 1]
   if (D[1, 1] < 0) {
@@ -204,6 +206,38 @@ CWB <- function(Rain,
       "d_MAD",
       "D>=dmad-(MAD*dmad)"
     )
-  rownames(WB) <- all.period
   return(WB)
+}
+
+#' Check User Input Dates for Validity
+#'
+#' @param x User entered date value
+#' @return Validated date string as a `POSIXct` object.
+#' @note This was taken from \CRANpkg{nasapower}.
+#' @example .check_date(x)
+#' @author Adam H. Sparks \email{adamhsparks@@gmail.com}
+#' @keywords Internal
+#' @noRd
+.check_date <- function(x) {
+  tryCatch(
+    x <- lubridate::parse_date_time(x,
+                                    c(
+                                      "Ymd",
+                                      "dmY",
+                                      "mdY",
+                                      "BdY",
+                                      "Bdy",
+                                      "bdY",
+                                      "bdy"
+                                    ),
+                                    tz = Sys.timezone()),
+    warning = function(c) {
+      stop(call. = FALSE,
+           "\n`",
+           x,
+           "` is not in a valid date format. Please enter a valid date format.",
+           "\n")
+    }
+  )
+  return(x)
 }
