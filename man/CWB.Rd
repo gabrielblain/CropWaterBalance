@@ -68,7 +68,7 @@ Rain <- DataForCWB[, 10]
 Drz <- DataForCWB[, 11]
 AWC <- DataForCWB[, 12]
 MAD <- DataForCWB[, 13]
-Kc <- DataForCWB[,1 4]
+Kc <- DataForCWB[, 14]
 Irrig <- DataForCWB[, 15]
 CWB(
 Rain = Rain,
