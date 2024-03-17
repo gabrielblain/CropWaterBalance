@@ -1,6 +1,6 @@
 #' Soil Water Deficit in the Root Zone
 #'
-#' Estimates initial values for soil water deficit. Required to initiate the
+#' Estimates initial values for soil water deficit.  Required to initiate the
 #'  water balance accounting.
 #'
 #' @param teta_FC
@@ -21,15 +21,19 @@
 #' Drz <- 0.3048
 #' Dinitial(teta_FC = teta_FC, teta_Obs = teta_Obs, Drz = Drz)
 Dinitial <- function(teta_FC, teta_Obs, Drz) {
-  if (!is.numeric(teta_FC) || length(teta_FC) != 1 ||
-    any(is.na(teta_FC)) || teta_FC < 0 ||
-    !(teta_Obs) || length(teta_Obs) != 1 ||
-    any(is.na(teta_Obs)) || teta_Obs < 0 ||
-    !(Drz) || length(Drz) != 1 ||
-    any(is.na(Drz)) || Drz < 0 || teta_Obs > teta_FC) {
-    stop("Physically impossible or missing teta_FC,teta_Ob or Drz values.
-         Also: teta_Obs cannot be larger than teta_FC")
+  pars <- list("teta_FC" = teta_FC, "teta_Obs" = teta_Obs, "Drz" = Drz)
+
+  if (!all(unlist(lapply(pars, is.numeric))) ||
+      any(unlist(lapply(pars, anyNA))) ||
+      any(lapply(pars, length) != 1) ||
+      any(pars < 0) ||
+      teta_Obs > teta_FC) {
+    stop(
+      "Physically impossible or missing `teta_FC`, `teta_Obs` or `Drz` values.
+         Also: `teta_Obs` cannot be larger than `teta_FC`."
+    )
   }
-  Dinitial <- 1000 * (teta_FC - teta_Obs) * Drz
+
+  Dinitial <- 1000 * (pars$teta_FC - pars$teta_Obs) * pars$Drz
   return(Dinitial)
 }
