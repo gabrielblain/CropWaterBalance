@@ -38,7 +38,14 @@
 #' WS <- DataForCWB[, 7]
 #' RH <- DataForCWB[, 8]
 #' G <- DataForCWB[, 9]
-#' ET0_PM(Tavg = Tavg, Tmax = Tmax, Tmin = Tmin, Rn = Rn, RH = RH, WS = WS, G = G)
+#' ET0_PM(Tavg = Tavg,
+#'        Tmax = Tmax,
+#'        Tmin = Tmin,
+#'        Rn = Rn,
+#'        RH = RH,
+#'        WS = WS,
+#'        G = G,
+#'        Alt = 700)
 ET0_PM <- function(Tavg, Tmax, Tmin, Rn, RH, WS, G = NULL, Alt) {
   Tavg <- as.matrix(Tavg)
   if (!is.numeric(Tavg) || any(is.na(Tavg)) ||
