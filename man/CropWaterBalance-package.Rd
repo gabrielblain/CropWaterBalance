@@ -24,6 +24,7 @@ Authors:
   \item Graciela R. Sobierajski (\href{https://orcid.org/0000-0002-7211-9268}{ORCID})
   \item Regina C. Matos Pires (\href{https://orcid.org/0000-0003-4200-7094}{ORCID})
   \item Adam H. Sparks \email{adamhsparks@gmail.com} (\href{https://orcid.org/0000-0002-0061-8359}{ORCID})
+  \item Leticia L. Martins (\href{https://orcid.org/0000-0002-0299-3005}{ORCID})
 }
 
 }

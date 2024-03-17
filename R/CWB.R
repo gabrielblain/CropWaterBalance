@@ -38,32 +38,23 @@
 #' @export
 #' @importFrom lubridate year is.Date
 #' @examples
-#' # See `?DataForCWB` for more on this data set
-#'
-#' Tavg <- DataForCWB[, 2]
-#' Tmax <- DataForCWB[, 3]
-#' Tmin <- DataForCWB[, 4]
-#' Rn <- DataForCWB[, 6]
-#' WS <- DataForCWB[, 7]
-#' RH <- DataForCWB[, 8]
-#' G <- DataForCWB[, 9]
-#' ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
-#' Rain <- DataForCWB[, 10]
-#' Drz <- DataForCWB[, 11]
-#' AWC <- DataForCWB[, 12]
-#' MAD <- DataForCWB[, 13]
-#' Kc <- DataForCWB[, 14]
-#' Irrig <- DataForCWB[, 15]
-#' CWB(
-#' Rain = Rain,
-#'   ET0 = ET0,
-#'   AWC = AWC,
-#'   Drz = Drz,
-#'   Kc = Kc,
-#'   Irrig = Irrig,
-#'   MAD = MAD,
-#'   start.date = "2023-11-23"
-#' )
+#' data(DataForCWB)
+#' Tavg <- DataForCWB[,2]
+#' Tmax <- DataForCWB[,3]
+#' Tmin <- DataForCWB[,4]
+#' Rn <- DataForCWB[,6]
+#' WS <- DataForCWB[,7]
+#' RH <- DataForCWB[,8]
+#' G <- DataForCWB[,9]
+#' ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS, G, Alt = 700)
+#' Rain <- DataForCWB[,10]
+#' Drz <- DataForCWB[,11]
+#' AWC <- DataForCWB[,12]
+#' MAD <- DataForCWB[,13]
+#' Kc <- DataForCWB[,14]
+#' Irrig <- DataForCWB[,15]
+#' CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
+#'     Kc=Kc, Irrig=Irrig, MAD=MAD, start.date = "2023-11-23")
 
 CWB <- function(Rain,
                 ET0,
@@ -149,11 +140,13 @@ CWB <- function(Rain,
   if (D[1, 1] < 0) {
     D[1, 1] <- 0
   }
-  if (D[1, 1] >= (dmad[1, 1] - (MAD[1, 1] * dmad[1, 1]))) {
-    recom[1, 1] <- c("Yes. Consider Irrig")
-  } else {
-    recom[1, 1] <- c("No")
+  if (D[1, 1] >= dmad[1, 1]) {
+    recom[1, 1] = paste0("Yes. Irrigate", round(D[1, 1], 0), "mm")
   }
+  else {
+    recom[1, 1] = c("No")
+  }
+
   if (D[1, 1] > dmad[1, 1]) {
     Ks[1, 1] <- ((TAW[1, 1] - D[1, 1]) / ((1 - MAD[1, 1]) * TAW[1, 1]))
   }
@@ -164,7 +157,7 @@ CWB <- function(Rain,
       D[i, 1] <- 0
     }
     if (D[i, 1] >= (dmad[i, 1] - (MAD[i, 1] * dmad[i, 1]))) {
-      recom[i, 1] <- c("Yes. Consider Irrig")
+      recom[i, 1] = paste("Yes. Irrigate", round(D[i, 1], 0), "mm")
     } else {
       recom[i, 1] <- c("No")
     }
@@ -173,22 +166,24 @@ CWB <- function(Rain,
     }
   }
 
-  ETactual[, 1] <- ETc[, 1] * Ks[, 1]
-  Def[, 1] <- ETc[, 1] - ETactual[, 1]
-  WB <- data.frame(DaysSeason,
-                   Rain,
-                   Irrig,
-                   ET0,
-                   Kc,
-                   Ks,
-                   ETc,
-                   P_ETc,
-                   ETactual,
-                   Def,
-                   TAW,
-                   D,
-                   dmad,
-                   recom)
+  ETactul[, 1] <- ETc[, 1] * Ks[, 1]
+  Def[, 1] <- ETc[, 1] - ETactul[, 1]
+  WB <-
+    data.frame(DaysSeason,
+               Rain,
+               Irrig,
+               ET0,
+               Kc,
+               Ks,
+               ETc,
+               P_ETc,
+               ETactul,
+               Def,
+               TAW,
+               D,
+               dmad,
+               recom)
+  WB[, 2:13] <- round(WB[, 2:13], 1)
   colnames(WB) <-
     c(
       "DaysSeason",
@@ -204,8 +199,9 @@ CWB <- function(Rain,
       "TAW",
       "SoilWaterDeficit",
       "d_MAD",
-      "D>=dmad-(MAD*dmad)"
+      "D>=dmad"
     )
+
   return(WB)
 }
 
@@ -232,11 +228,13 @@ CWB <- function(Rain,
                                     ),
                                     tz = Sys.timezone()),
     warning = function(c) {
-      stop(call. = FALSE,
-           "\n`",
-           x,
-           "` is not in a valid date format. Please enter a valid date format.",
-           "\n")
+      stop(
+        call. = FALSE,
+        "\n`",
+        x,
+        "` is not in a valid date format. Please enter a valid date format.",
+        "\n"
+      )
     }
   )
   return(x)

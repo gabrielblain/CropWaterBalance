@@ -24,6 +24,8 @@
 #'  in \eqn{MJ m-2 day-1}.
 #' Default is `NULL` and if `NULL` it is assumed to be zero.
 #' May be provided by \code{\link{Soil_Heat_Flux}}
+#' @param Alt
+#' A single number defining the altitude at crop's location in metres.
 #' @return
 #' A matrix of daily reference evapotranspiration amounts in millimetres.
 #' @export
@@ -37,7 +39,7 @@
 #' RH <- DataForCWB[, 8]
 #' G <- DataForCWB[, 9]
 #' ET0_PM(Tavg = Tavg, Tmax = Tmax, Tmin = Tmin, Rn = Rn, RH = RH, WS = WS, G = G)
-ET0_PM <- function(Tavg, Tmax, Tmin, Rn, RH, WS, G = NULL) {
+ET0_PM <- function(Tavg, Tmax, Tmin, Rn, RH, WS, G = NULL, Alt) {
   Tavg <- as.matrix(Tavg)
   if (!is.numeric(Tavg) || any(is.na(Tavg)) ||
     length(Tavg[Tavg > 70]) != 0 || length(Tavg[Tavg < -70]) != 0 ||
@@ -71,8 +73,9 @@ ET0_PM <- function(Tavg, Tmax, Tmin, Rn, RH, WS, G = NULL) {
     ncol(Tmax) != 1 || ncol(Tmin) != 1 || ncol(Rn) != 1 ||
     ncol(RH) != 1 || ncol(WS) != 1 || ncol(G) != 1 ||
     length(Tmax) != n || length(Tmin) != n || length(Rn) != n ||
-    length(RH) != n || length(WS) != n || length(G) != n) {
-    stop("Physically impossible or missing Tmax, Tmin, Rn, RH, WS or G values")
+    length(RH) != n || length(WS) != n || length(G) != n ||
+    length(Alt) != 1 || Alt < 0 || !is.numeric(Alt)) {
+    stop("Physically impossible or missing Tmax, Tmin, Rn, RH, WS, G or Alt values")
   }
   es <- 0.6108 * exp((17.27 * Tavg) / (Tavg + 273.3))
   ea <- (RH * es) / 100

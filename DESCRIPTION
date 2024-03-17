@@ -26,7 +26,13 @@ Authors@R: c(
     family = "Sparks",
     email = "adamhsparks@gmail.com",
     role = "aut",
-    comment = c(ORCID = "0000-0002-0061-8359")))
+    comment = c(ORCID = "0000-0002-0061-8359")),
+  person(
+    given = "Leticia L.",
+    family = "Martins",
+    role = "aut",
+    comment = c(ORCID = "0000-0002-0299-3005")
+  ))
 Description: Calculates daily climate water balance for irrigation purposes. 
   The package also calculates the reference 'evapotranspiration' using three
   methods, 'Penman and Monteith', 'Priestley and Taylor', or 'Hargreaves and

@@ -55,30 +55,21 @@ Calculates several parameters of the crop water balance.  It also suggests
 when to irrigate.
 }
 \examples{
-# See `?DataForCWB` for more on this data set
-
-Tavg <- DataForCWB[, 2]
-Tmax <- DataForCWB[, 3]
-Tmin <- DataForCWB[, 4]
-Rn <- DataForCWB[, 6]
-WS <- DataForCWB[, 7]
-RH <- DataForCWB[, 8]
-G <- DataForCWB[, 9]
-ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
-Rain <- DataForCWB[, 10]
-Drz <- DataForCWB[, 11]
-AWC <- DataForCWB[, 12]
-MAD <- DataForCWB[, 13]
-Kc <- DataForCWB[, 14]
-Irrig <- DataForCWB[, 15]
-CWB(
-Rain = Rain,
-  ET0 = ET0,
-  AWC = AWC,
-  Drz = Drz,
-  Kc = Kc,
-  Irrig = Irrig,
-  MAD = MAD,
-  start.date = "2023-11-23"
-)
+data(DataForCWB)
+Tavg <- DataForCWB[,2]
+Tmax <- DataForCWB[,3]
+Tmin <- DataForCWB[,4]
+Rn <- DataForCWB[,6]
+WS <- DataForCWB[,7]
+RH <- DataForCWB[,8]
+G <- DataForCWB[,9]
+ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS, G, Alt = 700)
+Rain <- DataForCWB[,10]
+Drz <- DataForCWB[,11]
+AWC <- DataForCWB[,12]
+MAD <- DataForCWB[,13]
+Kc <- DataForCWB[,14]
+Irrig <- DataForCWB[,15]
+CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
+    Kc=Kc, Irrig=Irrig, MAD=MAD, start.date = "2023-11-23")
 }

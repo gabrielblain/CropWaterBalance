@@ -40,19 +40,22 @@
 #'     Rn = Rn,
 #'     RH = RH,
 #'     WS = WS,
-#'     G = G
+#'     G = G,
+#'     Alt=700)
 #'   )
-#' Sample2 <- ET0_PT(Tavg = Tavg, Rn = Rn, G = G)
+#' Sample2 <- ET0_PT(Tavg = Tavg, Rn = Rn, G = G))
 #' Compare(Sample1 = Sample1, Sample2 = Sample2)
 #' @export
 #' @importFrom PowerSDI Accuracy
 
 Compare <- function(Sample1, Sample2) {
   ObsEst <- list(Sample1, Sample2)
-  if (isFALSE(any(unlist(lapply(ObsEst, is.numeric)))) ||
-    length(Sample1) < 5 ||
-    length(Sample1) != length(Sample2) ||
-    any(unlist(lapply(ObsEst, anyNA)))) {
+  if (isFALSE(any(unlist(lapply(
+    ObsEst, is.numeric
+  )))) ||
+  length(Sample1) < 5 ||
+  length(Sample1) != length(Sample2) ||
+  any(unlist(lapply(ObsEst, anyNA)))) {
     stop(
       "`Sample1` and `Sample2` must be numerical single column variables with at
       least 5 records each. Missing data are not allowed."
@@ -60,10 +63,8 @@ Compare <- function(Sample1, Sample2) {
   }
 
   Comp <-
-    as.data.frame(Accuracy(
-      obs_est = as.data.frame(ObsEst),
-      conf.int = "No"
-    ))[1, 3:8]
+    as.data.frame(Accuracy(obs_est = as.data.frame(ObsEst),
+                           conf.int = "No"))[1, 3:8]
   colnames(Comp) <-
     c("AME", "RMSE", "dorig", "dmod", "dref", "RQuad")
   return(Comp)

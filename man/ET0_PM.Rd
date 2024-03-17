@@ -4,7 +4,7 @@
 \alias{ET0_PM}
 \title{Reference 'evapotranspiration' Using the Penman and Monteith Method}
 \usage{
-ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS, G = NULL)
+ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS, G = NULL, Alt)
 }
 \arguments{
 \item{Tavg}{A vector, 1-column matrix or data frame with daily average air temperature.}
@@ -27,6 +27,8 @@ in Celsius degrees.}
 in \eqn{MJ m-2 day-1}.
 Default is \code{NULL} and if \code{NULL} it is assumed to be zero.
 May be provided by \code{\link{Soil_Heat_Flux}}}
+
+\item{Alt}{A single number defining the altitude at crop's location in metres.}
 }
 \value{
 A matrix of daily reference evapotranspiration amounts in millimetres.

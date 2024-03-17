@@ -48,8 +48,9 @@ Sample1 <-
     Rn = Rn,
     RH = RH,
     WS = WS,
-    G = G
+    G = G,
+    Alt=700)
   )
-Sample2 <- ET0_PT(Tavg = Tavg, Rn = Rn, G = G)
+Sample2 <- ET0_PT(Tavg = Tavg, Rn = Rn, G = G))
 Compare(Sample1 = Sample1, Sample2 = Sample2)
 }
