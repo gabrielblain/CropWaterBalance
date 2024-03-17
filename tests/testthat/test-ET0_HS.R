@@ -115,5 +115,5 @@ test_that("Tavg and Ra different length", {
   Tmin <- DataForCWB[1:10, 4]
   Ra <- DataForCWB[1:9, 5]
   expect_error(ET0_HS(Ra, Tavg, Tmax, Tmin),
-               regexp = "`Ra`, `Tavg`, `Tmax`, and `Tmin` must be.*"))
+               regexp = "`Ra`, `Tavg`, `Tmax`, and `Tmin` must be.*")
 })
