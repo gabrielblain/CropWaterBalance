@@ -53,8 +53,8 @@
 #' MAD <- DataForCWB[,13]
 #' Kc <- DataForCWB[,14]
 #' Irrig <- DataForCWB[,15]
-#' CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
-#'     Kc=Kc, Irrig=Irrig, MAD=MAD, start.date = "2023-11-23")
+#' CWB(Rain = Rain, ET0 = ET0, AWC = AWC, Drz = Drz,
+#'     Kc = Kc, Irrig = Irrig, MAD = MAD, start.date = "2023-11-23")
 
 CWB <- function(Rain,
                 ET0,
@@ -166,8 +166,8 @@ CWB <- function(Rain,
     }
   }
 
-  ETactul[, 1] <- ETc[, 1] * Ks[, 1]
-  Def[, 1] <- ETc[, 1] - ETactul[, 1]
+  ETactual[, 1] <- ETc[, 1] * Ks[, 1]
+  Def[, 1] <- ETc[, 1] - ETactual[, 1]
   WB <-
     data.frame(DaysSeason,
                Rain,
@@ -177,7 +177,7 @@ CWB <- function(Rain,
                Ks,
                ETc,
                P_ETc,
-               ETactul,
+               ETactual,
                Def,
                TAW,
                D,
