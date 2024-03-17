@@ -33,8 +33,7 @@
 #' Date at which the accounting should start. Formats:
 #'   \dQuote{YYYY-MM-DD}, \dQuote{YYYY/MM/DD}.
 #' @return
-#' A `data.frame` of water balance accounting, including the soil water
-#'   deficit.
+#' A `data.frame` of water balance accounting, including the soil water deficit.
 #' @export
 #' @importFrom lubridate year is.Date
 #' @examples
