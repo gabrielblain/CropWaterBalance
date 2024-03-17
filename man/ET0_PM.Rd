@@ -2,7 +2,7 @@
 % Please edit documentation in R/ET0_PM.R
 \name{ET0_PM}
 \alias{ET0_PM}
-\title{Reference 'evapotranspiration' Using the Penman and Monteith Method}
+\title{Reference Evapotranspiration Using the Penman and Monteith Method}
 \usage{
 ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS, G = NULL, Alt)
 }
