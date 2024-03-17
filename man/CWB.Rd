@@ -70,6 +70,6 @@ AWC <- DataForCWB[,12]
 MAD <- DataForCWB[,13]
 Kc <- DataForCWB[,14]
 Irrig <- DataForCWB[,15]
-CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
-    Kc=Kc, Irrig=Irrig, MAD=MAD, start.date = "2023-11-23")
+CWB(Rain = Rain, ET0 = ET0, AWC = AWC, Drz = Drz,
+    Kc = Kc, Irrig = Irrig, MAD = MAD, start.date = "2023-11-23")
 }
