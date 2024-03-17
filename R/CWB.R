@@ -14,26 +14,27 @@
 #'   capacity of the soil, that is: the amount of water between field capacity
 #'   and permanent wilting point in millimetre of water per meters of soil.
 #' @param InitialD
-#' Single number defining in millimetres, the initial soil water deficit.  It is
-#'    used to start the water balance accounting.  Default value is 0, which
+#' Single number defining in millimetres, the initial soil water deficit.  It
+#'    is used to start the water balance accounting.  Default value is 0, which
 #'    assumes the root zone is at the field capacity.
 #' @param Kc
 #' A `vector`, 1-column `matrix` or `data.frame` defining the crop coefficient.
-#' If `NULL` its values are assumed to be 1.
+#'    If `NULL` its values are assumed to be 1.
 #' @param MAD
-#' A `vector`, 1-column `matrix` or `data.frame` defining the management allowed
-#'   depletion.  Varies between 0 and 1.
+#' A `vector`, 1-column `matrix` or `data.frame` defining the management
+#'   allowed depletion.  Varies between 0 and 1.
 #' @param Drz
-#' A `vector`, 1-column `matrix` or `data.frame` defining the root zone depth in
-#'  metres.
+#' A `vector`, 1-column `matrix` or `data.frame` defining the root zone depth
+#'   in metres.
 #' @param Irrig
 #' A `vector`, 1-column `matrix` or `data.frame` with  net irrigation amount
 #'   infiltrated into the soil for the current day in millimeters.
 #' @param start.date
 #' Date at which the accounting should start. Formats:
-#' \dQuote{YYYY-MM-DD}, \dQuote{YYYY/MM/DD}.
+#'   \dQuote{YYYY-MM-DD}, \dQuote{YYYY/MM/DD}.
 #' @return
-#' A `data.frame` of water balance accounting, including the soil water deficit.
+#' A `data.frame` of water balance accounting, including the soil water
+#'   deficit.
 #' @export
 #' @importFrom lubridate year is.Date
 #' @examples
