@@ -34,7 +34,7 @@ ET0_HS <- function(Ra, Tavg, Tmax, Tmin) {
     "Tmin" = Tmin
   )
 
-  if (!all(isFALSE(unlist(lapply(w, is.numeric)))) ||
+  if (!all(unlist(lapply(w, is.numeric))) ||
       any(lapply(w, length) == 0) ||
       any(unlist(lapply(w, anyNA))) ||
       any(unlist(lapply(w, length)) != max(unlist(lapply(w, length)))) ||
