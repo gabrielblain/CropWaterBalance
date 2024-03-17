@@ -47,8 +47,7 @@ assumes the root zone is at the field capacity.}
 \dQuote{YYYY-MM-DD}, \dQuote{YYYY/MM/DD}.}
 }
 \value{
-A \code{data.frame} of water balance accounting, including the soil water
-deficit.
+A \code{data.frame} of water balance accounting, including the soil water deficit.
 }
 \description{
 Calculates several parameters of the crop water balance.  It also suggests
