@@ -40,6 +40,12 @@
       "familyName": "Sparks",
       "email": "adamhsparks@gmail.com",
       "@id": "https://orcid.org/0000-0002-0061-8359"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Leticia L.",
+      "familyName": "Martins",
+      "@id": "https://orcid.org/0000-0002-0299-3005"
     }
   ],
   "maintainer": [
@@ -140,6 +146,6 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "126.86KB",
+  "fileSize": "161.253KB",
   "readme": "https://github.com/gabrielblain/CropWaterBalance/blob/master/README.md"
 }
