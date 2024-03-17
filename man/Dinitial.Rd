@@ -20,7 +20,7 @@ metres.}
 Initial soil water deficit in the root zone (millimetres).
 }
 \description{
-Estimates initial values for soil water deficit. Required to initiate the
+Estimates initial values for soil water deficit.  Required to initiate the
 water balance accounting.
 }
 \examples{
