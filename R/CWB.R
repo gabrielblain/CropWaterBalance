@@ -12,7 +12,8 @@
 #' @param AWC
 #' A `vector`, 1-column `matrix` or `data.frame` with the available water
 #'   capacity of the soil, that is: the amount of water between field capacity
-#'   and permanent wilting point in millimetre of water per meters of soil.
+#'   and permanent wilting point in millimetre of water per meters of soil, must
+#'   be greater than or equal to 0.
 #' @param InitialD
 #' Single number defining in millimetres, the initial soil water deficit.  It
 #'    is used to start the water balance accounting.  Default value is 0, which
@@ -120,7 +121,7 @@ CWB <- function(Rain,
       any(unlist(lapply(pars, anyNA))) ||
       any(unlist(lapply(pars, length)) != n) ||
       any(unlist(lapply(pars, ncol)) != 1) ||
-      any(pars$MAD <= 0) || any(pars$MAD >= 1) ||
+      any(pars$MAD < 0) || any(pars$MAD > 1) ||
       any(pars$AWC <= 0) ||
       any(pars$Irrig < 0) ||
       any(pars$ET0 < 0) ||

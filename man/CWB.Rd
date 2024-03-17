@@ -25,7 +25,8 @@ evapotranspiration in millimetres.}
 
 \item{AWC}{A \code{vector}, 1-column \code{matrix} or \code{data.frame} with the available water
 capacity of the soil, that is: the amount of water between field capacity
-and permanent wilting point in millimetre of water per meters of soil.}
+and permanent wilting point in millimetre of water per meters of soil, must
+be greater than or equal to 0.}
 
 \item{Drz}{A \code{vector}, 1-column \code{matrix} or \code{data.frame} defining the root zone depth
 in metres.}
