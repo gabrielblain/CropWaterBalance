@@ -36,32 +36,56 @@ The `ETO_PM()` function calculates daily ETO amounts using the FAO-Penman and Mo
 
 
 ```{r CpsET0PM}
-data(DataForCWB)
-Tavg <- DataForCWB[,2]
-Tmax <- DataForCWB[,3]
-Tmin <- DataForCWB[,4]
-Rn <- DataForCWB[,6]
-WS <- DataForCWB[,7]
-RH <- DataForCWB[,8]
-G <- DataForCWB[,9]
-CpsET0PM <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
+Tavg <- DataForCWB[, 2]
+Tmax <- DataForCWB[, 3]
+Tmin <- DataForCWB[, 4]
+Rn <- DataForCWB[, 6]
+WS <- DataForCWB[, 7]
+RH <- DataForCWB[, 8]
+G <- DataForCWB[, 9]
+CpsET0PM <-
+  ET0_PM(
+    Tavg = Tavg,
+    Tmax = Tmax,
+    Tmin = Tmin,
+    Rn = Rn,
+    RH = RH,
+    WS = WS,
+    G = G
+  )
 head(CpsET0PM)
 ```
 
 By analyzing the `ET0_PM()` function, the user verify that the FAO-Penman and Monteith equation requires several inputs, which includes the soil heat flux (G). This latter variable is rarely measure. This is the reason why the {CropWaterBalance} has an auxiliary function (`Soil_Heat_Flux()`) that estimates G as function of daily average air temperature values. The users may use this auxiliary function to estimate G and then apply the `ET0_PM()` function. Alternatively, the users may simply run `ET0_PM()` without the G argument. In this case, this latter function will automatically use `Soil_Heat_Flux()` and then estimate ETO. See the example below.
 
 ```{r CpsET0PM estimating G}
-data(DataForCWB)
-Tavg <- DataForCWB[,2]
-Tmax <- DataForCWB[,3]
-Tmin <- DataForCWB[,4]
-Rn <- DataForCWB[,6]
-WS <- DataForCWB[,7]
-RH <- DataForCWB[,8]
+Tavg <- DataForCWB[, 2]
+Tmax <- DataForCWB[, 3]
+Tmin <- DataForCWB[, 4]
+Rn <- DataForCWB[, 6]
+WS <- DataForCWB[, 7]
+RH <- DataForCWB[, 8]
 G <- Soil_Heat_Flux(Tavg)
-CpsET0PM_WithG <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
-CpsET0PM_WithoutG <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS)
-head(cbind(CpsET0PM_WithG,CpsET0PM_WithoutG))
+CpsET0PM_WithG <-
+  ET0_PM(
+    Tavg = Tavg,
+    Tmax = Tmax,
+    Tmin = Tmin,
+    Rn = Rn,
+    RH = RH,
+    WS = WS,
+    G = G
+  )
+CpsET0PM_WithoutG <-
+  ET0_PM(
+    Tavg = Tavg,
+    Tmax = Tmax,
+    Tmin = Tmin,
+    Rn = Rn,
+    RH = RH,
+    WS = WS
+  )
+head(cbind(CpsET0PM_WithG, CpsET0PM_WithoutG))
 ```
 
 ## Step 2: Applying `ETO_PT()` and `ET0_HS()` in Campinas-SP, Brazil
@@ -69,40 +93,59 @@ head(cbind(CpsET0PM_WithG,CpsET0PM_WithoutG))
 As described in the introduction, the users may need to estimate ETO using non-standard methods, which require less input than the FAO-Penman and Monteith. The {CropWaterBalance} allows users to estimate this agrometeorological parameter using the Priestley-Taylor (`ETO_PT()`) and Hargreaves-Samani (`ET0_HS()`) methods. Note that the same considerations made for G in respect to `ETO_PM()` are valid for `ETO_PT()`.
 
 ```{r CpsET0PT and CpsET0HS}
-data(DataForCWB)
-Tavg <- DataForCWB[,2]
-Tmax <- DataForCWB[,3]
-Tmin <- DataForCWB[,4]
-Ra <- DataForCWB[,5]
-Rn <- DataForCWB[,6]
-G <- DataForCWB[,9]
-CpsET0PT <- ET0_PT(Tavg=Tavg, Rn=Rn,G=G)
-CpsET0HS <- ET0_HS(Ra=Ra, Tavg=Tavg, Tmax=Tmax, Tmin=Tmin)
-head(cbind(CpsET0PT,CpsET0HS))
+Tavg <- DataForCWB[, 2]
+Tmax <- DataForCWB[, 3]
+Tmin <- DataForCWB[, 4]
+Ra <- DataForCWB[, 5]
+Rn <- DataForCWB[, 6]
+G <- DataForCWB[, 9]
+CpsET0PT <- ET0_PT(Tavg = Tavg, Rn = Rn, G = G)
+CpsET0HS <- ET0_HS(
+  Ra = Ra,
+  Tavg = Tavg,
+  Tmax = Tmax,
+  Tmin = Tmin
+)
+head(cbind(CpsET0PT, CpsET0HS))
 ```
 
 The estimation of CpsET0PT and/or CpsET0HS raises the following question: Can these alternative methods really replace the FAO-Penman and Monteith model? Although the answer to this question may be regarded as a complex function involving local weather conditions and users' subjective choices, the (`Compare()`) and (`Descriptive()`) functions provide statistical information, which may assist users in such decision. In this context, the `Compare()` and `Descriptive()` functions may be used to verify how well an alternative ET0 estimating method approaches ET0_PM.
 
 ```{r Evaluating alternative methods for ETO}
-data(DataForCWB)
-Tavg <- DataForCWB[,2]
-Tmax <- DataForCWB[,3]
-Tmin <- DataForCWB[,4]
-Ra <- DataForCWB[,5]
-Rn <- DataForCWB[,6]
-WS <- DataForCWB[,7]
-RH <- DataForCWB[,8]
-G <- DataForCWB[,9]
-CpsET0PM <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G)
-CpsET0PT <- ET0_PT(Tavg=Tavg, Rn=Rn,G=G)
-CpsET0HS <- ET0_HS(Ra=Ra, Tavg=Tavg, Tmax=Tmax, Tmin=Tmin)
-PM_PT <- Compare(Sample1=CpsET0PM, Sample2=CpsET0PT)
+Tavg <- DataForCWB[, 2]
+Tmax <- DataForCWB[, 3]
+Tmin <- DataForCWB[, 4]
+Ra <- DataForCWB[, 5]
+Rn <- DataForCWB[, 6]
+WS <- DataForCWB[, 7]
+RH <- DataForCWB[, 8]
+G <- DataForCWB[, 9]
+CpsET0PM <-
+  ET0_PM(
+    Tavg = Tavg,
+    Tmax = Tmax,
+    Tmin = Tmin,
+    Rn = Rn,
+    RH = RH,
+    WS = WS,
+    G = G
+  )
+CpsET0PT <- ET0_PT(Tavg = Tavg, Rn = Rn, G = G)
+CpsET0HS <- ET0_HS(
+  Ra = Ra,
+  Tavg = Tavg,
+  Tmax = Tmax,
+  Tmin = Tmin
+)
+PM_PT <- Compare(Sample1 = CpsET0PM, Sample2 = CpsET0PT)
 PM_PT
-Descrp_PM_PT <- cbind(Descriptive(Sample = CpsET0PM),Descriptive(Sample = CpsET0PT))
+Descrp_PM_PT <-
+  cbind(Descriptive(Sample = CpsET0PM), Descriptive(Sample = CpsET0PT))
 Descrp_PM_PT
-PM_HS <- Compare(Sample1=CpsET0PM, Sample2=CpsET0HS)
+PM_HS <- Compare(Sample1 = CpsET0PM, Sample2 = CpsET0HS)
 PM_HS
-Descrp_PM_HS <- cbind(Descriptive(Sample = CpsET0PM),Descriptive(Sample = CpsET0HS))
+Descrp_PM_HS <-
+  cbind(Descriptive(Sample = CpsET0PM), Descriptive(Sample = CpsET0HS))
 Descrp_PM_HS
 ```
 
@@ -113,31 +156,51 @@ The results provided by the `Compare()` and `Descriptive()` functions, indicate 
 Considering the previous results, we applied the `CWB()` using daily values of rainfall and ET0_PM obtained/estimated from daily data of the weather station of Campinas. We included this meteorological data in the package (DataForCWB), along with parameters required for calculating the crop water balance: depth of the root zone (Drz), available water capacity (AWC; amount of water between field capacity and permanent wilting point), management allowed depletion (MAD), and crop coefficient (Kc). The example below loaded DataForCWB to apply `CWB()` in Campinas-SP. Only for sake of simplicity, Kc values were set to 1 for the entire period. The initial D value (Dinitial) required for initiating the crop water balance account was obtained  using function `DInitial()` with teta_FC and AWC values obtained from two data sets included in the package (DataForSWC.rda and DataForAWC). These data sets provide soil water content values (m3/m3) for the effective root zone at the field capacity and at permanent wilting point, and AWC values (mm/m), respectively (teta_obs was measured in the field). We applied the `CWB()` function considering two scenarios. Scenario 1 in which no irrigation was applied and scenario 2 in which the package’s recommendation about when and how much to irrigate was met. 
 
 ```{r `CWB()` and `DInitial()` in Campinas-SP, Brazil: scenario 1}
-data(DataForCWB)
-Tavg <- DataForCWB[,2]
-Tmax <- DataForCWB[,3]
-Tmin <- DataForCWB[,4]
-Rn <- DataForCWB[,6]
-WS <- DataForCWB[,7]
-RH <- DataForCWB[,8]
-G <- DataForCWB[,9]
-ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
-Dinitial <- Dinitial(teta_FC=0.30,teta_Obs=0.17,Drz=DataForCWB[1,11])
-Rain <- DataForCWB[,10]
-Drz <- DataForCWB[,11]
-AWC <- DataForCWB[,12]
-MAD <- DataForCWB[,13]
-Kc <- DataForCWB[,14]
-Irrig <- DataForCWB[,15]
- Scenario1 <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
-     Kc=Kc, Irrig=Irrig, MAD=MAD, InitialD = Dinitial, start.date = "2011-11-23")
-Scenario1[1:8,]
+Tavg <- DataForCWB[, 2]
+Tmax <- DataForCWB[, 3]
+Tmin <- DataForCWB[, 4]
+Rn <- DataForCWB[, 6]
+WS <- DataForCWB[, 7]
+RH <- DataForCWB[, 8]
+G <- DataForCWB[, 9]
+ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS, G)
+Dinitial <-
+  Dinitial(teta_FC = 0.30,
+           teta_Obs = 0.17,
+           Drz = DataForCWB[1, 11])
+Rain <- DataForCWB[, 10]
+Drz <- DataForCWB[, 11]
+AWC <- DataForCWB[, 12]
+MAD <- DataForCWB[, 13]
+Kc <- DataForCWB[, 14]
+Irrig <- DataForCWB[, 15]
+Scenario1 <- CWB(
+  Rain = Rain,
+  ET0 = ET0,
+  AWC = AWC,
+  Drz = Drz,
+  Kc = Kc,
+  Irrig = Irrig,
+  MAD = MAD,
+  InitialD = Dinitial,
+  start.date = "2011-11-23"
+)
+Scenario1[1:8, ]
 Irrig[7] <- 11
- Scenario2 <- CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
-     Kc=Kc, Irrig=Irrig, MAD=MAD, InitialD = Dinitial, start.date = "2011-11-23")
-Scenario2[1:8,]
+Scenario2 <- CWB(
+  Rain = Rain,
+  ET0 = ET0,
+  AWC = AWC,
+  Drz = Drz,
+  Kc = Kc,
+  Irrig = Irrig,
+  MAD = MAD,
+  InitialD = Dinitial,
+  start.date = "2011-11-23"
+)
+Scenario2[1:8, ]
 ```
 
-In both scenarios, the package suggested irrigating on 28/11/2011 because the soil water deficit had become larger than MAD.dmad. Since in scenario 1 we applied no irrigation, the Ks coefficient assumed on the next two days (29 and 30) values smaller than 1 and the NonStandardCropEvap becomes smaller than ETc, which may prevent the crop from achieving its potential yield. In scenario 2, we followed the package's recommendation and applied irrigation on day 29 (Irrig = 11mm, in the early morning). In this case, no crop evapotranspiration deficit was observed, indicating no water shortage in the root zone.   
+In both scenarios, the package suggested irrigating on 28/11/2011 because the soil water deficit had become larger than MAD.dmad. Since in scenario 1 we applied no irrigation, the Ks coefficient assumed on the next two days (29 and 30) values smaller than 1 and the NonStandardCropEvap becomes smaller than ETc, which may prevent the crop from achieving its potential yield. In scenario 2, we followed the package's recommendation and applied irrigation on day 29 (Irrig = 11mm, in the early morning). In this case, no crop evapotranspiration deficit was observed, indicating no water shortage in the root zone.
 
 # References
