@@ -40,7 +40,8 @@ test_that("Compare errors when there is just one Sample", {
   Sample1 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS, G)
   expect_error(
     Compare(Sample1 = Sample1, Sample2 = "Sample2"),
-    "Samples 1 and 2 must be numerical single column variables with at least 5*"
+    "`Sample1` and `Sample2` must be numerical single column variables with at
+      least 5 records each. Missing data are not allowed."
   )
 })
 
@@ -57,7 +58,8 @@ test_that("Compare errors when there is just one Sample", {
   Sample2 <- ET0_PT(Tavg, Rn, G)
   expect_error(
     Compare(Sample1 = Sample1[1:4, 1], Sample2 = Sample2[1:4, 1]),
-    "Samples 1 and 2 must be numerical single column variables with at least 5*"
+    "`Sample1` and `Sample2` must be numerical single column variables with at
+      least 5 records each. Missing data are not allowed."
   )
 })
 
@@ -74,7 +76,8 @@ test_that("Compare errors when there is just one Sample", {
   Sample2 <- ET0_PT(Tavg, Rn, G)
   expect_error(
     Compare(Sample1 = Sample1, Sample2 = Sample2[1:4, 1]),
-    "Samples 1 and 2 must be numerical single column variables with at least 5*"
+    "`Sample1` and `Sample2` must be numerical single column variables with at
+      least 5 records each. Missing data are not allowed."
   )
 })
 
@@ -90,7 +93,8 @@ test_that("Compare errors when there is just one Sample", {
   Sample1 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS, G)
   expect_error(
     Compare(Sample1 = Sample1[1:5, 1], Sample2 = c(NA, 1, 2, 3, 4)),
-    "Samples 1 and 2 must be numerical single column variables with at least 5*"
+    "`Sample1` and `Sample2` must be numerical single column variables with at
+      least 5 records each. Missing data are not allowed."
   )
 })
 test_that("Compare errors when there is just one Sample", {
@@ -105,6 +109,7 @@ test_that("Compare errors when there is just one Sample", {
   Sample1 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS, G)
   expect_error(
     Compare(Sample1 = Sample1[1:5, 1], Sample2 = c(1, 2, 3, 4)),
-    "Samples 1 and 2 must be numerical single column variables with at least 5*"
+    "`Sample1` and `Sample2` must be numerical single column variables with at
+      least 5 records each. Missing data are not allowed."
   )
 })
