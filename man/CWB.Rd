@@ -27,8 +27,8 @@ evapotranspiration in millimetres.}
 capacity of the soil, that is: the amount of water between field capacity
 and permanent wilting point in millimetre of water per meters of soil.}
 
-\item{Drz}{A \code{vector}, 1-column \code{matrix} or \code{data.frame} defining the root zone depth in
-metres.}
+\item{Drz}{A \code{vector}, 1-column \code{matrix} or \code{data.frame} defining the root zone depth
+in metres.}
 
 \item{Kc}{A \code{vector}, 1-column \code{matrix} or \code{data.frame} defining the crop coefficient.
 If \code{NULL} its values are assumed to be 1.}
@@ -36,22 +36,23 @@ If \code{NULL} its values are assumed to be 1.}
 \item{Irrig}{A \code{vector}, 1-column \code{matrix} or \code{data.frame} with  net irrigation amount
 infiltrated into the soil for the current day in millimeters.}
 
-\item{MAD}{A \code{vector}, 1-column \code{matrix} or \code{data.frame} defining the management allowed
-depletion.  Varies between 0 and 1.}
+\item{MAD}{A \code{vector}, 1-column \code{matrix} or \code{data.frame} defining the management
+allowed depletion.  Varies between 0 and 1.}
 
-\item{InitialD}{Single number defining in millimetres, the initial soil water deficit.  It is
-used to start the water balance accounting.  Default value is 0, which
+\item{InitialD}{Single number defining in millimetres, the initial soil water deficit.  It
+is used to start the water balance accounting.  Default value is 0, which
 assumes the root zone is at the field capacity.}
 
 \item{start.date}{Date at which the accounting should start. Formats:
 \dQuote{YYYY-MM-DD}, \dQuote{YYYY/MM/DD}.}
 }
 \value{
-A \code{data.frame} of water balance accounting, including the soil water deficit.
+A \code{data.frame} of water balance accounting, including the soil water
+deficit.
 }
 \description{
-Calculates several parameters of the crop water balance.
-It also suggests when irrigate.
+Calculates several parameters of the crop water balance.  It also suggests
+when to irrigate.
 }
 \examples{
 # See `?DataForCWB` for more on this data set

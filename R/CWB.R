@@ -1,7 +1,7 @@
 #' Crop Water Balance Accounting
 #'
-#' Calculates several parameters of the crop water balance.
-#' It also suggests when irrigate.
+#' Calculates several parameters of the crop water balance.  It also suggests
+#'   when to irrigate.
 #'
 #' @param Rain
 #' A `vector`, 1-column `matrix` or `data.frame` with daily rainfall totals in
