@@ -77,7 +77,7 @@ CWB <- function(Rain,
   all.period <- seq(start.date, end.date, "days")
 
   Ks <- matrix(1, n, 1)
-  ETactual <- Def <- P_ETc <- D <- recom <- matrix(NA, n, 1)
+  ETactul <- Def <- P_ETc <- D <- recom <- matrix(NA, n, 1)
 
   if (is.null(Kc)) {
     Kc <- matrix(1, n, 1)
@@ -166,8 +166,8 @@ CWB <- function(Rain,
     }
   }
 
-  ETactual[, 1] <- ETc[, 1] * Ks[, 1]
-  Def[, 1] <- ETc[, 1] - ETactual[, 1]
+  ETactul[, 1] <- ETc[, 1] * Ks[, 1]
+  Def[, 1] <- ETc[, 1] - ETactul[, 1]
   WB <-
     data.frame(DaysSeason,
                Rain,
@@ -177,7 +177,7 @@ CWB <- function(Rain,
                Ks,
                ETc,
                P_ETc,
-               ETactual,
+               ETactul,
                Def,
                TAW,
                D,
