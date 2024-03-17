@@ -34,25 +34,30 @@ Authors@R: c(
     comment = c(ORCID = "0000-0002-0299-3005")
   ))
 Description: Calculates daily climate water balance for irrigation purposes. 
-  The package also calculates the reference 'evapotranspiration' using three methods.
-  Penman and 'Monteith', Priestley and Taylor, or Hargreaves and 'Samani'. 
-  Users may specify a management allowed depletion ('MAD'), which is used by the package 
-  to suggest when irrigate. It also allows the use of crop and water stress coefficients.
+  The package also calculates the reference 'evapotranspiration' using three
+  methods, 'Penman and Monteith', 'Priestley and Taylor', or 'Hargreaves and
+  Samani'.  Users may specify a management allowed depletion ('MAD'), which is
+  used by the package to suggest when irrigate. It also allows the use of crop
+  and water stress coefficients.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Depends: 
-    R (>= 2.10)
+    R (>= 3.10)
 LazyData: true
 Suggests: 
     knitr,
     rmarkdown,
+    spelling,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Config/testthat/parallel: true
 Imports: 
     PowerSDI,
-    lubridate
+    lubridate,
+    stats
 URL: https://github.com/gabrielblain/CropWaterBalance
 BugReports: https://github.com/gabrielblain/CropWaterBalance/issues
 VignetteBuilder: knitr
+Language: en-US

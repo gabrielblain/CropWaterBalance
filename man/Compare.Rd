@@ -2,17 +2,19 @@
 % Please edit documentation in R/Compare.R
 \name{Compare}
 \alias{Compare}
-\title{Compare data from two samples}
+\title{Compare Data from Two Samples}
 \usage{
 Compare(Sample1, Sample2)
 }
 \arguments{
-\item{Sample1}{A vector, 1-column matrix or data frame with evapotranspiration or other variable.}
+\item{Sample1}{A \code{vector}, 1-column \code{matrix} or \code{data.frame} with evapotranspiration or
+other variable.}
 
-\item{Sample2}{A vector, 1-column matrix or data frame with evapotranspiration or other variable.}
+\item{Sample2}{A \code{vector}, 1-column \code{matrix} or \code{data.frame} with evapotranspiration or
+other variable.}
 }
 \value{
-a \code{list} with:
+A \code{data.frame} with:
 
 \itemize{
 \item Absolute mean error (AME),
@@ -22,23 +24,32 @@ a \code{list} with:
 \item original (dorig),
 \item modified (dmod) and
 \item refined (dref)
-}
-\item Pearson determination coefficient (R2), and
+}, and
+\item Pearson determination coefficient (RQuad).
 }
 }
 \description{
 Calculates measures of accuracy and agreement.
 }
 \examples{
-data(DataForCWB)
-Tavg <- DataForCWB[,2]
-Tmax <- DataForCWB[,3]
-Tmin <- DataForCWB[,4]
-Rn <- DataForCWB[,6]
-WS <- DataForCWB[,7]
-RH <- DataForCWB[,8]
-G <- DataForCWB[,9]
-Sample1 <- ET0_PM(Tavg=Tavg, Tmax=Tmax, Tmin=Tmin, Rn=Rn, RH=RH, WS=WS,G=G,Alt=700)
-Sample2 <- ET0_PT(Tavg=Tavg, Rn=Rn,G=G)
-Compare(Sample1=Sample1, Sample2=Sample2)
+# See `?DataForCWB` for more on this data set
+Tavg <- DataForCWB[, 2]
+Tmax <- DataForCWB[, 3]
+Tmin <- DataForCWB[, 4]
+Rn <- DataForCWB[, 6]
+WS <- DataForCWB[, 7]
+RH <- DataForCWB[, 8]
+G <- DataForCWB[, 9]
+Sample1 <-
+  ET0_PM(
+    Tavg = Tavg,
+    Tmax = Tmax,
+    Tmin = Tmin,
+    Rn = Rn,
+    RH = RH,
+    WS = WS,
+    G = G,
+    Alt = 700)
+Sample2 <- ET0_PT(Tavg = Tavg, Rn = Rn, G = G)
+Compare(Sample1 = Sample1, Sample2 = Sample2)
 }

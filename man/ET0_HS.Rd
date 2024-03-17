@@ -2,30 +2,38 @@
 % Please edit documentation in R/ET0_HS.R
 \name{ET0_HS}
 \alias{ET0_HS}
-\title{Reference 'evapotranspiration'}
+\title{Reference 'evapotranspiration' Using Hargreaves-Samani Method}
 \usage{
 ET0_HS(Ra, Tavg, Tmax, Tmin)
 }
 \arguments{
-\item{Ra}{Extraterrestrial solar radiation in \acronym{MJ m-2 day-1}.}
+\item{Ra}{A \code{vector}, 1-column \code{matrix} or \code{data.frame} with extraterrestrial solar
+radiation in \acronym{MJ m-2 day-1}.}
 
-\item{Tavg}{A vector, 1-column matrix or data frame with daily average air temperature.}
+\item{Tavg}{A \code{vector}, 1-column \code{matrix} or \code{data.frame} column with daily average air
+temperature.}
 
-\item{Tmax}{A vector, 1-column matrix or data frame with daily maximum air temperature in Celsius degrees.}
+\item{Tmax}{A \code{vector}, 1-column \code{matrix} or \code{data.frame} with daily maximum air
+temperature in Celsius degrees.}
 
-\item{Tmin}{A vector, 1-column matrix or data frame with daily minimum air temperature in Celsius degrees.}
+\item{Tmin}{A \code{vector}, 1-column \code{matrix} or \code{data.frame} with daily minimum air
+temperature in Celsius degrees.}
 }
 \value{
-Daily potential evapotranspiration values in millimetres.
+A \code{matrix} of 1-column with the same length as `the input values with the
+daily potential evapotranspiration values in millimetres.
 }
 \description{
 Calculates daily reference evapotranspiration amounts using the Hargreaves-Samani method.
 }
 \examples{
-data(DataForCWB)
-Tavg <- DataForCWB[,2]
-Tmax <- DataForCWB[,3]
-Tmin <- DataForCWB[,4]
-Ra <- DataForCWB[,5]
-ET0_HS(Ra=Ra, Tavg=Tavg, Tmax=Tmax, Tmin=Tmin)
+# See `?DataForCWB` for more on this data set
+Tavg <- DataForCWB[, 2]
+Tmax <- DataForCWB[, 3]
+Tmin <- DataForCWB[, 4]
+Ra <- DataForCWB[, 5]
+ET0_HS(Ra = Ra, Tavg = Tavg, Tmax = Tmax, Tmin = Tmin)
+}
+\seealso{
+\code{\link[=ET0_PM]{ET0_PM()}} \code{\link[=ET0_PT]{ET0_PT()}}
 }
