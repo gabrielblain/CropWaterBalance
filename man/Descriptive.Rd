@@ -2,12 +2,13 @@
 % Please edit documentation in R/Descriptive.R
 \name{Descriptive}
 \alias{Descriptive}
-\title{Descriptive statistics}
+\title{Descriptive Statistics for Weather Variables}
 \usage{
 Descriptive(Sample)
 }
 \arguments{
-\item{Sample}{A vector, 1-column matrix or data frame with rainfall, evapotranspiration, or other variable.}
+\item{Sample}{A vector, 1-column matrix or data frame with rainfall, evapotranspiration,
+or other variable.}
 }
 \value{
 A \code{dataframe} with:
@@ -23,7 +24,8 @@ A \code{dataframe} with:
 }
 }
 \description{
-Calculates descriptive statistics for rainfall, evapotranspiration, or other variable.
+Calculates descriptive statistics for rainfall, evapotranspiration, or other
+variables.
 }
 \examples{
 data(DataForCWB)
