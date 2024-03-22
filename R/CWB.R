@@ -73,6 +73,7 @@ CWB <- function(Rain,
   n <- length(Rain)
 
   start.date <- .check_date(start.date)
+  start.date <- as.Date(start.date)
   end.date <- start.date + (n - 1)
   all.period <- seq(start.date, end.date, "days")
 
@@ -158,7 +159,7 @@ CWB <- function(Rain,
       D[i, 1] <- 0
     }
     if (D[i, 1] > TAW[i, 1]) {D[i, 1] <- TAW[i, 1]}
-    if (D[i, 1] >= (dmad[i, 1] - (MAD[i, 1] * dmad[i, 1]))) {
+    if (D[i, 1] >= (dmad[i, 1])) {
       recom[i, 1] = paste("Yes. Irrigate", round(D[i, 1], 0), "mm")
     } else {
       recom[i, 1] <- c("No")
@@ -203,7 +204,7 @@ CWB <- function(Rain,
       "d_MAD",
       "D>=dmad"
     )
-
+  rownames(WB) <- all.period
   return(WB)
 }
 
