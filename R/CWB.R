@@ -71,12 +71,7 @@ CWB <- function(Rain,
     stop("Physically impossible or missing rain values")
   }
   n <- length(Rain)
-
   start.date <- .check_date(start.date)
-  start.date <- as.Date(start.date)
-  end.date <- start.date + (n - 1)
-  all.period <- seq(start.date, end.date, "days")
-
   Ks <- matrix(1, n, 1)
   ETactul <- Def <- P_ETc <- D <- recom <- matrix(NA, n, 1)
 
@@ -204,6 +199,9 @@ CWB <- function(Rain,
       "d_MAD",
       "D>=dmad"
     )
+  start.cycle <- as.Date(start.date)
+  end.cycle <- start.cycle + (n - 1)
+  all.period <- seq(start.cycle, end.cycle, "days")
   rownames(WB) <- all.period
   return(WB)
 }
