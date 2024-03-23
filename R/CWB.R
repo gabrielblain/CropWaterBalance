@@ -1,6 +1,6 @@
 #' Crop Water Balance Accounting
 #'
-#' Calculates several parametres of the crop water balance.  It also suggests
+#' Calculates several parameters of the crop water balance.  It also suggests
 #'   when to irrigate.
 #'
 #' @param Rain

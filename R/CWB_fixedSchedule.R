@@ -1,6 +1,6 @@
 #' Crop Water Balance Accounting with fixed time periods for irrigation
 #'
-#' Calculates several parametres of the crop water balance.
+#' Calculates several parameters of the crop water balance.
 #' It also suggests how much irrigate.
 #'
 #' @param Rain

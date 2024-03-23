@@ -50,7 +50,7 @@ Default value is zero, which assumes the root zone is at the field capacity.}
 Water balance accounting, including the soil water deficit.
 }
 \description{
-Calculates several parametres of the crop water balance.
+Calculates several parameters of the crop water balance.
 It also suggests how much irrigate.
 }
 \examples{

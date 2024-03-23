@@ -205,7 +205,7 @@ Compare(Sample1=Sample1, Sample2=Sample2)
 ```
 
 ## Function CWB()
-Calculates several parametres of the crop water balance. It also suggests when irrigate.
+Calculates several parameters of the crop water balance. It also suggests when irrigate.
 
 ## Usage
 
@@ -287,7 +287,7 @@ data(DataForAWC)
 
 ## DataForCWB: Data for Water Balance Accounting.
 
-Daily meteorological data from a weather station in Campinas, Brazil and other parametres required for calculating the crop water balance. The meteorological data belongs to the Agronomic Institute of the state of Sao Paulo.
+Daily meteorological data from a weather station in Campinas, Brazil and other parameters required for calculating the crop water balance. The meteorological data belongs to the Agronomic Institute of the state of Sao Paulo.
 
 ## Usage 
 
@@ -348,4 +348,4 @@ Package ‘lubridate', Version 1.9.3, Author Vitalie Spinu et al., <https://CRAN
 
 Package ‘PowerSDI', Version 1.0. 0, Author Gabriel C. Blain et al., <https://CRAN.R-project.org/package=PowerSDI>
 
-Priestley, C.H.B., Taylor, R.J., 1972. On the Assessment of Surface Heat Flux and Evaporation Using Large-Scale Parametres. Monthly Weather Review, 100 (2), 81–92.
+Priestley, C.H.B., Taylor, R.J., 1972. On the Assessment of Surface Heat Flux and Evaporation Using Large-Scale Parameters. Monthly Weather Review, 100 (2), 81–92.

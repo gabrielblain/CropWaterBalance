@@ -51,7 +51,7 @@ assumes the root zone is at the field capacity.}
 A \code{data.frame} of water balance accounting, including the soil water deficit.
 }
 \description{
-Calculates several parametres of the crop water balance.  It also suggests
+Calculates several parameters of the crop water balance.  It also suggests
 when to irrigate.
 }
 \examples{

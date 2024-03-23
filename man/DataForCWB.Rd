@@ -12,7 +12,7 @@ DataForCWB
 }
 \description{
 Daily meteorological data from a weather station in Campinas, Brazil
-and other parametres required for calculating the crop water balance.
+and other parameters required for calculating the crop water balance.
 The meteorological data belongs to the Agronomic Institute \acronym{(IAC)}.
 }
 \details{
