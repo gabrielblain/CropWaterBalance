@@ -1,18 +1,18 @@
 #' Crop Water Balance Accounting with fixed time periods for irrigation
 #'
-#' Calculates several parameters of the crop water balance.
+#' Calculates several parametres of the crop water balance.
 #' It also suggests how much irrigate.
 #'
 #' @param Rain
-#' Vector, 1-column matrix or data frame with daily rainfall totals in millimeters.
+#' Vector, 1-column matrix or data frame with daily rainfall totals in millimetres.
 #' @param ET0
-#' Vector, 1-column matrix or data frame with daily reference evapotranspiration in millimeters.
+#' Vector, 1-column matrix or data frame with daily reference evapotranspiration in millimetres.
 #' @param AWC
 #' Vector, 1-column matrix or data frame with the available water capacity of the soil, that is:
 #' the amount of water between field capacity and permanent wilting point
-#' in millimeter of water per meters of soil.
+#' in millimetre of water per metres of soil.
 #' @param InitialD
-#' Single number defining in millimeter, the initial soil water deficit.
+#' Single number defining in millimetre, the initial soil water deficit.
 #' It is used to start the water balance accounting.
 #' Default value is zero, which assumes the root zone is at the field capacity.
 #' @param Kc
@@ -22,10 +22,10 @@
 #' Vector, 1-column matrix or data frame defining the management allowed depletion.
 #' Varies between 0 and 1.
 #' @param Drz
-#' Vector, 1-column matrix or data frame defining the root zone depth in meters.
+#' Vector, 1-column matrix or data frame defining the root zone depth in metres.
 #' @param Irrig
 #' Vector, 1-column matrix or data frame with net irrigation amount infiltrated into the soil
-#' for the current day in millimeters.
+#' for the current day in millimetres.
 #' @param Scheduling
 #' Single integer number defining the number of days between two consecutive irrigations.
 #' @param start.date

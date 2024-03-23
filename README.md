@@ -205,7 +205,7 @@ Compare(Sample1=Sample1, Sample2=Sample2)
 ```
 
 ## Function CWB()
-Calculates several parameters of the crop water balance. It also suggests when irrigate.
+Calculates several parametres of the crop water balance. It also suggests when irrigate.
 
 ## Usage
 
@@ -225,14 +225,14 @@ start.date = "2011-11-23"
 
 ## Arguments
 
-* Rain: Vector, 1-column matrix or data frame with daily rainfall totals in millimeters.
-* ET0: Vector, 1-column matrix or data frame with daily reference evapotranspiration in millimeters.
-* AWC: Vector, 1-column matrix or data frame with the available water capacity of the soil, that is: the amount of water between field capacity and permanent wilting point in millimeter of water per centimeter of soil.
-* Drz: Vector, 1-column matrix or data frame defining the root zone depth in centimeters.
+* Rain: Vector, 1-column matrix or data frame with daily rainfall totals in millimetres.
+* ET0: Vector, 1-column matrix or data frame with daily reference evapotranspiration in millimetres.
+* AWC: Vector, 1-column matrix or data frame with the available water capacity of the soil, that is: the amount of water between field capacity and permanent wilting point in millimetre of water per centimetre of soil.
+* Drz: Vector, 1-column matrix or data frame defining the root zone depth in centimetres.
 * Kc: Vector, 1-column matrix or data frame defining the crop coefficient. If NULL its values are assumed to be 1.
-* Irrig: Vector, 1-column matrix or data frame with net irrigation amount infiltrated into the soil for the current day in millimeters.
+* Irrig: Vector, 1-column matrix or data frame with net irrigation amount infiltrated into the soil for the current day in millimetres.
 * MAD: Vector, 1-column matrix or data frame defining the management allowed depletion. Varies between 0 and 1.
-* InitialD Single number defining in millimeter, the initial soil water deficit. It is used to start the water balance accounting. Default value is 0, which assumes the root zone is at the field capacity.
+* InitialD Single number defining in millimetre, the initial soil water deficit. It is used to start the water balance accounting. Default value is 0, which assumes the root zone is at the field capacity.
 * start.date: Date at which the accounting should start. Formats: “YYYY-MM-DD”, “YYYY/MM/DD”.
 ## Value
 
@@ -261,7 +261,7 @@ Kc=Kc, Irrig=Irrig, MAD=MAD, start.date = "2023-11-23")
 
 ## DataForAWC: Soil texture and plant available water capacity (AWC).
 
-AWC is the amount of water between field capacity and permanent wilting point. Given in millimetre of water per centimeter of soil. Extracted from: Irrigation Scheduling: The Water Balance Approach Fact Sheet No. 4.707 by A. A. Andales, J. L. Chávez, T. A. Bauder..
+AWC is the amount of water between field capacity and permanent wilting point. Given in millimetre of water per centimetre of soil. Extracted from: Irrigation Scheduling: The Water Balance Approach Fact Sheet No. 4.707 by A. A. Andales, J. L. Chávez, T. A. Bauder..
 
 ## Usage
 
@@ -271,9 +271,9 @@ DataForAWC
 
 ## Format
 * Soil Texture Soil Texture
-* AWC Low Available water capacity in millimeter of water per centimeter of soil
-* AWC High Available water capacity in millimeter of water per centimeter of soil
-* AWC Average Available water capacity in millimeter of water per centimeter of soil
+* AWC Low Available water capacity in millimetre of water per centimetre of soil
+* AWC High Available water capacity in millimetre of water per centimetre of soil
+* AWC Average Available water capacity in millimetre of water per centimetre of soil
 
 ## Source
 
@@ -287,7 +287,7 @@ data(DataForAWC)
 
 ## DataForCWB: Data for Water Balance Accounting.
 
-Daily meteorological data from a weather station in Campinas, Brazil and other parameters required for calculating the crop water balance. The meteorological data belongs to the Agronomic Institute of the state of Sao Paulo.
+Daily meteorological data from a weather station in Campinas, Brazil and other parametres required for calculating the crop water balance. The meteorological data belongs to the Agronomic Institute of the state of Sao Paulo.
 
 ## Usage 
 
@@ -305,12 +305,12 @@ DataForCWB
 * W Wind speed in M S-1
 * RH Relative Humidity in %
 * G Soil Heat Flux in MJ M-2 DAY-1
-* Rain Rain in millimeters
-* Drz Depth of the root zone in centimeters
-* AWC available water capacity (amount of water between field capacity and permanent wilting point) in millimeter of water per centimeter of soil
+* Rain Rain in millimetres
+* Drz Depth of the root zone in centimetres
+* AWC available water capacity (amount of water between field capacity and permanent wilting point) in millimetre of water per centimetre of soil
 * MAD management allowed depletion (between 0 and 1)
 * Kc Crop coefficient (between 0 and 1)
-* Irrig Applied net irrigation in millimeters
+* Irrig Applied net irrigation in millimetres
 
 ## Source
 
@@ -348,4 +348,4 @@ Package ‘lubridate', Version 1.9.3, Author Vitalie Spinu et al., <https://CRAN
 
 Package ‘PowerSDI', Version 1.0. 0, Author Gabriel C. Blain et al., <https://CRAN.R-project.org/package=PowerSDI>
 
-Priestley, C.H.B., Taylor, R.J., 1972. On the Assessment of Surface Heat Flux and Evaporation Using Large-Scale Parameters. Monthly Weather Review, 100 (2), 81–92.
+Priestley, C.H.B., Taylor, R.J., 1972. On the Assessment of Surface Heat Flux and Evaporation Using Large-Scale Parametres. Monthly Weather Review, 100 (2), 81–92.

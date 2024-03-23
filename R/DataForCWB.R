@@ -1,7 +1,7 @@
 #' Data for Water Balance Accounting
 #'
 #' Daily meteorological data from a weather station in Campinas, Brazil
-#' and other parameters required for calculating the crop water balance.
+#' and other parametres required for calculating the crop water balance.
 #' The meteorological data belongs to the Agronomic Institute \acronym{(IAC)}.
 #'
 #'  @format ## `DataForCWB`
@@ -16,13 +16,13 @@
 #'    \item{W}{Wind speed in \acronym{m s-1}}
 #'    \item{RH}{Relative Humidity  in %}
 #'    \item{G}{Soil Heat Flux  in \acronym{MJ m-2 day-1}}
-#'    \item{Rain}{Rain in millimeters}
-#'    \item{Drz}{Depth of the root zone in meters}
+#'    \item{Rain}{Rain in millimetres}
+#'    \item{Drz}{Depth of the root zone in metres}
 #'    \item{AWC}{available water capacity (amount of water between field capacity and permanent wilting point)
-#'               in millimeter of water per meter of soil}
+#'               in millimetre of water per metre of soil}
 #'    \item{MAD}{management allowed depletion (between 0 and 1)}
 #'    \item{Kc}{Crop coefficient (between 0 and 1)}
-#'    \item{Irrig}{Applied net irrigation in millimeters}
+#'    \item{Irrig}{Applied net irrigation in millimetres}
 #'    }
 #'    @source <http://www.ciiagro.org.br/>
 "DataForCWB"

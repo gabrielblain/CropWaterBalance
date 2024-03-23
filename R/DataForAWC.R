@@ -1,7 +1,7 @@
 #' Soil Texture and Plant Available Water Capacity (AWC)
 #'
 #' AWC is the amount of water between field capacity and permanent wilting
-#'  point.  Given in millimetre of water per meter of soil.
+#'  point.  Given in millimetre of water per metre of soil.
 #'
 #' @references Irrigation Scheduling: The Water Balance Approach Fact Sheet No.
 #'  4.707 by A. A. Andales, J. L. Chávez, T. A. Bauder.

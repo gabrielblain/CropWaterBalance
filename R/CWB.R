@@ -1,18 +1,18 @@
 #' Crop Water Balance Accounting
 #'
-#' Calculates several parameters of the crop water balance.  It also suggests
+#' Calculates several parametres of the crop water balance.  It also suggests
 #'   when to irrigate.
 #'
 #' @param Rain
 #' A `vector`, 1-column `matrix` or `data.frame` with daily rainfall totals in
-#'   millimeters.
+#'   millimetres.
 #' @param ET0
 #' A `vector`, 1-column `matrix` or `data.frame` with daily reference
 #'   evapotranspiration in millimetres.
 #' @param AWC
 #' A `vector`, 1-column `matrix` or `data.frame` with the available water
 #'   capacity of the soil, that is: the amount of water between field capacity
-#'   and permanent wilting point in millimetre of water per meters of soil, must
+#'   and permanent wilting point in millimetre of water per metres of soil, must
 #'   be greater than or equal to 0.
 #' @param InitialD
 #' Single number defining in millimetres, the initial soil water deficit.  It
@@ -29,7 +29,7 @@
 #'   in metres.
 #' @param Irrig
 #' A `vector`, 1-column `matrix` or `data.frame` with  net irrigation amount
-#'   infiltrated into the soil for the current day in millimeters.
+#'   infiltrated into the soil for the current day in millimetres.
 #' @param start.date
 #' Date at which the accounting should start. Formats:
 #'   \dQuote{YYYY-MM-DD}, \dQuote{YYYY/MM/DD}.

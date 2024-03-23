@@ -24,7 +24,7 @@ DataForAWC
 }
 \description{
 AWC is the amount of water between field capacity and permanent wilting
-point.  Given in millimetre of water per meter of soil.
+point.  Given in millimetre of water per metre of soil.
 }
 \references{
 Irrigation Scheduling: The Water Balance Approach Fact Sheet No.
