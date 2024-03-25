@@ -64,7 +64,7 @@ CWB <- function(Rain,
                 Irrig = NULL,
                 MAD = NULL,
                 InitialD = 0,
-                start.date = "2011-11-23") {
+                start.date) {
   Rain <- as.matrix(Rain)
   if (!is.numeric(Rain) || any(is.na(Rain)) ||
       length(Rain[Rain < 0]) != 0 || ncol(Rain) != 1) {
@@ -138,10 +138,10 @@ CWB <- function(Rain,
   }
   if (D[1, 1] > TAW[1,1]) {D[1, 1] <- TAW[1,1]}
   if (D[1, 1] >= dmad[1, 1]) {
-    recom[1, 1] = paste0("Yes. Irrigate", round(D[1, 1], 0), "mm")
+    recom[1, 1] <- paste0("Yes. Irrigate", round(D[1, 1], 0), "mm")
   }
   else {
-    recom[1, 1] = c("No")
+    recom[1, 1] <- c("No")
   }
 
   if (D[1, 1] > dmad[1, 1]) {
