@@ -14,7 +14,7 @@ CWB_FixedSchedule(
   MAD = NULL,
   InitialD = 0,
   Scheduling,
-  start.date = "2011-11-23"
+  start.date
 )
 }
 \arguments{

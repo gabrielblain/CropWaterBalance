@@ -13,7 +13,7 @@ CWB(
   Irrig = NULL,
   MAD = NULL,
   InitialD = 0,
-  start.date = "2011-11-23"
+  start.date
 )
 }
 \arguments{
