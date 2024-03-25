@@ -28,7 +28,8 @@ Tmin,
 Rn,
 RH,
 WS,
-G = NULL)
+G = NULL,
+Alt)
 ```
 
 ## Arguments
@@ -43,7 +44,8 @@ Celsius degrees.
 * WS: A vector, 1-column matrix or data frame with daily wind speed in M S-1.
 * G: Optional. A vector, 1-column matrix or data frame with daily soil heat flux in
 MJ M-2 DAY-1. Default is `NULL` and if `NULL` it is assumed to be zero.
-May be provided by Soil_Heat_Flux
+May be provided by Soil_Heat_Flux.
+* Alt: A single number defining the altitude at crop's location in metres.
 ## Value
 
 Daily reference evapotranspiration amounts in millimetres.
@@ -58,7 +60,7 @@ Rn <- DataForCWB[,6]
 WS <- DataForCWB[,7]
 RH <- DataForCWB[,8]
 G <- DataForCWB[,9]
-ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt = 700)
 ```
 
 ## Function ET0_PT()
@@ -205,7 +207,7 @@ Compare(Sample1=Sample1, Sample2=Sample2)
 ```
 
 ## Function CWB()
-Calculates several parameters of the crop water balance. It also suggests when irrigate.
+Calculates several parameters of the crop water balance. It also suggests when and how much to irrigate.
 
 ## Usage
 
@@ -219,7 +221,7 @@ Kc = NULL,
 Irrig = NULL,
 MAD = NULL,
 InitialD = 0,
-start.date = "2011-11-23"
+start.date
 )
 ```
 
@@ -248,15 +250,73 @@ Rn <- DataForCWB[,6]
 WS <- DataForCWB[,7]
 RH <- DataForCWB[,8]
 G <- DataForCWB[,9]
-ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G)
+ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS, G, Alt = 700)
 Rain <- DataForCWB[,10]
 Drz <- DataForCWB[,11]
 AWC <- DataForCWB[,12]
 MAD <- DataForCWB[,13]
 Kc <- DataForCWB[,14]
-Irrig <- DataForCWB[,16]
-CWB(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
-Kc=Kc, Irrig=Irrig, MAD=MAD, start.date = "2023-11-23")
+Irrig <- DataForCWB[,15]
+CWB(Rain = Rain, ET0 = ET0, AWC = AWC, Drz = Drz,
+    Kc = Kc, Irrig = Irrig, MAD = MAD, start.date = "2023-11-23")
+```
+
+## Function CWB_FixedSchedule()
+Calculates several parameters of the crop water balance. It also suggests how much irrigate.
+
+## Usage
+
+```r
+CWB_FixedSchedule(
+  Rain,
+  ET0,
+  AWC,
+  Drz,
+  Kc = NULL,
+  Irrig = NULL,
+  MAD = NULL,
+  InitialD = 0,
+  Scheduling,
+  start.date
+)
+```
+
+## Arguments
+
+* Rain: Vector, 1-column matrix or data frame with daily rainfall totals in millimetres.
+* ET0: Vector, 1-column matrix or data frame with daily reference evapotranspiration in millimetres.
+* AWC: Vector, 1-column matrix or data frame with the available water capacity of the soil, that is: the amount of water between field capacity and permanent wilting point in millimetre of water per centimetre of soil.
+* Drz: Vector, 1-column matrix or data frame defining the root zone depth in centimetres.
+* Kc: Vector, 1-column matrix or data frame defining the crop coefficient. If NULL its values are assumed to be 1.
+* Irrig: Vector, 1-column matrix or data frame with net irrigation amount infiltrated into the soil for the current day in millimetres.
+* MAD: Vector, 1-column matrix or data frame defining the management allowed depletion. Varies between 0 and 1.
+* InitialD Single number defining in millimetre, the initial soil water deficit. It is used to start the water balance accounting. Default value is 0, which assumes the root zone is at the field capacity.
+* Scheduling Single integer number defining the number of days between two consecutive irrigations.
+* start.date: Date at which the accounting should start. Formats: “YYYY-MM-DD”, “YYYY/MM/DD”.
+## Value
+
+* Water balance accounting, including the soil water deficit.
+## Examples
+
+```r
+data(DataForCWB)
+Tavg <- DataForCWB[,2]
+Tmax <- DataForCWB[,3]
+Tmin <- DataForCWB[,4]
+Rn <- DataForCWB[,6]
+WS <- DataForCWB[,7]
+RH <- DataForCWB[,8]
+G <- DataForCWB[,9]
+ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS,G,Alt=700)
+Rain <- DataForCWB[,10]
+Drz <- DataForCWB[,11]
+AWC <- DataForCWB[,12]
+MAD <- DataForCWB[,13]
+Kc <- DataForCWB[,14]
+Irrig <- DataForCWB[,15]
+Scheduling <- 5
+CWB_FixedSchedule(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,
+    Kc=Kc, Irrig=Irrig, MAD=MAD, Scheduling=Scheduling, start.date = "2023-11-23")
 ```
 
 ## DataForAWC: Soil texture and plant available water capacity (AWC).
@@ -330,7 +390,7 @@ data(DataForCWB)
 MIT
 
 ## Authors: 
-Gabriel Constantino Blain, Graciela da Rocha Sobierajski, Regina Célia Matos Pires
+Gabriel Constantino Blain, Graciela da Rocha Sobierajski, Regina Célia Matos Pires, Adam H. Sparks, Letícia L. Martins. 
 Maintainer: Gabriel Constantino Blain, <gabriel.blain@sp.gov.br>
 
 ## Acknowledgments:
