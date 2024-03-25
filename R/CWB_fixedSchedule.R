@@ -64,7 +64,7 @@ CWB_FixedSchedule <- function(Rain,
                           MAD = NULL,
                           InitialD = 0,
                           Scheduling,
-                          start.date = "2011-11-23"){
+                          start.date){
   if (!is.numeric(Scheduling) || length(Scheduling) != 1 || Scheduling < 1) {
     stop("Scheduling must be a single positive number")
   }
@@ -77,8 +77,6 @@ CWB_FixedSchedule <- function(Rain,
     stop("Physically impossible or missing rain values")}
   n <- length(Rain)
   start.date <- as.Date(start.date, tryFormats = c("%Y-%m-%d", "%Y/%m/%d"))
-  end.date <- start.date + (n-1)
-  all.period <- seq(start.date, end.date, "days")
   Ks <- matrix(1,n,1)
   ETactul <- matrix(NA,n,1)
   Arm <- matrix(NA,n,1)
@@ -121,12 +119,10 @@ CWB_FixedSchedule <- function(Rain,
   D[1,1] <- InitialD + ETc[1,1] - RainIrrig[1,1]
   if(D[1,1] < 0){D[1,1] <- 0}
   if(D[1,1] > TAW[1,1]){D[1,1] <- TAW[1,1]}
-  if (D[1,1] >= (dmad[1,1]-(MAD[1,1]*dmad[1,1]))) {recom[1,1]=c("Yes. Consider Irrig")}
-  else {recom[1,1]=c("No")}
   if (D[1,1] > dmad[1,1]) {Ks[1,1] <- ((TAW[1,1]-D[1,1])/((1-MAD[1,1])*TAW[1,1]))}
   days.irrig <- 1
   if (days.irrig == Scheduling) {
-    recom[1,1]=c("Time to Irrig")
+    recom[1,1] <- paste0("Time to Irrigate", round(D[1, 1], 0), "mm")
     days.irrig <- 1}
   else {
     recom[1,1]=c("No")
@@ -136,7 +132,7 @@ CWB_FixedSchedule <- function(Rain,
     if(D[i,1] < 0){D[i,1] <- 0}
     if(D[i,1] > TAW[i,1]){D[i,1] <- TAW[i,1]}
     if (days.irrig == Scheduling) {
-      recom[i,1]=paste("Irrigate", round(D[i,1],3),"mm")
+      recom[i,1]=paste("Time to Irrigate", round(D[i, 1], 0), "mm")
       days.irrig <- 1}
     else {
       recom[i,1]=c("No")
@@ -150,6 +146,9 @@ CWB_FixedSchedule <- function(Rain,
   WB[,2:13] <- round(WB[,2:13],3)
   colnames(WB) <- c("DaysSeason","Rain","Irrig","ET0","Kc","WaterStressCoef_Ks","ETc", "(P+Irrig)-ETc","NonStandardCropEvap",
                     "ET_Defict","TAW","SoilWaterDeficit","d_MAD", "Scheduling")
+  start.cycle <- as.Date(start.date)
+  end.cycle <- start.cycle + (n - 1)
+  all.period <- seq(start.cycle, end.cycle, "days")
   rownames(WB) <- all.period
   return(WB)
 }
