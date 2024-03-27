@@ -76,7 +76,7 @@ CWB_FixedSchedule <- function(Rain,
       length(Rain[Rain<0]) != 0 || ncol(Rain) != 1){
     stop("Physically impossible or missing rain values")}
   n <- length(Rain)
-  start.date <- as.Date(start.date, tryFormats = c("%Y-%m-%d", "%Y/%m/%d"))
+  start.date <- .check_date(start.date)
   Ks <- matrix(1,n,1)
   ETactul <- matrix(NA,n,1)
   Arm <- matrix(NA,n,1)
