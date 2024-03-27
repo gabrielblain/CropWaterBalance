@@ -82,9 +82,10 @@ test_that("Wrong date format", {
   Scheduling <- 5
   start.date <- "date"
   expect_error(
-    tes <- CWB_FixedSchedule(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz, Kc=Kc,
+    CWB_FixedSchedule(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz, Kc=Kc,
                Irrig=Irrig, MAD=MAD, Scheduling=Scheduling,  start.date = start.date),
-    "character string is not in a standard unambiguous format")
+    "`date` is not in a valid date format. Please enter a valid date format."
+  )
 })
 
 
@@ -709,9 +710,9 @@ test_that("Wrong start.date", {
   Irrig <- DataForCWB[,15]
   Scheduling <- 5
   expect_error(
-    tes <- CWB_FixedSchedule(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,  MAD=MAD, Scheduling=Scheduling,
+    CWB_FixedSchedule(Rain=Rain, ET0=ET0, AWC=AWC, Drz=Drz,  MAD=MAD, Scheduling=Scheduling,
                Kc=Kc, Irrig=Irrig, start.date = "string"),
-    "character string is not in a standard unambiguous format"
+    "`string` is not in a valid date format. Please enter a valid date format."
   )
 })
 
