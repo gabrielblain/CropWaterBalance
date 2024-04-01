@@ -1,5 +1,9 @@
+<!-- badges: start -->
+  [![R-CMD-check](https://github.com/gabrielblain/CropWaterBalance/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gabrielblain/CropWaterBalance/actions/workflows/R-CMD-check.yaml)
+  <!-- badges: end -->
+  
 # CropWaterBalance
-Calculates daily climate water balance for irrigation purposes.
+Crop water balance accounting in the root zone for irrigation purposes.
 
 # Basic Description
 The CropWaterBalance is an R package designed to assist users in irrigation scheduling based on the Water Balance Approach.
