@@ -10,10 +10,14 @@
 #'  A data frame with 5 columns and 9 rows:
 #'  \describe{
 #'    \item{Soil type}{Soil Type}
-#'    \item{Teta_FC_Min}{Minimum values for soil water content at field capacity}
-#'    \item{Teta_FC_Max}{Maximum values for soil water content at field capacity}
-#'    \item{Teta_PWP_Min}{Minimum values for soil water content at permanent wilting point}
-#'    \item{Teta_PWP_Max}{Maximum values for soil water content at permanent wilting point}
+#'    \item{Teta_FC_Min}{Minimum values for soil water content at field
+#'       capacity}
+#'    \item{Teta_FC_Max}{Maximum values for soil water content at field
+#'      capacity}
+#'    \item{Teta_PWP_Min}{Minimum values for soil water content at permanent
+#'      wilting point}
+#'    \item{Teta_PWP_Max}{Maximum values for soil water content at permanent
+#'      wilting point}
 #'    }
 #'    @source <https://www.fao.org/home/en/>
 "DataForSWC"

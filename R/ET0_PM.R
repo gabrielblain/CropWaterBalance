@@ -82,7 +82,9 @@ ET0_PM <- function(Tavg, Tmax, Tmin, Rn, RH, WS, G = NULL, Alt) {
     length(Tmax) != n || length(Tmin) != n || length(Rn) != n ||
     length(RH) != n || length(WS) != n || length(G) != n ||
     length(Alt) != 1 || Alt < 0 || !is.numeric(Alt)) {
-    stop("Physically impossible or missing Tmax, Tmin, Rn, RH, WS, G or Alt values")
+    stop(
+      "Physically impossible or missing Tmax, Tmin, Rn, RH, WS, G or Alt values"
+      )
   }
   es <- 0.6108 * exp((17.27 * Tavg) / (Tavg + 273.3))
   ea <- (RH * es) / 100

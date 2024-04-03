@@ -19,6 +19,7 @@
 #' @return
 #' A matrix object of the daily potential evapotranspiration values in
 #'  millimetres.
+#'
 #' @export
 #' @examples
 #' # See `?DataForCWB` for more on this data set
@@ -26,6 +27,7 @@
 #' Rn <- DataForCWB[, 6]
 #' G <- DataForCWB[, 9]
 #' ET0_PT(Tavg = Tavg, Rn = Rn, G = G)
+#'
 ET0_PT <- function(Tavg, Rn, G = NULL, Coeff = 1.26) {
   Tavg <- as.matrix(Tavg)
   if (!is.numeric(Tavg) || any(is.na(Tavg)) ||

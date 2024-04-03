@@ -55,7 +55,6 @@ Calculates several parameters of the crop water balance.  It also suggests
 when to irrigate.
 }
 \examples{
-data(DataForCWB)
 Tavg <- DataForCWB[,2]
 Tmax <- DataForCWB[,3]
 Tmin <- DataForCWB[,4]
