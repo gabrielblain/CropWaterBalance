@@ -20,8 +20,7 @@
 #'  }
 #'
 #' @examples
-#' data(DataForCWB)
-#' Rain <- DataForCWB[,10]
+#' Rain <- DataForCWB[, 10]
 #' Descriptive(Sample = Rain)
 #' @export
 #' @importFrom PowerSDI Accuracy

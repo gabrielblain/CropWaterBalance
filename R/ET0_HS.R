@@ -1,6 +1,7 @@
 #' Reference 'evapotranspiration' Using Hargreaves-Samani Method
 #'
-#' Calculates daily reference evapotranspiration amounts using the Hargreaves-Samani method.
+#' Calculates daily reference evapotranspiration amounts using the
+#'   Hargreaves-Samani method.
 #'
 #' @param Ra
 #' A `vector`, 1-column `matrix` or `data.frame` with extraterrestrial solar

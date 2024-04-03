@@ -38,7 +38,6 @@
 #' @export
 #' @importFrom lubridate year is.Date
 #' @examples
-#' data(DataForCWB)
 #' Tavg <- DataForCWB[,2]
 #' Tmax <- DataForCWB[,3]
 #' Tmin <- DataForCWB[,4]
@@ -155,7 +154,7 @@ CWB <- function(Rain,
     }
     if (D[i, 1] > TAW[i, 1]) {D[i, 1] <- TAW[i, 1]}
     if (D[i, 1] >= (dmad[i, 1])) {
-      recom[i, 1] = paste("Yes. Irrigate", round(D[i, 1], 0), "mm")
+      recom[i, 1] <- paste("Yes. Irrigate", round(D[i, 1], 0), "mm")
     } else {
       recom[i, 1] <- c("No")
     }

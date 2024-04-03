@@ -28,7 +28,6 @@ Calculates descriptive statistics for rainfall, evapotranspiration, or other
 variables.
 }
 \examples{
-data(DataForCWB)
-Rain <- DataForCWB[,10]
+Rain <- DataForCWB[, 10]
 Descriptive(Sample = Rain)
 }

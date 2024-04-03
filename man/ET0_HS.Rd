@@ -24,7 +24,8 @@ A \code{matrix} of 1-column with the same length as `the input values with the
 daily potential evapotranspiration values in millimetres.
 }
 \description{
-Calculates daily reference evapotranspiration amounts using the Hargreaves-Samani method.
+Calculates daily reference evapotranspiration amounts using the
+Hargreaves-Samani method.
 }
 \examples{
 # See `?DataForCWB` for more on this data set

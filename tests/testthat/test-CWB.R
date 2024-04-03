@@ -46,10 +46,13 @@ test_that("CWB() works as expected in example", {
       "D>=dmad"
     )
   )
-  expect_equal(tes[1:3, "NonStandardCropEvap"], c(2.440372, 4.171917, 4.290477), tolerance = 0.01)
-  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000, 0.000000000, 0.000000000), tolerance = 0.01)
+  expect_equal(tes[1:3, "NonStandardCropEvap"], c(2.440372, 4.171917, 4.290477),
+               tolerance = 0.01)
+  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000, 0.000000000, 0.000000000),
+               tolerance = 0.01)
   expect_equal(tes[1:3, "TAW"], c(45.72, 45.72, 45.72), tolerance = 0.01)
-  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000, 3.9179166, 8.2083937), tolerance = 0.01)
+  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000, 3.9179166, 8.2083937),
+               tolerance = 0.01)
   expect_equal(tes[1:3, "d_MAD"], c(13.716, 13.716, 13.716), tolerance = 0.01)
   expect_equal(tes[1:3, "D>=dmad"], c("No", "No", "No"))
 })
@@ -88,10 +91,13 @@ test_that("CWB() works as expected when initialD is provided", {
       "D>=dmad"
     )
   )
-  expect_equal(tes[1:3, "NonStandardCropEvap"], c(2.440372, 4.171917, 4.290477), tolerance = 0.01)
-  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000, 0.000000000, 0.000000000), tolerance = 0.01)
+  expect_equal(tes[1:3, "NonStandardCropEvap"], c(2.440372, 4.171917, 4.290477),
+               tolerance = 0.01)
+  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000, 0.000000000, 0.000000000),
+               tolerance = 0.01)
   expect_equal(tes[1:3, "TAW"], c(45.72, 45.72, 45.72), tolerance = 0.01)
-  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000, 3.9179166, 8.2083937), tolerance = 0.01)
+  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000, 3.9179166, 8.2083937),
+               tolerance = 0.01)
   expect_equal(tes[1:3, "d_MAD"], c(13.716, 13.716, 13.716), tolerance = 0.01)
   expect_equal(tes[1:3, "D>=dmad"], c("No", "No", "No"))
 })
@@ -114,7 +120,6 @@ test_that("Wrong date format", {
 
 
 test_that("CWB() works as expected When Kc is NULL", {
-
   tes <- CWB(
     Rain = Rain,
     ET0 = ET0,
@@ -147,10 +152,13 @@ test_that("CWB() works as expected When Kc is NULL", {
       "D>=dmad"
     )
   )
-  expect_equal(tes[1:3, "NonStandardCropEvap"], c(2.440372, 4.171917, 4.290477), tolerance = 0.01)
-  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000, 0.000000000, 0.000000000), tolerance = 0.01)
+  expect_equal(tes[1:3, "NonStandardCropEvap"], c(2.440372, 4.171917, 4.290477),
+               tolerance = 0.01)
+  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000, 0.000000000, 0.000000000),
+               tolerance = 0.01)
   expect_equal(tes[1:3, "TAW"], c(45.72, 45.72, 45.72), tolerance = 0.01)
-  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000, 3.9179166, 8.2083937), tolerance = 0.01)
+  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000, 3.9179166, 8.2083937),
+               tolerance = 0.01)
   expect_equal(tes[1:3, "d_MAD"], c(13.716, 13.716, 13.716), tolerance = 0.01)
   expect_equal(tes[1:3, "D>=dmad"], c("No", "No", "No"))
 })
@@ -188,10 +196,13 @@ test_that("CWB() works as expected When Irrig is NULL", {
       "D>=dmad"
     )
   )
-  expect_equal(tes[1:3, "NonStandardCropEvap"], c(2.440372, 4.171917, 4.290477), tolerance = 0.01)
-  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000, 0.000000000, 0.000000000), tolerance = 0.01)
+  expect_equal(tes[1:3, "NonStandardCropEvap"], c(2.440372, 4.171917, 4.290477),
+               tolerance = 0.01)
+  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000, 0.000000000, 0.000000000),
+               tolerance = 0.01)
   expect_equal(tes[1:3, "TAW"], c(45.72, 45.72, 45.72), tolerance = 0.01)
-  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000, 3.9179166, 8.2083937), tolerance = 0.01)
+  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000, 3.9179166, 8.2083937),
+               tolerance = 0.01)
   expect_equal(tes[1:3, "d_MAD"], c(13.716, 13.716, 13.716), tolerance = 0.01)
   expect_equal(tes[1:3, "D>=dmad"], c("No", "No", "No"))
 })
@@ -229,16 +240,18 @@ test_that("CWB() works as expected When MAD is NULL", {
       "D>=dmad"
     )
   )
-  expect_equal(tes[1:3, "NonStandardCropEvap"], c(2.440372, 4.171917, 4.290477), tolerance = 0.01)
-  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000, 0.000000000, 0.000000000), tolerance = 0.01)
+  expect_equal(tes[1:3, "NonStandardCropEvap"], c(2.440372, 4.171917, 4.290477),
+               tolerance = 0.01)
+  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000, 0.000000000, 0.000000000),
+               tolerance = 0.01)
   expect_equal(tes[1:3, "TAW"], c(45.72, 45.72, 45.72), tolerance = 0.01)
-  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000, 3.9179166, 8.2083937), tolerance = 0.01)
+  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000, 3.9179166, 8.2083937),
+               tolerance = 0.01)
   expect_equal(tes[1:3, "d_MAD"], c(13.716, 13.716, 13.716), tolerance = 0.01)
   expect_equal(tes[1:3, "D>=dmad"], c("No", "No", "No"))
 })
 
 test_that("CWB() works as expected when G is NULL", {
-
   expect_warning(ET0 <-
                    ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS, Alt = 700),
                  "The first 3 G values were set to zero")
@@ -274,16 +287,18 @@ test_that("CWB() works as expected when G is NULL", {
       "D>=dmad"
     )
   )
-  expect_equal(tes[1:3, "NonStandardCropEvap"], c(2.293183, 4.104242, 4.333359), tolerance = 0.01)
-  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000, 0.000000000, 0.000000000), tolerance = 0.01)
+  expect_equal(tes[1:3, "NonStandardCropEvap"], c(2.293183, 4.104242, 4.333359),
+               tolerance = 0.01)
+  expect_equal(tes[1:3, "ET_Defict"], c(0.000000000, 0.000000000, 0.000000000),
+               tolerance = 0.01)
   expect_equal(tes[1:3, "TAW"], c(45.72, 45.72, 45.72), tolerance = 0.01)
-  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000, 3.8502425, 8.1836018), tolerance = 0.01)
+  expect_equal(tes[1:3, "SoilWaterDeficit"], c(0.0000000, 3.8502425, 8.1836018),
+               tolerance = 0.01)
   expect_equal(tes[1:3, "d_MAD"], c(13.716, 13.716, 13.716), tolerance = 0.01)
   expect_equal(tes[1:3, "D>=dmad"], c("No", "No", "No"))
 })
 
 test_that("CWB() works as expected when P<ET0 on the very first day", {
-
   ET0 <- ET0_PM(Tavg, Tmax, Tmin, Rn, RH, WS, G, Alt = 700)
   ET0 <- ET0[2:10]
   ET0 <- as.matrix(ET0)
@@ -326,10 +341,13 @@ test_that("CWB() works as expected when P<ET0 on the very first day", {
       "D>=dmad"
     )
   )
-  expect_equal(tes1[1:3, "NonStandardCropEvap"], c(4.171917, 4.290477, 3.665459), tolerance = 0.01)
-  expect_equal(tes1[1:3, "ET_Defict"], c(0.0000000, 0.0000000, 0.0000000), tolerance = 0.01)
+  expect_equal(tes1[1:3, "NonStandardCropEvap"],
+               c(4.171917, 4.290477, 3.665459), tolerance = 0.01)
+  expect_equal(tes1[1:3, "ET_Defict"], c(0.0000000, 0.0000000, 0.0000000),
+               tolerance = 0.01)
   expect_equal(tes1[1:3, "TAW"], c(45.72, 45.72, 45.72), tolerance = 0.01)
-  expect_equal(tes1[1:3, "SoilWaterDeficit"], c(3.9179166, 8.2083937, 0.4438527), tolerance = 0.01)
+  expect_equal(tes1[1:3, "SoilWaterDeficit"],
+               c(3.9179166, 8.2083937, 0.4438527), tolerance = 0.01)
   expect_equal(tes1[1:3, "d_MAD"], c(13.716, 13.716, 13.716), tolerance = 0.01)
   expect_equal(tes1[1:3, "D>=dmad"], c("No", "No", "No"))
 })
@@ -354,14 +372,16 @@ test_that("Missing rain values", {
   missing_Rain <- DataForCWB[, 10]
   missing_Rain[1] <- NA
   expect_error(
-    CWB(Rain = missing_Rain,
-        ET0,
-        AWC,
-        Drz,
-        Kc,
-        Ks,
-        Irrig,
-        start.date = "2023-11-23"),
+    CWB(
+      Rain = missing_Rain,
+      ET0,
+      AWC,
+      Drz,
+      Kc,
+      Ks,
+      Irrig,
+      start.date = "2023-11-23"
+    ),
     "Physically impossible or missing rain values"
   )
 })
@@ -369,15 +389,17 @@ test_that("Missing rain values", {
 test_that("Wrong format rain", {
   wrong_Rain <- cbind(DataForCWB[, 10], DataForCWB[, 10])
   expect_error(
-    CWB(Rain = wrong_Rain,
-        ET0,
-        AWC,
-        Drz,
-        Kc,
-        Ks,
-        Irrig,
-        MAD,
-        start.date = "2023-11-23"),
+    CWB(
+      Rain = wrong_Rain,
+      ET0,
+      AWC,
+      Drz,
+      Kc,
+      Ks,
+      Irrig,
+      MAD,
+      start.date = "2023-11-23"
+    ),
     "Physically impossible or missing rain values"
   )
 })
@@ -477,7 +499,6 @@ test_that("Physically impossible MAD values", {
 })
 
 test_that("Wrong MAD values. Single number", {
-
   wrong_MAD <- 4
   Kc <- DataForCWB[, 14]
   Irrig <- DataForCWB[, 15]
@@ -537,7 +558,6 @@ test_that("Wrong Drz values. Character", {
 })
 
 test_that("Physically impossible AWC values", {
-
   impossible_AWC <- AWC
   impossible_AWC[1] <- 0
   expect_error(

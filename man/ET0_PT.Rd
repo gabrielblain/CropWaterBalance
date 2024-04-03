@@ -33,4 +33,5 @@ Tavg <- DataForCWB[, 2]
 Rn <- DataForCWB[, 6]
 G <- DataForCWB[, 9]
 ET0_PT(Tavg = Tavg, Rn = Rn, G = G)
+
 }

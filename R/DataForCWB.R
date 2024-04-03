@@ -18,7 +18,8 @@
 #'    \item{G}{Soil Heat Flux  in \acronym{MJ m-2 day-1}}
 #'    \item{Rain}{Rain in millimetres}
 #'    \item{Drz}{Depth of the root zone in metres}
-#'    \item{AWC}{available water capacity (amount of water between field capacity and permanent wilting point)
+#'    \item{AWC}{available water capacity (amount of water between field
+#'              capacity and permanent wilting point)
 #'               in millimetre of water per metre of soil}
 #'    \item{MAD}{management allowed depletion (between 0 and 1)}
 #'    \item{Kc}{Crop coefficient (between 0 and 1)}
