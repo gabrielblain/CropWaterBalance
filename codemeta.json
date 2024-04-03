@@ -146,6 +146,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "161.253KB",
-  "readme": "https://github.com/gabrielblain/CropWaterBalance/blob/master/README.md"
+  "fileSize": "191.332KB",
+  "readme": "https://github.com/gabrielblain/CropWaterBalance/blob/master/README.md",
+  "contIntegration": "https://github.com/gabrielblain/CropWaterBalance/actions/workflows/R-CMD-check.yaml"
 }
