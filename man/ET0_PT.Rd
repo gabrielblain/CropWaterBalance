@@ -2,7 +2,7 @@
 % Please edit documentation in R/ET0_PT.R
 \name{ET0_PT}
 \alias{ET0_PT}
-\title{Reference 'evapotranspiration' Using the Preistley-Taylor Method}
+\title{Reference evapotranspiration Using the Preistley-Taylor Method}
 \usage{
 ET0_PT(Tavg, Rn, G = NULL, Coeff = 1.26)
 }
@@ -16,7 +16,7 @@ ET0_PT(Tavg, Rn, G = NULL, Coeff = 1.26)
 in \eqn{MJ m-2 day-1}.
 May be provided by \code{\link{Soil_Heat_Flux}}}
 
-\item{Coeff}{Single number defining the 'Priestley' and 'Taylor' coefficient. Default is
+\item{Coeff}{Single number defining the Priestley and Taylor coefficient. Default is
 1.26.}
 }
 \value{

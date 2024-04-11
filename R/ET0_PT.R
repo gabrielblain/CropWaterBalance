@@ -1,4 +1,4 @@
-#' Reference 'evapotranspiration' Using the Preistley-Taylor Method
+#' Reference evapotranspiration Using the Preistley-Taylor Method
 #'
 #' Calculates daily reference evapotranspiration amounts using the
 #'   Priestley-Taylor method.
@@ -13,7 +13,7 @@
 #'   in \eqn{MJ m-2 day-1}.
 #' May be provided by \code{\link{Soil_Heat_Flux}}
 #' @param Coeff
-#' Single number defining the 'Priestley' and 'Taylor' coefficient. Default is
+#' Single number defining the Priestley and Taylor coefficient. Default is
 #'   1.26.
 #
 #' @return
