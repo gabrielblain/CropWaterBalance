@@ -2,7 +2,7 @@
 % Please edit documentation in R/ET0_HS.R
 \name{ET0_HS}
 \alias{ET0_HS}
-\title{Reference evapotranspiration Using Hargreaves-Samani Method}
+\title{Reference Evapotranspiration Using Hargreaves-Samani Method}
 \usage{
 ET0_HS(Ra, Tavg, Tmax, Tmin)
 }

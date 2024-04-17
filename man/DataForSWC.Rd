@@ -3,7 +3,7 @@
 \docType{data}
 \name{DataForSWC}
 \alias{DataForSWC}
-\title{Typical soil water characteristics for different soil types (Teta)}
+\title{Typical Soil Water Characteristics for Different Soil Types (Teta)}
 \format{
 An object of class \code{data.frame} with 9 rows and 5 columns.
 }
