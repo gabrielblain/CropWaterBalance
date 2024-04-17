@@ -1,4 +1,4 @@
-#' Typical soil water characteristics for different soil types (Teta)
+#' Typical Soil Water Characteristics for Different Soil Types (Teta)
 #'
 #' Soil water content at field capacity and at permanent wilting point.
 #' Given in \acronym{m-3 m-3}.

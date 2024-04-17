@@ -1,4 +1,4 @@
-#' Compare Data from Two Samples
+#' Compare Data From Two Samples
 #'
 #' Calculates measures of accuracy and agreement.
 #'
