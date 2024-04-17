@@ -2,7 +2,7 @@
 % Please edit documentation in R/ET0_PT.R
 \name{ET0_PT}
 \alias{ET0_PT}
-\title{Reference evapotranspiration Using the Preistley-Taylor Method}
+\title{Reference Evapotranspiration Using the Preistley-Taylor Method}
 \usage{
 ET0_PT(Tavg, Rn, G = NULL, Coeff = 1.26)
 }

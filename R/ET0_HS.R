@@ -1,4 +1,4 @@
-#' Reference evapotranspiration Using Hargreaves-Samani Method
+#' Reference Evapotranspiration Using Hargreaves-Samani Method
 #'
 #' Calculates daily reference evapotranspiration amounts using the
 #'   Hargreaves-Samani method.

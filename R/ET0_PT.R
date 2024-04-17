@@ -1,4 +1,4 @@
-#' Reference evapotranspiration Using the Preistley-Taylor Method
+#' Reference Evapotranspiration Using the Preistley-Taylor Method
 #'
 #' Calculates daily reference evapotranspiration amounts using the
 #'   Priestley-Taylor method.

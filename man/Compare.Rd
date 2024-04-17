@@ -2,7 +2,7 @@
 % Please edit documentation in R/Compare.R
 \name{Compare}
 \alias{Compare}
-\title{Compare Data from Two Samples}
+\title{Compare Data From Two Samples}
 \usage{
 Compare(Sample1, Sample2)
 }

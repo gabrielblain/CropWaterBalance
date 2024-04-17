@@ -6,7 +6,7 @@
 \alias{CropWaterBalance-package}
 \title{CropWaterBalance: Climate Water Balance for Irrigation Purposes}
 \description{
-Calculates daily climate water balance for irrigation purposes. The package also calculates the reference 'evapotranspiration' using three methods, ('Penman and Monteith') Allen et al. (1998,ISBN:92-5-104219-5), Priestley and Taylor (1972) \doi{10/cr3qwn}, or Hargreaves and Samani (1985) \doi{10.13031/2013.26773}. Users may specify a management allowed depletion ('MAD'), which is used by the package to suggest when irrigate. It also allows the use of crop and water stress coefficients.
+Calculates daily climate water balance for irrigation purposes and also calculates the reference evapotranspiration (ET) using three methods, Penman and Monteith (Allen et al. 1998, ISBN:92-5-104219-5); Priestley and Taylor (1972) \doi{10/cr3qwn}; or Hargreaves and Samani (1985) \doi{10.13031/2013.26773}. Users may specify a management allowed depletion (MAD), which is used to suggest when to irrigate. The functionality allows for the use of crop and water stress coefficients as well.
 }
 \seealso{
 Useful links:
