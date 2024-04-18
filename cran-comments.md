@@ -6,7 +6,9 @@
 
 -   Add references to the Description file.
 
--   Remove single quotes, leaving them only in the title and description.
+-   Fix up DESCRIPTION for CRAN submission.
+
+-   Fix title case and grammar in docs.
 
 ## R CMD check results
 
