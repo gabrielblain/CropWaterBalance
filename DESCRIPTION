@@ -1,6 +1,6 @@
 Package: CropWaterBalance
 Title: Climate Water Balance for Irrigation Purposes
-Version: 0.2.0
+Version: 0.2.0.9000
 Authors@R: c(
   person(
     given = "Gabriel Constantino",
