@@ -55,7 +55,7 @@ Imports:
     PowerSDI,
     lubridate,
     stats
-URL: https://github.com/gabrielblain/CropWaterBalance, https://adamhsparks.github.io/CropWaterBalance/
+URL: https://github.com/gabrielblain/CropWaterBalance
 BugReports: https://github.com/gabrielblain/CropWaterBalance/issues
 VignetteBuilder: knitr
 Language: en-US

@@ -14,7 +14,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.4.1 (2024-06-14)",
+  "runtimePlatform": "R version 4.4.1 (2024-06-14 ucrt)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -153,7 +153,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "176.568KB",
+  "fileSize": "181.672KB",
   "releaseNotes": "https://github.com/gabrielblain/CropWaterBalance/blob/master/NEWS.md",
   "readme": "https://github.com/gabrielblain/CropWaterBalance/blob/master/README.md",
   "contIntegration": ["https://github.com/gabrielblain/CropWaterBalance/actions/workflows/R-CMD-check.yaml", "https://github.com/adamhsparks/CropWaterBalance/actions/workflows/R-CMD-check.yaml"]
