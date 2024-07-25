@@ -1,0 +1,9 @@
+pandoc: 3.1.11
+pkgdown: 2.1.0
+pkgdown_sha: ~
+articles:
+  Intro_to_CropWaterBalance: Intro_to_CropWaterBalance.html
+last_built: 2024-07-25T13:18Z
+urls:
+  reference: https://adamhsparks.github.io/CropWaterBalance/reference
+  article: https://adamhsparks.github.io/CropWaterBalance/articles
