@@ -12,6 +12,7 @@ Calculates daily climate water balance for irrigation purposes and also calculat
 Useful links:
 \itemize{
   \item \url{https://github.com/gabrielblain/CropWaterBalance}
+  \item \url{https://adamhsparks.github.io/CropWaterBalance/}
   \item Report bugs at \url{https://github.com/gabrielblain/CropWaterBalance/issues}
 }
 
