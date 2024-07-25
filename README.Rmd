@@ -7,7 +7,9 @@ output: github_document
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/gabrielblain/CropWaterBalance/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gabrielblain/CropWaterBalance/actions/workflows/R-CMD-check.yaml) <!-- badges: end -->
+[![R-CMD-check](https://github.com/gabrielblain/CropWaterBalance/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gabrielblain/CropWaterBalance/actions/workflows/R-CMD-check.yaml) 
+[![R-CMD-check](https://github.com/adamhsparks/CropWaterBalance/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/adamhsparks/CropWaterBalance/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
 
 # CropWaterBalance
 
@@ -45,13 +47,14 @@ Calculates daily reference evapotranspiration amounts using the Penman and Monte
 
 ```{r, eval=FALSE}
 ET0_PM(Tavg,
-       Tmax,
-       Tmin,
-       Rn,
-       RH,
-       WS,
-       G = NULL,
-       Alt)
+  Tmax,
+  Tmin,
+  Rn,
+  RH,
+  WS,
+  G = NULL,
+  Alt
+)
 ```
 
 ## Arguments
@@ -90,9 +93,10 @@ Calculates daily reference evapotranspiration amounts using the Priestley-Taylor
 
 ```{r, eval=FALSE}
 ET0_PT(Tavg,
-       Rn,
-       G = NULL,
-       Coeff = 1.26)
+  Rn,
+  G = NULL,
+  Coeff = 1.26
+)
 ```
 
 ## Arguments
@@ -122,10 +126,12 @@ Calculates daily reference evapotranspiration amounts using the Hargreaves-Saman
 ## Usage
 
 ```{r, eval=FALSE}
-ET0_HS(Ra,
-       Tavg,
-       Tmax,
-       Tmin)
+ET0_HS(
+  Ra,
+  Tavg,
+  Tmax,
+  Tmin
+)
 ```
 
 ## Arguments
@@ -161,7 +167,7 @@ Calculates the daily amounts of Soil Heat Flux.
 ## Usage
 
 ```{r, eval=FALSE}
-Soil_Heat_Flux(Tavg) 
+Soil_Heat_Flux(Tavg)
 ```
 
 ## Arguments
