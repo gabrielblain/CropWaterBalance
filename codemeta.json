@@ -4,7 +4,6 @@
   "identifier": "CropWaterBalance",
   "description": "Calculates daily climate water balance for irrigation purposes and also calculates the reference evapotranspiration (ET) using three methods, Penman and Monteith (Allen et al. 1998, ISBN:92-5-104219-5); Priestley and Taylor (1972) <doi:10/cr3qwn>; or Hargreaves and Samani (1985) <doi:10.13031/2013.26773>. Users may specify a management allowed depletion (MAD), which is used to suggest when to irrigate. The functionality allows for the use of crop and water stress coefficients as well.",
   "name": "CropWaterBalance: Climate Water Balance for Irrigation Purposes",
-  "relatedLink": "https://adamhsparks.github.io/CropWaterBalance/",
   "codeRepository": "https://github.com/gabrielblain/CropWaterBalance",
   "issueTracker": "https://github.com/gabrielblain/CropWaterBalance/issues",
   "license": "https://spdx.org/licenses/MIT",
@@ -14,7 +13,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.4.1 (2024-06-14 ucrt)",
+  "runtimePlatform": "R version 4.4.1 (2024-06-14)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -153,7 +152,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "181.672KB",
+  "fileSize": "176.519KB",
   "releaseNotes": "https://github.com/gabrielblain/CropWaterBalance/blob/master/NEWS.md",
   "readme": "https://github.com/gabrielblain/CropWaterBalance/blob/master/README.md",
   "contIntegration": ["https://github.com/gabrielblain/CropWaterBalance/actions/workflows/R-CMD-check.yaml", "https://github.com/adamhsparks/CropWaterBalance/actions/workflows/R-CMD-check.yaml"]
